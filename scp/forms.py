@@ -29,9 +29,9 @@ class ProfileSettings(forms.ModelForm):
     fields = ['user', 'bio', 'avatar']
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ['avatar']
         widgets = {
-            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'avatar': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 # class SettingsProfile(forms.ModelForm):
  

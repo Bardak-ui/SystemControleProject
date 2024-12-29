@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.http import HttpResponse
 from .models import Task, Project, Profile
+
 def home(request):
     projects = Project.objects.all()
     #домашняя страница вывод всех проектов на сайте
@@ -21,7 +22,6 @@ def register(request):
     return render(request, 'register.html', {'form':form})
 
 # def edit_project(request, task_id):
-
 
 def profile_settings(request):
     if request.method == "POST":
@@ -44,6 +44,7 @@ def add_project(request):
     else:
         form = AddProject()
     return render(request,'add_project.html', {'form':form})
+
 #profile, profile_settings, add_project, add_task, admin_panel,
 
 

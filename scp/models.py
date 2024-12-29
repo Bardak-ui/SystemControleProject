@@ -99,11 +99,4 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
 
     def __str__(self):
-        return self.user.username
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
-
-    def __str__(self):
         return f"{self.user.username}'s Profile"
