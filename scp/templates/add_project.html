@@ -9,6 +9,11 @@
     <form method="post">
         {% csrf_token %}
         {{form.as_p}}
+        <button type="submit">Создать</button>
+    </form>
+    <form method="post" action="{% url 'profile' %}">
+        {% csrf_token %}
+        <button type="submit">Назад</button>
     </form>
 </body>
 </html>

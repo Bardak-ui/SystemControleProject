@@ -1,6 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Role(models.Model):
+    ROLE_CHOICES = [
+        ('Administrator','Администратор'),
+        ('Executor','Исполнитель'),
+        ('Administrator','Администратор'),
+    ]
+
 class Language(models.Model):
     LANGUAGE_CHOICES = [
         ('C', 'Си'),
@@ -69,8 +76,8 @@ class Project(models.Model):
     code = models.TextField()
     language = models.CharField(max_length=50, choices=Language.LANGUAGE_CHOICES, default='Not specified')
     status = models.CharField(max_length=50,choices=Status.STATUS_CHOICES, default='Waiting')
-    owner = models.ManyToManyField(User , related_name='p_owner')
-    participants = models.ManyToManyField(User, related_name='p_participants')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name='p_owner')
+    participants = models.ManyToManyField(User, blank=True, related_name='p_participants')
     created_at = models.DateField(auto_now_add=True)
     start_date = models.DateField()
     end_date = models.DateField()
@@ -97,6 +104,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    role = models.ManyToManyField(Role, related_name='p_role')
 
     def __str__(self):
-        return f"{self.user.username}'s Profile"
+        return f"{self.user}'s Profile"

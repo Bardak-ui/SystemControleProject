@@ -6,26 +6,29 @@
     <title>Домашняя страница</title>
 </head>
 <body>
-    <form method="post" action="{% url 'info_project' task.id %}">
-        <button type="submit">
-            {% for project in projects %}
-                {{project.title}} <br>
-                {{project.description}} <br>
-                {{project.created_at}} <br>
-                {{project.owner}} <br>
-                {{project.participants}} <br>
-                {{project.start_date}} <br>
-                {{project.end_date}} <br>
-                {{project.status}} <br>
-                <!-- {{project.code}} <br> -->
-            {% endfor %}
-        </button>
-    </form>
+    {% for project in projects %}
+        <form method="post" action="{% url 'info_project' project.id %}">
+            {% csrf_token %}
+            <button type="submit">
+                    {{project.title}} <br>
+                    {{project.description}} <br>
+                    {{project.created_at}} <br>
+                    {{project.owner}} <br>
+                    {{project.participants}} <br>
+                    {{project.start_date}} <br>
+                    {{project.end_date}} <br>
+                    {{project.status}} <br>
+                    <!-- {{project.code}} <br> -->
+                {% empty %}
+                    <p>Проекты отсутствуют.</p>
+                {% endfor %}
+            </button>
+        </form>
     <form method="post" action="{% url 'profile' %}">
         {% csrf_token %}
         <button type="submit">Профиль</button>
     </form>
-    <form method="post" action="{% url 'logout' %}">
+    <form method="post" action="{% url 'logout_view' %}">
         {% csrf_token %}
         <button type="submit">Выйти</button>
     </form>

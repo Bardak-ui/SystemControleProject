@@ -16,7 +16,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-LOGIN_URL = '/login/'
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/profile/' # имя функции из views, не маршрут
 LOGOUT_REDIRECT_URL = 'login' #'tasks/login/'
 
