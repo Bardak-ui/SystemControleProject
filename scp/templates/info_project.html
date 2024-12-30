@@ -3,9 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Проект: {{ project.title }}</title>
 </head>
 <body>
-    
+    Название проекта: {{ project.title }} <br>
+    Описание проекта: {{ project.description }} <br>
+    {% if project.participants.all %}
+        <br> Над проектом работают:
+        {% for participant in project.participants.all %}
+            {{ participant.username }}, <!-- Выводим имена участников -->
+        {% endfor %}
+    {% else %}
+        <br>Исполнители отсутствуют<br>
+    {% endif %}
+    <br><br>Проект создан: {{ project.created_at }} <br>
+    Разработка проекта начата: {{ project.start_date }} <br>
+    Разработка проекта окончена: {{ project.end_date }} <br>
+    <br>Статус проекта: {{ project.status }} <br>
+    <br>Создатель проекта: {{ project.owner }} <br>
+    Код проекта: <br> {{ project.code }} <br>
+    <hr>
+    <form method="post" action="{% url 'add_task' project.id%}">
+        {% csrf_token %}
+        <button type="submit">Добавить задачу</button>
+    </form>
+    <form method="post" action="{% url 'profile'%}">
+        {% csrf_token %}
+        <button type="submit">В профиль</button>
+    </form>
+    <form method="post" action="{% url 'home'%}">
+        {% csrf_token %}
+        <button type="submit">На главную</button>
+    </form>
+    <hr>
+    {% for task in tasks %}
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">
+                    Название задачи: {{ task.title }} <br>
+                    Описание задачи: {{ task.description }} <br>
+                    <!-- Проект: {{ task.project }} <br> -->
+                    {% if project.participants.all %}
+                    <br> Над проектом работают:
+                    {% for participant in project.participants.all %}
+                        {{ participant.username }}, <!-- Выводим имена участников -->
+                    {% endfor %}
+                    {% else %}
+                        <br>Исполнители отсутствуют<br>
+                    {% endif %}
+                    <br><br>Приоритет задачи: {{ task.priority }} <br>
+                    Создатель задачи: {{ task.creator }} <br>
+                    Статус задачи: {{ task.status }} <br>
+                    Когда создана задача: {{ task.created_at }} <br>
+    {% endfor %}
+            </button>
+        </form>
+    <hr><br>
 </body>
 </html>

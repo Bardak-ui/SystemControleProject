@@ -1,12 +1,13 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User
 
 class Role(models.Model):
     ROLE_CHOICES = [
-        ('Administrator','Администратор'),
-        ('Executor','Исполнитель'),
-        ('Administrator','Администратор'),
+        ('Администратор','Administrator'),
+        ('Исполнитель','Executor'),
     ]
+
 
 class Language(models.Model):
     LANGUAGE_CHOICES = [
@@ -63,11 +64,16 @@ class Status(models.Model):
                       {'In Development','В разработке'},
                       {'Waiting','Ожидает'}
                       ]
+    
     PRIORITY_CHOICES = [{'Low','Низкий'},
                         {'Average','Cредний'},
                         {'High','Высокий'},
                         {'Not specified','Не указан'}
                         ]
+    
+    BLACKLIST_CHOICES = [{'Baned','Заблокирован'},
+                         {'Not baned','Не заблокирован'},
+                         ]
     
 class Project(models.Model):
     title = models.CharField(max_length=100)
@@ -91,9 +97,9 @@ class Task(models.Model):
     description = models.TextField()
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='t_creator')
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='t_project')
-    assignee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='t_assignee')
+    assignee = models.ForeignKey(User, on_delete=models.CASCADE, null=True,related_name='t_assignee')
     priority = models.CharField(max_length=50, choices=Status.PRIORITY_CHOICES, default='Not specified')
-    status = models.CharField(max_length=50,choices=Status.STATUS_CHOICES, default='Waiting')  
+    status = models.CharField(max_length=50,choices=Status.STATUS_CHOICES, default='Waiting')
     created_at = models.DateField(auto_now_add=True)
     # updated_at = models.DateField() #Реализовать дату последнего обновления
 
@@ -101,10 +107,26 @@ class Task(models.Model):
         return self.title
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    puser = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', unique=True)
     bio = models.TextField(blank=True, null=True)
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
-    role = models.ManyToManyField(Role, related_name='p_role')
+    avatar = models.ImageField(upload_to='profile_avatars/', blank=True, null=True)
+    role = models.CharField(max_length=50, blank=True, choices=Role.ROLE_CHOICES, default='Executor')
+    status = models.CharField(max_length=50, choices=Status.BLACKLIST_CHOICES, default='Not baned')
 
     def __str__(self):
-        return f"{self.user}'s Profile"
+        return f"{self.puser}'s Profile"
+    
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old_avatar = Profile.objects.get(pk = self.pk).avatar
+            if old_avatar and old_avatar != self.avatar:
+                if os.path.isfile(old_avatar.path):
+                    os.remove(old_avatar.path)
+        super(Profile, self).save(*args, **kwargs)
+    
+    def delete(self, *args, **kwargs):
+    # Удаляем файл, связанный с аватаром, перед удалением объекта
+        if self.avatar:
+            if os.path.isfile(self.avatar.path):
+                os.remove(self.avatar.path)
+        super(Profile, self).delete(*args, **kwargs)

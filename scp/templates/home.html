@@ -6,28 +6,38 @@
     <title>Домашняя страница</title>
 </head>
 <body>
+    <h1>Домашняя страница</h1>
     {% for project in projects %}
         <form method="post" action="{% url 'info_project' project.id %}">
             {% csrf_token %}
             <button type="submit">
-                    {{project.title}} <br>
-                    {{project.description}} <br>
-                    {{project.created_at}} <br>
-                    {{project.owner}} <br>
-                    {{project.participants}} <br>
-                    {{project.start_date}} <br>
-                    {{project.end_date}} <br>
-                    {{project.status}} <br>
+                    Название проекта: {{project.title}} <br>
+                    Описание проекта: {{project.description}} <br>
+                    {% if project.participants.all %}
+                        <br> Над проектом работают: 
+                        {% for participant in project.participants.all %}
+                            {{ participant.username }}, <!-- Выводим имена участников -->
+                        {% endfor %}
+                    {% else %}
+                        <br>Исполнители отсутствуют<br>
+                    {% endif %}
+                    <br><br>Проект создан: {{project.created_at}} <br>
+                    Разработка проекта начата: {{project.start_date}} <br>
+                    Разработка проекта окончена: {{project.end_date}} <br>
+                    <br >Статус проекта: {{project.status}} <br>
+                    <br>Создатель проекта: {{project.owner}} <br>
                     <!-- {{project.code}} <br> -->
-                {% empty %}
-                    <p>Проекты отсутствуют.</p>
-                {% endfor %}
+    {% empty %}
+        <p>Проекты отсутствуют</p>
+    {% endfor %}
             </button>
         </form>
+        <hr>
     <form method="post" action="{% url 'profile' %}">
         {% csrf_token %}
         <button type="submit">Профиль</button>
     </form>
+    <br>
     <form method="post" action="{% url 'logout_view' %}">
         {% csrf_token %}
         <button type="submit">Выйти</button>

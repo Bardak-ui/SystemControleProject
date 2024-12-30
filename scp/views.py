@@ -1,4 +1,4 @@
-from .forms import CustomeCreateUserForm, AddProject, ProfileSettings, ProjectFilterForm
+from .forms import CustomeCreateUserForm, AddProject, ProfileSettings, ProjectFilterForm, AddTask
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -26,29 +26,35 @@ def register(request):
     return render(request, 'register.html', {'form':form})
 
 @login_required
-def edit_project(request, task_id):
-    pass
-
-@login_required
-def info_project(request, project_id):
-    if request.method == 'POST':
-        project = get_object_or_404(Project, id = project_id)
-        task = Task.objects.filter(project)
-    return render(request, 'info_project.html', {'projects':project, 'task':task})
-
-@login_required
 def profile_settings(request):
+    profile = get_object_or_404(Profile, puser = request.user)
     if request.method == "POST":
         form = ProfileSettings(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
+            return redirect('profile')
     else:
         form = ProfileSettings(instance=request.user.profile)
-    return render(request, 'profile_settings.html', {'form':form})
+    return render(request, 'profile_settings.html', {'form':form, 'profile':profile})
+
+
+@login_required
+def edit_project(request, task_id):
+    pass
+
+@login_required
+def edit_task(request, task_id):
+    pass
+
+@login_required
+def info_project(request, project_id):
+    project = get_object_or_404(Project, id = project_id)
+    tasks = Task.objects.filter(project = project_id)
+    return render(request, 'info_project.html', {'project':project, 'tasks':tasks})
 
 @login_required
 def profile(request):
-    profiles = get_object_or_404(Profile, user = request.user)
+    profiles = get_object_or_404(Profile, puser = request.user)
     projects = Project.objects.filter(owner = request.user)
     return render(request, 'profile.html', {'profile':profiles, 'projects':projects})
 
@@ -65,6 +71,25 @@ def add_project(request):
         form = AddProject()
     return render(request,'add_project.html', {'form':form})
 
-#profile, profile_settings, add_project, add_task, admin_panel,
+from django.shortcuts import get_object_or_404
+
+@login_required
+def add_task(request, project_id):
+    project = get_object_or_404(Project, id=project_id)  # Изменено на Project
+    if request.method == "POST":
+        form = AddTask(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.creator = request.user  # Привязка создателя
+            task.project = project       # Привязка проекта
+            task.save()
+            return redirect('info_project', project_id=project.id)
+    else:
+        form = AddTask()
+    return render(request, 'add_task.html', {'form': form})
+
+
+
+#admin_panel,
 #сделать функцию для вступления в проект и вступление в разруботку задачи для проекта
 

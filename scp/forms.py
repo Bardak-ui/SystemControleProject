@@ -29,15 +29,15 @@ class AddProject(forms.ModelForm):
                 'cols': 50,                                 # Количество символов в строке
                 'maxlength': 500,                           # Максимальная длина текста
                 'required': True,                           # Поле обязательно для заполнения
-                'style': 'resize: vertical; border-color: green;'# Inline-стили (запрет изменения размера и цвет границы)
+                'style': 'resize: vertical; border-color: green;', # Inline-стили (запрет изменения размера и цвет границы)
             }),
             'code': Textarea(attrs={
-                'class': 'desc-project',                     # Класс для CSS-стилей
-                'placeholder': 'Введите код проекта',          # Подсказка внутри поля
-                'rows': 35,                                  # Количество строк
-                'cols': 50,                                 # Количество символов в строке                           # Максимальная длина текста
-                'required': False,                           # Поле обязательно для заполнения
-                'style': 'resize: vertical; border-color: green;'# Inline-стили (запрет изменения размера и цвет границы)
+                'class': 'desc-project',                     
+                'placeholder': 'Введите код проекта',         
+                'rows': 35,                                  
+                'cols': 50,                                  
+                'required': False,                           
+                'style': 'resize: vertical; border-color: green;',
             }),
             'start_date': DateInput(attrs={
                 'class': 'desc-project', 
@@ -52,6 +52,29 @@ class AddProject(forms.ModelForm):
 
         }
 
+class AddTask(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['title','description','status','priority']
+        widgets = {
+            'title': TextInput(attrs={
+                'class': 'title-project',
+                'placeholder': 'Введите название задачи',
+                'style': 'resize: none; border-color: green;',
+                'required': True,
+            }),
+            'description': Textarea(attrs={
+                'class': 'desc-project',                     # Класс для CSS-стилей
+                'placeholder': 'Введите описание',          # Подсказка внутри поля
+                'rows': 5,                                  # Количество строк
+                'cols': 50,                                 # Количество символов в строке
+                'maxlength': 500,                           # Максимальная длина текста
+                'required': True,                           # Поле обязательно для заполнения
+                'style': 'resize: vertical; border-color: green;', # Inline-стили (запрет изменения размера и цвет границы)
+            }),
+
+        }
+
 class ProjectFilterForm(forms.ModelForm):
     model = Project
     fields = ['created_at']
@@ -62,13 +85,15 @@ class ProjectFilterForm(forms.ModelForm):
     )
 
 class ProfileSettings(forms.ModelForm):
-    model = Profile
-    fields = ['user', 'bio', 'avatar']
     class Meta:
         model = Profile
-        fields = ['avatar']
+        fields = ['bio', 'avatar']
         widgets = {
             'avatar': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'bio': forms.Textarea(attrs={
+                'class':'bio-profile',
+                'rows':5,
+                'style': 'resize: vertical',
+            }),
         }
-# class SettingsProfile(forms.ModelForm):
  
