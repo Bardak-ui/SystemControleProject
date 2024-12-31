@@ -89,7 +89,7 @@ body {
     min-width: 376px; /* Минимальная ширина кнопок */
     text-align: left;
     position: relative;
-    align-items: center;
+    justify-self: center;
     background-color: #eef4fc;
     padding: 15px;
     border: none;

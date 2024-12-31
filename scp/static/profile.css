@@ -36,8 +36,10 @@ body {
 
 h1 {
     font-size: 24px;
-    margin-bottom: 10px;
+    margin-top: 8px;
+    margin-bottom: 20px;
     color: #4a76a8;
+    text-align: center;
 }
 
 p {
@@ -57,6 +59,7 @@ p {
     border-radius: 50%;
     overflow: hidden;
     border: 4px solid #4a76a8;
+    justify-self: center;
 }
 
 .avatar {
@@ -85,7 +88,18 @@ p {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    justify-self: center;
     margin-bottom: 20px;
+}
+
+.button-form .ban{
+    color: rgb(255, 255, 255);
+    background-color: red;
+}
+
+.button-form .unban{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 255, 34);
 }
 
 .button-form button {
@@ -105,30 +119,38 @@ p {
 }
 
 hr {
-    margin: 20px 0;
+    margin: 12px 0;
     border: none;
     border-top: 1px solid #e5e5e5;
 }
 
 h2 {
+    text-align: center;
     font-size: 20px;
     color: #333;
     margin-bottom: 10px;
 }
 
+/* Контейнер для плиток проектов */
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;  /* Позволяет переносить плитки на следующую строку при необходимости */
+    gap: 20px;  /* Отступ между плитками */
+    justify-content:center;  /* Плитки выстраиваются слева */
+}
+
 .project-btn {
-    display: block;
-    width: 100%;
+    width: 300px;  /* Фиксированная ширина плитки */
     text-align: left;
     background: #eef4fc;
     padding: 15px;
     border: none;
     border-radius: 5px;
-    margin-bottom: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background 0.3s;
     color: #333;
     cursor: pointer;
+    margin-bottom: 10px;  /* Отступ снизу для плиток */
 }
 
 .project-btn h3 {
@@ -147,6 +169,12 @@ h2 {
     background: #d9e6f7;
 }
 
+/* Для маленьких экранов (например, мобильных устройств), плитки будут занимать всю ширину */
+@media (max-width: 768px) {
+    .project-btn {
+        width: 100%;  /* На маленьких экранах плитки занимают всю ширину */
+    }
+}
 .empty {
     text-align: center;
     color: #777;

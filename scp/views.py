@@ -21,12 +21,22 @@ def logout_view(request):
 def you_is_banned():
     return HttpResponse("Вы были забанены администрацией сайта")
 
+def unban_user(request, user_id):
+    if not request.user.profile.role == "Администратор":
+        return HttpResponseForbidden("У вас нет прав для выполнения этого действия.")
+    user_to_ban = get_object_or_404(Profile, puser = user_id)
+    user_to_ban.status = 'Не заблокирован'
+    user_to_ban.save()
+    return redirect('profiles')
+
 @login_required
 def ban_user(request, user_id):
     if not request.user.profile.role == "Администратор":
         return HttpResponseForbidden("У вас нет прав для выполнения этого действия.")
+    if request.user.id == user_id:
+        return HttpResponseForbidden("Вы не можете заблокировать сами себя.")
     user_to_ban = get_object_or_404(Profile, puser = user_id)
-    user_to_ban.status = 'Baned'
+    user_to_ban.status = 'Заблокирован'
     user_to_ban.save()
     return redirect('profiles')
 

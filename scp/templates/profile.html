@@ -11,8 +11,8 @@
     <div class="container">
         <!-- Левая часть -->
         <div class="left-container">
-            <h1>Здравствуйте, {{ profile.puser }}</h1>
-
+            <h1>Профиль</h1>
+            <hr>
             {% if user.profile.avatar %}
                 <div class="avatar-container">
                     <img src="{{ user.profile.avatar.url }}" alt="Profile Image" class="avatar"/>
@@ -20,7 +20,7 @@
             {% else %}
                 <p class="no-avatar">Нет загруженной аватарки.</p>
             {% endif %}
-
+            <h1>{{ profile.puser }}</h1>
             <div class="profile-info">
                 <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
                 <p><strong>О вас:</strong> {{ profile.bio }}</p>
@@ -34,16 +34,16 @@
                     {% csrf_token %}
                     <button type="submit">На главную</button>
                 </form>
+                <form method="post" action="{% url 'profiles' %}">
+                    {% csrf_token %}
+                    <button type="submit">Aдминка</button>
+                </form>
                 <form method="post" action="{% url 'add_project' %}">
                     {% csrf_token %}
-                    <button type="submit">Создать Проект</button>
+                    <button type="submit">Создать проект</button>
                 </form>
                 <form method="get" action="{% url 'profile_settings' %}">
                     <button type="submit">Настройки</button>
-                </form>
-                <form method="post" action="{% url 'profiles' %}">
-                    {% csrf_token %}
-                    <button type="submit">Участники</button>
                 </form>
                 <form method="post" action="{% url 'logout_view' %}">
                     {% csrf_token %}

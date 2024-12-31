@@ -60,19 +60,19 @@ class Language(models.Model):
     ]
 
 class Status(models.Model):
-    STATUS_CHOICES = [{'Complited','Выполнено'},
-                      {'In Development','В разработке'},
-                      {'Waiting','Ожидает'}
+    STATUS_CHOICES = [('Complited','Выполнено'),
+                      ('In Development','В разработке'),
+                      ('Waiting','Ожидает')
                       ]
     
-    PRIORITY_CHOICES = [{'Low','Низкий'},
-                        {'Average','Cредний'},
-                        {'High','Высокий'},
-                        {'Not specified','Не указан'}
+    PRIORITY_CHOICES = [('Low','Низкий'),
+                        ('Average','Cредний'),
+                        ('High','Высокий'),
+                        ('Not specified','Не указан')
                         ]
     
-    BLACKLIST_CHOICES = [{'Заблокирован','Baned'},
-                         {'Не заблокирован','Not baned'},
+    BLACKLIST_CHOICES = [('Заблокирован','Baned'),
+                         ('Не заблокирован','Not baned'),
                          ]
     
 class Project(models.Model):

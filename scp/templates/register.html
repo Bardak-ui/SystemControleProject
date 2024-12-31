@@ -1,12 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+    <title>Вход</title>
+    <link rel="stylesheet" href="{% static 'register.css' %}">
 </head>
 <body>
-    <h1>Регистрация на сайте Ситстема контроля проектов</h1>
+    <h1>Вход в System Contole Project</h1>
     <form method="post">
         {% csrf_token %}
         {{form.as_p}}

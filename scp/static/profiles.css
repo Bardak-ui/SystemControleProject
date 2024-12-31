@@ -1,139 +1,97 @@
-/* Основной стиль для страницы */
+/* Общие стили */
 body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #d14141;
 }
 
-/* Контейнер всей страницы */
+/* Контейнер */
 .container {
-    display: grid;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-/* Левая часть */
-.left-container {
-    flex: 0 0 10%; /* Уменьшена ширина до 10% */
-    background-color: #eef4fc;
-    padding: 10px; /* Уменьшен отступ */
-    box-shadow: inset -1px 0 0 #ddd;
-}
-
-.left-container h1 {
-    font-size: 16px; /* Уменьшен размер шрифта */
-    margin-bottom: 10px;
-    color: #4a76a8;
-}
-
-.avatar-wrapper {
-    text-align: center;
-    margin-bottom: 10px; /* Уменьшен отступ */
-}
-
-.avatar-container img {
-    width: 50px; /* Уменьшен размер аватарки */
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid #4a76a8;
-    object-fit: cover;
-}
-
-.profile-info p {
-    font-size: 12px; /* Уменьшен размер шрифта */
-    margin: 5px 0;
-}
-
-/* Правая часть */
-.right-container {
-    flex: 1;
+    width: 80%;
+    margin: 0 auto;
     padding: 20px;
 }
 
-.right-container .button-form {
+/* Хедер */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+/* Список пользователей */
+.user-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 20px;
+    justify-content: center;
 }
 
-.button-form form button {
-    all: unset;
-    padding: 10px 15px;
-    background-color: #4a76a8;
-    color: #fff;
-    border-radius: 5px;
+/* Карточка пользователя */
+.user-card-btn {
+    background: none;
+    border: none;
     cursor: pointer;
-    text-align: center;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+    width: 250px;
+    transition: transform 0.3s ease;
 }
 
-.button-form form button:hover {
-    background-color: #3a5f8c;
+.user-card-btn:hover {
+    transform: scale(1.05);
 }
 
-/* Список проектов */
-.project-btn {
-    display: block;
-    width: 50%;
-    padding: 15px;
-    margin-bottom: 15px;
-    text-align: left;
-    background-color: #eef4fc;
+/* Карточка пользователя */
+.user-card {
+    background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.project-btn:hover {
-    transform: translateY(-5px);
-    background-color: #d9e6f7;
+/* Аватар */
+.user-avatar img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
 }
 
-.project-btn h3 {
-    font-size: 18px;
-    color: #4a76a8;
-    margin-bottom: 10px;
-}
-
-.title-project h2 {
-    display: grid;
-    margin: auto;
+.no-avatar {
     text-align: center;
+    padding: 20px;
+    color: #666;
 }
 
-.project-btn p {
-    font-size: 14px;
-    color: #555;
+/* Информация о пользователе */
+.user-info {
+    padding: 15px;
+    color: #333;
+}
+
+.user-info h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.user-info p {
     margin: 5px 0;
 }
 
-.empty {
-    color: #888;
-    text-align: center;
-    font-size: 14px;
+.user-info strong {
+    color: #3498db;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .left-container {
-        flex: 0 0 100%; /* На мобильных устройствах левая часть занимает 100% */
-    }
-
-    .right-container {
-        flex: 1;
-    }
+/* Пустой список */
+.empty {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #999;
 }

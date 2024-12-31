@@ -12,11 +12,12 @@
         <header class="header">
             <h1>Все зарегистрированные пользователи</h1>
         </header>
+        <hr>
         <section class="user-list">
             {% for user in users %}
                 <form method="post" action="{% url 'profiles_info' user.id %}">
                     {% csrf_token %}
-                    <button type="submit">
+                    <button type="submit" class="user-card-btn">
                         <div class="user-card">
                             {% if user.profile.avatar %}
                                 <div class="user-avatar">
@@ -24,7 +25,7 @@
                                 </div>
                             {% else %}
                                 <p class="no-avatar">Нет загруженной аватарки.</p>
-                            {% endif %} 
+                            {% endif %}
                             <div class="user-info">
                                 <h2>{{ user.username }}</h2>
                                 <p><strong>Биография:</strong> {{ user.profile.bio }}</p>

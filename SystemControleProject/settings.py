@@ -16,9 +16,9 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOGIN_REDIRECT_URL = '/login/'  # Например, на главную страницу
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/profile/' # имя функции из views, не маршрут
-LOGOUT_REDIRECT_URL = 'login' #'tasks/login/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -127,7 +127,7 @@ USE_TZ = True
 # Настройка статических файлов
 STATIC_URL = '/static/'  # URL для доступа к статическим файлам
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Путь, где хранятся твои статические файлы
+    os.path.join(BASE_DIR, 'scp/static'),
 ]
 
 # Default primary key field type
