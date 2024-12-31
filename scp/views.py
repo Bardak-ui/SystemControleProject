@@ -3,12 +3,17 @@ from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .models import Task, Project, Profile
 
 def logout_view(request):
     logout(request)
     return redirect('/login/')
+
+@login_required
+def you_is_banned():
+    return HttpResponse("Вы были забанеы администрацией сайта")
 
 @login_required
 def home(request):
@@ -71,8 +76,6 @@ def add_project(request):
         form = AddProject()
     return render(request,'add_project.html', {'form':form})
 
-from django.shortcuts import get_object_or_404
-
 @login_required
 def add_task(request, project_id):
     project = get_object_or_404(Project, id=project_id)  # Изменено на Project
@@ -88,7 +91,16 @@ def add_task(request, project_id):
         form = AddTask()
     return render(request, 'add_task.html', {'form': form})
 
+def profiles(request):
+    users = User.objects.all()
+    return render(request, 'profiles.html', {'users':users})
 
+def profiles_info(request, user_id):
+    profiles = get_object_or_404(Profile, puser = user_id)
+    projects = Project.objects.filter(owner = user_id)
+    return render(request, 'profiles_info.html', {'profile':profiles, 'projects':projects, 'u_profile':request.user})    
+
+def ban_user(requset, user_id):
 
 #admin_panel,
 #сделать функцию для вступления в проект и вступление в разруботку задачи для проекта

@@ -1,0 +1,111 @@
+/* Основной стиль для страницы */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Контейнер всей страницы */
+.container {
+    max-width: 1200px;
+    margin: 60px auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Заголовок страницы */
+.header {
+    padding: 20px;
+    background-color: #4a76a8;
+    color: #fff;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Список пользователей */
+.user-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center; /* Центрирование элементов */
+}
+
+/* Карточка пользователя */
+.user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 250px; /* Ширина карточки */
+    background-color: #eef4fc;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.user-card:hover {
+    transform: translateY(-5px); /* Лёгкое поднятие карточки при наведении */
+    background-color: #d9e6f7;
+}
+
+/* Аватарка пользователя */
+.user-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4a76a8;
+    margin-bottom: 15px;
+}
+
+/* Информация о пользователе */
+.user-info h2 {
+    font-size: 18px;
+    color: #4a76a8;
+    margin-bottom: 10px;
+}
+
+.user-info p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.user-info strong {
+    color: #333;
+}
+
+/* Кнопка, охватывающая карточку */
+button {
+    all: unset; /* Сброс всех стилей кнопки */
+    width: 100%;
+    cursor: pointer;
+}
+
+button:hover {
+    outline: none;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .user-card {
+        width: calc(50% - 20px); /* Две колонки на экранах до 768px */
+    }
+}
+
+@media (max-width: 480px) {
+    .user-card {
+        width: 100%; /* Одна колонка на экранах до 480px */
+    }
+}

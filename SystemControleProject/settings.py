@@ -123,7 +123,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# Настройка статических файлов
+STATIC_URL = '/static/'  # URL для доступа к статическим файлам
+STATICFILES_DIRS = [BASE_DIR / "static"]  # Папка для статических файлов проекта
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

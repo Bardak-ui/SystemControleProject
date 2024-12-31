@@ -1,46 +1,58 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
     <title>Домашняя страница</title>
 </head>
 <body>
-    <h1>Домашняя страница</h1>
-    {% for project in projects %}
-        <form method="post" action="{% url 'info_project' project.id %}">
-            {% csrf_token %}
-            <button type="submit">
-                    Название проекта: {{project.title}} <br>
-                    Описание проекта: {{project.description}} <br>
-                    {% if project.participants.all %}
-                        <br> Над проектом работают: 
-                        {% for participant in project.participants.all %}
-                            {{ participant.username }}, <!-- Выводим имена участников -->
-                        {% endfor %}
-                    {% else %}
-                        <br>Исполнители отсутствуют<br>
-                    {% endif %}
-                    <br><br>Проект создан: {{project.created_at}} <br>
-                    Разработка проекта начата: {{project.start_date}} <br>
-                    Разработка проекта окончена: {{project.end_date}} <br>
-                    <br >Статус проекта: {{project.status}} <br>
-                    <br>Создатель проекта: {{project.owner}} <br>
-                    <!-- {{project.code}} <br> -->
-    {% empty %}
-        <p>Проекты отсутствуют</p>
-    {% endfor %}
-            </button>
-        </form>
-        <hr>
-    <form method="post" action="{% url 'profile' %}">
-        {% csrf_token %}
-        <button type="submit">Профиль</button>
-    </form>
-    <br>
-    <form method="post" action="{% url 'logout_view' %}">
-        {% csrf_token %}
-        <button type="submit">Выйти</button>
-    </form>
+    <div class="fixed-header">
+        <h1 class="title-home">Домашняя страница</h1>
+        {% if user.profile.avatar %}
+            <a href="{% url 'profile' %}">
+                <div class="avatar-wrapper">
+                    <img src="{{ user.profile.avatar.url }}" alt="Profile Image" class="avatar"/>
+                </div>
+            </a>
+        {% else %}
+            <p class="no-avatar">Нет загруженной аватарки</p>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <div class="left-container">
+            <div class="left-content">
+                <h1 class="title-home">Список проектов</h1>
+            </div>
+        </div>
+        <div class="right-container">
+            {% for project in projects %}
+                <form method="post" action="{% url 'info_project' project.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="button-projects">
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description }}</p>
+                        {% if project.participants.all %}
+                            <br> Над проектом работают: 
+                            {% for participant in project.participants.all %}
+                                {{ participant.username }},
+                            {% endfor %}
+                        {% else %}
+                            <br>Исполнители отсутствуют<br>
+                        {% endif %}
+                        <br><br>Проект создан: {{ project.created_at }} <br>
+                        Разработка проекта начата: {{ project.start_date }} <br>
+                        Разработка проекта окончена: {{ project.end_date }} <br>
+                        <br>Статус проекта: {{ project.status }} <br>
+                        <br>Создатель проекта: {{ project.owner }} <br>
+                    </button>
+                </form>
+            {% empty %}
+                <p>Проекты отсутствуют</p>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>

@@ -10,18 +10,17 @@
 <body>
     <div class="container">
         <div class="left-container">
-            <h1>Здравтвуйте, {{ profile.puser }}</h1>
+            <h1>Профиль пользователя: {{ profile.puser }}</h1>
 
-            {% if user.profile.avatar %}
+            {% if profile.avatar %}
                 <div class="avatar-wrapper">
                     <div class="avatar-container">
-                        <img src="{{ user.profile.avatar.url }}" alt="Profile Image" class="avatar"/>
+                        <img src="{{ profile.avatar.url }}" alt="Profile Image" class="avatar"/>
                     </div>
                 </div>
-            {% else %}
-                <p class="no-avatar">Нет загруженной аватарки.</p>
-            {% endif %}
-
+                {% else %}
+                    <p class="no-avatar">Нет загруженной аватарки.</p>
+                {% endif %}
             <div class="profile-info">
                 <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
                 <p><strong>О вас:</strong> {{ profile.bio }}</p>
@@ -34,17 +33,17 @@
                     {% csrf_token %}
                     <button type="submit">На главную</button>
                 </form> 
-                <form method="post" action="{% url 'add_project' %}">
-                    {% csrf_token %}
-                    <button type="submit">Создать Проект</button>
-                </form> 
-                <form method="get" action="{% url 'profile_settings' %}">
-                    <button type="submit">Настройки</button>
-                </form> 
                 <form method="post" action="{% url 'profiles' %}">
                     {% csrf_token %}
                     <button type="submit">Участники</button>
                 </form>
+                {% if u_profile.profile.role == "Администратор" %}
+                    <form method="post" action="{% url 'profile'%}">
+                        {% csrf_token %}
+                        <button type="submit">Забанить</button>
+                    </form>
+                {% endif %}
+
                 <form method="post" action="{% url 'logout_view' %}">
                     {% csrf_token %}
                     <button type="submit">Выйти</button>
