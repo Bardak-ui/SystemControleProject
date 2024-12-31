@@ -1,19 +1,35 @@
-from .forms import CustomeCreateUserForm, AddProject, ProfileSettings, ProjectFilterForm, AddTask
+from .forms import AddTask
+from .forms import EditTask
+from .forms import AddProject
+from .forms import EditProject
+from .forms import ProfileSettings
+from .forms import ProjectFilterForm
+from .forms import CustomeCreateUserForm
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.http import HttpResponseForbidden
 from .models import Task, Project, Profile
 
 def logout_view(request):
     logout(request)
     return redirect('/login/')
 
-@login_required
 def you_is_banned():
-    return HttpResponse("Вы были забанеы администрацией сайта")
+    return HttpResponse("Вы были забанены администрацией сайта")
+
+@login_required
+def ban_user(request, user_id):
+    if not request.user.profile.role == "Администратор":
+        return HttpResponseForbidden("У вас нет прав для выполнения этого действия.")
+    user_to_ban = get_object_or_404(Profile, puser = user_id)
+    user_to_ban.status = 'Baned'
+    user_to_ban.save()
+    return redirect('profiles')
+
 
 @login_required
 def home(request):
@@ -44,12 +60,29 @@ def profile_settings(request):
 
 
 @login_required
-def edit_project(request, task_id):
-    pass
+def edit_project(request, project_id):
+    project = get_object_or_404(Project, id = project_id)
+    if request.method == "POST":
+        form = EditProject(request.POST, instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('info_project', project_id=project.id)
+    else:
+        form = EditProject(instance=project)
+    return render(request,'edit_project.html',{'form':form, 'project':project})
 
 @login_required
-def edit_task(request, task_id):
-    pass
+def edit_task(request, task_id, project_id):
+    task = get_object_or_404(Task, id = task_id)
+    project = get_object_or_404(Project, id = task_id)
+    if request.method == "POST":
+        form = EditTask(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('info_project', project_id=project.id)
+    else:
+        form = EditTask(instance=task)
+    return render(request,'edit_task.html',{'form':form, 'task':task, 'project_id':project_id})
 
 @login_required
 def info_project(request, project_id):
@@ -98,10 +131,7 @@ def profiles(request):
 def profiles_info(request, user_id):
     profiles = get_object_or_404(Profile, puser = user_id)
     projects = Project.objects.filter(owner = user_id)
-    return render(request, 'profiles_info.html', {'profile':profiles, 'projects':projects, 'u_profile':request.user})    
+    return render(request, 'profiles_info.html', {'profile':profiles, 'projects':projects})    
 
-def ban_user(requset, user_id):
-
-#admin_panel,
 #сделать функцию для вступления в проект и вступление в разруботку задачи для проекта
 

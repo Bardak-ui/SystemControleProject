@@ -26,7 +26,8 @@ body {
 
 .fixed-header .title-home {
     font-size: 15px;  /* Уменьшен размер шрифта заголовка */
-    margin: 0;
+    margin: auto;
+
 }
 
 /* Позиционирование аватара в правом верхнем углу */
@@ -72,18 +73,25 @@ body {
 }
 
 .right-container {
-    flex: 2;
+    display: flex; /* Выстраиваем кнопки в строку */
+    flex-wrap: wrap; /* Разрешаем перенос кнопок на новую строку */
+    gap: 15px; /* Отступы между кнопками */
     padding: 20px;
-    overflow-y: auto;
+    justify-content: flex-start; /* Кнопки выравниваются по левому краю */
 }
-
+.left-container .title-home{
+    margin: auto;
+    text-align: center;
+}
 .button-projects {
-    display: block;
-    width: 100%;
+    flex: 0 1 calc(50% - 10px); /* Каждая кнопка занимает примерно 45% ширины контейнера */
+    max-width: calc(50% - 10px); /* Ограничиваем максимальную ширину кнопок */
+    min-width: 376px; /* Минимальная ширина кнопок */
     text-align: left;
+    position: relative;
+    align-items: center;
     background-color: #eef4fc;
     padding: 15px;
-    margin-bottom: 15px;
     border: none;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -91,6 +99,7 @@ body {
     color: #333;
     cursor: pointer;
 }
+
 
 .button-projects:hover {
     background-color: #d9e6f7;

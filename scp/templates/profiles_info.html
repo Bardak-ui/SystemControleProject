@@ -23,6 +23,7 @@
                 {% endif %}
             <div class="profile-info">
                 <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
+                <p><strong>Статус блокировки:</strong> {{ profile.status}}</p>
                 <p><strong>О вас:</strong> {{ profile.bio }}</p>
             </div>
         </div>
@@ -37,13 +38,10 @@
                     {% csrf_token %}
                     <button type="submit">Участники</button>
                 </form>
-                {% if u_profile.profile.role == "Администратор" %}
-                    <form method="post" action="{% url 'profile'%}">
+                <form method="post" action="{% url 'ban_user' profile.puser.id%}">
                         {% csrf_token %}
                         <button type="submit">Забанить</button>
-                    </form>
-                {% endif %}
-
+                </form>
                 <form method="post" action="{% url 'logout_view' %}">
                     {% csrf_token %}
                     <button type="submit">Выйти</button>

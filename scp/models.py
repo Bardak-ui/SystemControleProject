@@ -71,8 +71,8 @@ class Status(models.Model):
                         {'Not specified','Не указан'}
                         ]
     
-    BLACKLIST_CHOICES = [{'Baned','Заблокирован'},
-                         {'Not baned','Не заблокирован'},
+    BLACKLIST_CHOICES = [{'Заблокирован','Baned'},
+                         {'Не заблокирован','Not baned'},
                          ]
     
 class Project(models.Model):

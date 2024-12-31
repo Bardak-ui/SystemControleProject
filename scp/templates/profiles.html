@@ -14,12 +14,17 @@
         </header>
         <section class="user-list">
             {% for user in users %}
-                <form method="get" action="{% url 'profiles_info' user.id %}">
+                <form method="post" action="{% url 'profiles_info' user.id %}">
+                    {% csrf_token %}
                     <button type="submit">
                         <div class="user-card">
-                            <div class="user-avatar">
-                                <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}'s avatar">
-                            </div>
+                            {% if user.profile.avatar %}
+                                <div class="user-avatar">
+                                    <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}'s avatar">
+                                </div>
+                            {% else %}
+                                <p class="no-avatar">Нет загруженной аватарки.</p>
+                            {% endif %} 
                             <div class="user-info">
                                 <h2>{{ user.username }}</h2>
                                 <p><strong>Биография:</strong> {{ user.profile.bio }}</p>

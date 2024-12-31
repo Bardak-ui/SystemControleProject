@@ -52,7 +52,71 @@ class AddProject(forms.ModelForm):
 
         }
 
+class EditProject(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['title','description','code','language','status','start_date','end_date']
+        widgets = {
+            'title': TextInput(attrs={
+                'class': 'title-project',
+                'placeholder': 'Введите название задачи',
+                'style': 'resize: none; border-color: green;',
+                'required': True,
+            }),
+            'description': Textarea(attrs={
+                'class': 'desc-project',                     # Класс для CSS-стилей
+                'placeholder': 'Введите описание',          # Подсказка внутри поля
+                'rows': 5,                                  # Количество строк
+                'cols': 50,                                 # Количество символов в строке
+                'maxlength': 500,                           # Максимальная длина текста
+                'required': True,                           # Поле обязательно для заполнения
+                'style': 'resize: vertical; border-color: green;', # Inline-стили (запрет изменения размера и цвет границы)
+            }),
+            'code': Textarea(attrs={
+                'class': 'desc-project',                     
+                'placeholder': 'Введите код проекта',         
+                'rows': 35,                                  
+                'cols': 50,                                  
+                'required': False,                           
+                'style': 'resize: vertical; border-color: green;',
+            }),
+            'start_date': DateInput(attrs={
+                'class': 'desc-project', 
+                'type':'date',
+                'required': False,
+            }),
+            'end_date': DateInput(attrs={
+                'class': 'desc-project', 
+                'type':'date',
+                'required': False,
+            })
+
+        }
+
 class AddTask(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['title','description','status','priority']
+        widgets = {
+            'title': TextInput(attrs={
+                'class': 'title-project',
+                'placeholder': 'Введите название задачи',
+                'style': 'resize: none; border-color: green;',
+                'required': True,
+            }),
+            'description': Textarea(attrs={
+                'class': 'desc-project',                     # Класс для CSS-стилей
+                'placeholder': 'Введите описание',          # Подсказка внутри поля
+                'rows': 5,                                  # Количество строк
+                'cols': 50,                                 # Количество символов в строке
+                'maxlength': 500,                           # Максимальная длина текста
+                'required': True,                           # Поле обязательно для заполнения
+                'style': 'resize: vertical; border-color: green;', # Inline-стили (запрет изменения размера и цвет границы)
+            }),
+
+        }
+
+class EditTask(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title','description','status','priority']

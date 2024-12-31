@@ -4,108 +4,136 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
-    color: #333;
+    color: #d14141;
 }
 
 /* Контейнер всей страницы */
 .container {
+    display: grid;
     max-width: 1200px;
-    margin: 60px auto;
+    margin: 20px auto;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
 }
 
-/* Заголовок страницы */
-.header {
-    padding: 20px;
-    background-color: #4a76a8;
-    color: #fff;
+/* Левая часть */
+.left-container {
+    flex: 0 0 10%; /* Уменьшена ширина до 10% */
+    background-color: #eef4fc;
+    padding: 10px; /* Уменьшен отступ */
+    box-shadow: inset -1px 0 0 #ddd;
+}
+
+.left-container h1 {
+    font-size: 16px; /* Уменьшен размер шрифта */
+    margin-bottom: 10px;
+    color: #4a76a8;
+}
+
+.avatar-wrapper {
     text-align: center;
+    margin-bottom: 10px; /* Уменьшен отступ */
 }
 
-.header h1 {
-    margin: 0;
-    font-size: 24px;
+.avatar-container img {
+    width: 50px; /* Уменьшен размер аватарки */
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #4a76a8;
+    object-fit: cover;
 }
 
-/* Список пользователей */
-.user-list {
+.profile-info p {
+    font-size: 12px; /* Уменьшен размер шрифта */
+    margin: 5px 0;
+}
+
+/* Правая часть */
+.right-container {
+    flex: 1;
+    padding: 20px;
+}
+
+.right-container .button-form {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    justify-content: center; /* Центрирование элементов */
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-/* Карточка пользователя */
-.user-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.button-form form button {
+    all: unset;
+    padding: 10px 15px;
+    background-color: #4a76a8;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
     text-align: center;
-    width: 250px; /* Ширина карточки */
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.button-form form button:hover {
+    background-color: #3a5f8c;
+}
+
+/* Список проектов */
+.project-btn {
+    display: block;
+    width: 50%;
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: left;
     background-color: #eef4fc;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    padding: 15px;
     cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.user-card:hover {
-    transform: translateY(-5px); /* Лёгкое поднятие карточки при наведении */
+.project-btn:hover {
+    transform: translateY(-5px);
     background-color: #d9e6f7;
 }
 
-/* Аватарка пользователя */
-.user-avatar img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #4a76a8;
-    margin-bottom: 15px;
-}
-
-/* Информация о пользователе */
-.user-info h2 {
+.project-btn h3 {
     font-size: 18px;
     color: #4a76a8;
     margin-bottom: 10px;
 }
 
-.user-info p {
+.title-project h2 {
+    display: grid;
+    margin: auto;
+    text-align: center;
+}
+
+.project-btn p {
     font-size: 14px;
+    color: #555;
     margin: 5px 0;
 }
 
-.user-info strong {
-    color: #333;
-}
-
-/* Кнопка, охватывающая карточку */
-button {
-    all: unset; /* Сброс всех стилей кнопки */
-    width: 100%;
-    cursor: pointer;
-}
-
-button:hover {
-    outline: none;
+.empty {
+    color: #888;
+    text-align: center;
+    font-size: 14px;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-    .user-card {
-        width: calc(50% - 20px); /* Две колонки на экранах до 768px */
+    .container {
+        flex-direction: column;
     }
-}
 
-@media (max-width: 480px) {
-    .user-card {
-        width: 100%; /* Одна колонка на экранах до 480px */
+    .left-container {
+        flex: 0 0 100%; /* На мобильных устройствах левая часть занимает 100% */
+    }
+
+    .right-container {
+        flex: 1;
     }
 }

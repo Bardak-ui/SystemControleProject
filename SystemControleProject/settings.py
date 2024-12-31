@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-7x0xbh*ahs1oc5a_+3wl^79qs++^xsm1&2r@i##0o4s(w$s1v4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'scp.middleware.ban_check.BanCheckMiddleware',
 ]
 
 ROOT_URLCONF = 'SystemControleProject.urls'
@@ -125,8 +126,9 @@ USE_TZ = True
 
 # Настройка статических файлов
 STATIC_URL = '/static/'  # URL для доступа к статическим файлам
-STATICFILES_DIRS = [BASE_DIR / "static"]  # Папка для статических файлов проекта
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Путь, где хранятся твои статические файлы
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
