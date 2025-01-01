@@ -109,7 +109,7 @@ class Task(models.Model):
 class Profile(models.Model):
     puser = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', unique=True)
     bio = models.TextField(blank=True, null=True)
-    avatar = models.ImageField(upload_to='profile_avatars/', blank=True, null=True)
+    avatar = models.ImageField(upload_to='./profile_avatars/', blank=True, null=True)
     role = models.CharField(max_length=50, blank=True, choices=Role.ROLE_CHOICES, default='Executor')
     status = models.CharField(max_length=50, choices=Status.BLACKLIST_CHOICES, default='Not baned')
 
