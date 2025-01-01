@@ -14,6 +14,9 @@ from django.http import HttpResponse
 from django.http import HttpResponseForbidden
 from .models import Task, Project, Profile
 
+def index(request):
+    return render(request, 'index.html')
+
 def logout_view(request):
     logout(request)
     return redirect('/login/')
