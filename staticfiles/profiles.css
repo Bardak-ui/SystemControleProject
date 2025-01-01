@@ -1,0 +1,97 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Контейнер */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Хедер */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+/* Список пользователей */
+.user-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Карточка пользователя */
+.user-card-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 250px;
+    transition: transform 0.3s ease;
+}
+
+.user-card-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Карточка пользователя */
+.user-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Аватар */
+.user-avatar img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+.no-avatar {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* Информация о пользователе */
+.user-info {
+    padding: 15px;
+    color: #333;
+}
+
+.user-info h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.user-info p {
+    margin: 5px 0;
+}
+
+.user-info strong {
+    color: #3498db;
+}
+
+/* Пустой список */
+.empty {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #999;
+}
