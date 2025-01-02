@@ -38,23 +38,7 @@
                 </form>
                 <form method="post" action="{% url 'profiles' %}">
                     {% csrf_token %}
-                    <button type="submit">Участники</button>
-                </form>
-                {% if profile.status == "Не заблокирован" %}
-                    <form method="post" action="{% url 'ban_user' profile.puser.id%}">
-                        {% csrf_token %}
-                        <button type="submit" class="ban">Забанить</button>
-                    </form>
-                {% endif %}
-                {% if profile.status == "Заблокирован" %}
-                    <form method="post" action="{% url 'unban_user' profile.puser.id%}">
-                        {% csrf_token %}
-                        <button type="submit" class="unban">Разбанить</button>
-                    </form>
-                {% endif %}
-                <form method="post" action="{% url 'logout_view' %}">
-                    {% csrf_token %}
-                    <button type="submit">Выйти</button>
+                    <button type="submit">Назад</button>
                 </form>
             </div>
 

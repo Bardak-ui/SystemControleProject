@@ -15,6 +15,7 @@ urlpatterns = [
     path('profiles/', views.profiles, name='profiles'),
     # ----------------
     path('profile/', views.profile, name='profile'), # Профиль
+    path('admin-panel/<int:user_id>', views.admin_panel, name='admin_panel'), # Панель администратора
     path('profile/settings', views.profile_settings, name='profile_settings'), # Настройки профиля
     path('project/edit/<int:project_id>/', views.edit_project, name='edit_project'), # Изменение проекта
     # -----------------

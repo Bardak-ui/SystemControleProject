@@ -45,6 +45,22 @@ body {
     transform: scale(1.05);
 }
 
+.button-form button {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a76a8;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.button-form button:hover {
+    background-color: #365b85;
+}
+
 /* Карточка пользователя */
 .user-card {
     background-color: white;

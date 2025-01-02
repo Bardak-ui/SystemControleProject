@@ -47,7 +47,12 @@ class Status(models.Model):
     BLACKLIST_CHOICES = [('Заблокирован','Banned'),
                          ('Не заблокирован','NotBanned'),
                          ]
-    
+    ACCSTATUS_CHOICES_CHOICES = [
+        ('Онлайн','Online'),
+        ('Офлайн','Оffline'),
+        ('Деактивирована','Deactivated')
+    ]
+
 class Project(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -84,6 +89,7 @@ class Profile(models.Model):
     bio = models.TextField(blank=True, null=True)
     avatar = models.ImageField(upload_to='./profile_avatars/', blank=True, null=True)
     role = models.CharField(max_length=50, blank=True, choices=Role.ROLE_CHOICES, default='Executor')
+    account = models.CharField(max_length=50, choices=Status.ACCSTATUS_CHOICES_CHOICES, default='Online')
     status = models.CharField(max_length=50, choices=Status.BLACKLIST_CHOICES, default='NotBanned')
 
     def __str__(self):

@@ -153,11 +153,12 @@ class ProfileSettings(forms.ModelForm):
         model = Profile
         fields = ['bio', 'avatar']
         widgets = {
-            'avatar': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-            'bio': forms.Textarea(attrs={
-                'class':'bio-profile',
-                'rows':5,
-                'style': 'resize: vertical',
-            }),
+            'avatar': forms.ClearableFileInput(attrs={'style': 'display: none; text-decoration: none;' , 'class': 'id_avatar'}),
+            'bio': forms.Textarea(attrs={'class': 'bio-profile', 'rows': 5, 'style': 'resize: vertical'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Убираем поле для очистки аватара
+        self.fields['avatar'].required = False  # Убираем обязательность
  

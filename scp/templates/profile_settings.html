@@ -1,24 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'profile_settings.css' %}">
     <title>Настройки</title>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h1>Ваше имя: {{ profile.puser }}</h1>
-        <br>Ваша роль: {% if profile.role %} 
-                            {{ profile.role }}
-                        {% else %}
-                            не установлена <br>
-                        {% endif %}</p>
-        {{ form.as_p }}
-        <button type="submit">Сохранить</button>
-    </form>
-    <form method="get" action="{% url 'profile' %}">
-        <button type="submit">Назад</button>
-    </form>
+    <div class="settings-container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="avatar-section">
+                <label for="id_avatar" class="avatar-label">
+                    {% if profile.avatar %}
+                        <img src="{{ profile.avatar.url }}" alt="Аватар" class="avatar-image">
+                    {% else %}
+                        <div class="avatar-placeholder">Нажмите для загрузки</div>
+                    {% endif %}
+                </label>
+                <div class="hidde">
+                    {{ form.avatar }}
+                </div>
+            </div>
+            <h1>Ваше имя: {{ profile.puser }}</h1>
+            <p>Ваша роль: {{ profile.role|default:"не установлена" }}</p>
+            <div class="form-group">
+                {{ form.bio }}
+            </div>
+            <button type="submit" class="save-button">Сохранить</button>
+        </form>
+        <form method="get" action="{% url 'profile' %}" class="button-back">
+            <button type="submit">Назад</button>
+        </form>
+    </div>
 </body>
 </html>

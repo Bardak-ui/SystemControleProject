@@ -63,12 +63,12 @@ def register(request):
 def profile_settings(request):
     profile = get_object_or_404(Profile, puser = request.user)
     if request.method == "POST":
-        form = ProfileSettings(request.POST, request.FILES, instance=request.user.profile)
+        form = ProfileSettings(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('profile_settings')
     else:
-        form = ProfileSettings(instance=request.user.profile)
+        form = ProfileSettings(instance=profile)
     return render(request, 'profile_settings.html', {'form':form, 'profile':profile})
 
 
@@ -83,7 +83,7 @@ def join_project(request):
 @login_required
 def edit_project(request, project_id):
         project = get_object_or_404(Project, id = project_id)
-        if request.user == project.participants:
+        if request.user == project.participants or request.user == project.owner:
             if request.method == "POST":
                 form = EditProject(request.POST, instance=project)
                 if form.is_valid():
@@ -102,14 +102,11 @@ def delete_task(request, project_id, task_id):
 
     return redirect('info_project', project_id=project_id)  # Переходим на страницу проекта
 
-
-
 @login_required
 def edit_task(request, project_id, task_id):
     task = get_object_or_404(Task, id=task_id)
     project = get_object_or_404(Project, id=project_id)  # Исправлено: использую project_id для поиска проекта
     delete_url = reverse('delete_task', args=[task.id, project.id])
-    
     if request.method == "POST":
         form = EditTask(request.POST, instance=task)
         if form.is_valid():
@@ -117,7 +114,6 @@ def edit_task(request, project_id, task_id):
             return redirect('info_project', project_id=project_id)  # Исправлено: правильный редирект
     else:
         form = EditTask(instance=task)
-    
     return render(request, 'edit_task.html', {
         'form': form, 
         'project_id': project_id, 
@@ -174,3 +170,8 @@ def profiles_info(request, user_id):
     profiles = get_object_or_404(Profile, puser = user_id)
     projects = Project.objects.filter(owner = user_id)
     return render(request, 'profiles_info.html', {'profile':profiles, 'projects':projects})    
+
+def admin_panel(request, user_id):
+    profiles = get_object_or_404(Profile, puser = user_id)
+    projects = Project.objects.filter(owner = user_id)
+    return render(request, 'admin_panel.html', {'profile':profiles, 'projects':projects})

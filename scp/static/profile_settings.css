@@ -1,0 +1,87 @@
+/* Основной фон */
+body {
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Центрирование блока */
+.settings-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Стили для аватара */
+.avatar-section {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.avatar-label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.avatar-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.avatar-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.hidde{
+    display: none;
+    text-decoration: none;
+    visibility: hidden;
+}
+
+/* Скрытое поле для загрузки */
+.id_avatar {
+    display: none;
+    text-decoration: none;
+    visibility: hidden;
+
+}
+
+/* Кнопки */
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

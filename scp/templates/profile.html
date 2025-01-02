@@ -23,7 +23,7 @@
             <h1>{{ profile.puser }}</h1>
                 <div class="profile-info">
                     <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
-                {% if bio %}
+                {% if profile.bio %}
                     <p><strong>О вас:</strong> {{ profile.bio }}</p>
                 {% else %}
                     <p><strong>О вас:</strong> Данные не указаны</p>
@@ -38,10 +38,17 @@
                     {% csrf_token %}
                     <button type="submit">На главную</button>
                 </form>
-                <form method="post" action="{% url 'profiles' %}">
-                    {% csrf_token %}
-                    <button type="submit">Aдминка</button>
-                </form>
+                {% if profile.role == "Администратор" %}
+                    <form method="post" action="{% url 'profiles'%}">
+                        {% csrf_token %}
+                        <button type="submit">Aдминка</button>
+                    </form>
+                {% else %}
+                    <form method="post" action="{% url 'profiles' %}">
+                        {% csrf_token %}
+                        <button type="submit">Участники</button>
+                    </form>
+                {% endif %}
                 <form method="post" action="{% url 'add_project' %}">
                     {% csrf_token %}
                     <button type="submit">Создать проект</button>
