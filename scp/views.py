@@ -21,14 +21,14 @@ def logout_view(request):
     logout(request)
     return redirect('/login/')
 
-def you_is_banned():
-    return HttpResponse("")
+def you_is_banned(request):
+    return render(request, 'you_is_banned.html')
 
 def unban_user(request, user_id):
-    if not request.user.profile.role == "Administrator":
+    if not request.user.profile.role == "Администратор":
         return render(request, 'user_ban.html')
     user_to_ban = get_object_or_404(Profile, puser = user_id)
-    user_to_ban.status = 'Not banned'
+    user_to_ban.status = 'Не заблокирован'
     user_to_ban.save()
     return redirect('profiles')
 
@@ -39,7 +39,7 @@ def ban_user(request, user_id):
     if request.user.id == user_id:
         return HttpResponseForbidden("Вы не можете заблокировать сами себя.")
     user_to_ban = get_object_or_404(Profile, puser = user_id)
-    user_to_ban.status = 'Banned'
+    user_to_ban.status = 'Заблокирован'
     user_to_ban.save()
     return redirect('profiles')
 
@@ -54,7 +54,7 @@ def register(request):
         form = CustomeCreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('')
+            return redirect('/')
     else:
         form = CustomeCreateUserForm()
     return render(request, 'register.html', {'form':form})
@@ -73,29 +73,58 @@ def profile_settings(request):
 
 
 @login_required
-def edit_project(request, project_id):
-    project = get_object_or_404(Project, id = project_id)
-    if request.method == "POST":
-        form = EditProject(request.POST, instance=project)
-        if form.is_valid():
-            form.save()
-            return redirect('info_project', project_id=project.id)
-    else:
-        form = EditProject(instance=project)
-    return render(request,'edit_project.html',{'form':form, 'project':project})
+def join_task(request):
+    pass
 
 @login_required
-def edit_task(request, task_id, project_id):
-    task = get_object_or_404(Task, id = task_id)
-    project = get_object_or_404(Project, id = task_id)
+def join_project(request):
+    pass
+
+@login_required
+def edit_project(request, project_id):
+        project = get_object_or_404(Project, id = project_id)
+        if request.user == project.participants:
+            if request.method == "POST":
+                form = EditProject(request.POST, instance=project)
+                if form.is_valid():
+                    form.save()
+                    return redirect('info_project', project_id=project.id)
+            else:
+                form = EditProject(instance=project)
+            return render(request,'edit_project.html',{'form':form, 'project':project, 'project_id':project_id})
+        return HttpResponseForbidden("Вы не учавствуете в разработке этого проекта.")
+
+@login_required
+def delete_task(request, project_id, task_id):
+    del_task = get_object_or_404(Task, id=task_id)
+    del_task.delete()  # Удаляем задачу
+    # Нет необходимости вызывать save(), так как объект уже удален
+
+    return redirect('info_project', project_id=project_id)  # Переходим на страницу проекта
+
+
+
+@login_required
+def edit_task(request, project_id, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    project = get_object_or_404(Project, id=project_id)  # Исправлено: использую project_id для поиска проекта
+    delete_url = reverse('delete_task', args=[task.id, project.id])
+    
     if request.method == "POST":
         form = EditTask(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('info_project', project_id=project.id)
+            return redirect('info_project', project_id=project_id)  # Исправлено: правильный редирект
     else:
         form = EditTask(instance=task)
-    return render(request,'edit_task.html',{'form':form, 'task':task, 'project_id':project_id})
+    
+    return render(request, 'edit_task.html', {
+        'form': form, 
+        'project_id': project_id, 
+        'task_id': task_id, 
+        'task': task,
+        'delete_url': delete_url  # Передаем URL для удаления задачи
+    })
 
 @login_required
 def info_project(request, project_id):

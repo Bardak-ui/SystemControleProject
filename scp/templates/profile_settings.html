@@ -9,11 +9,11 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h1>Ваше имя: {{ profile.puser }}</h1>
-        <br>Ваша роль: {% if role.p_role.exist %} 
-            {{ profile.role }}
-        {% else %}
-            не установлена <br>
-        {% endif %}</p>
+        <br>Ваша роль: {% if profile.role %} 
+                            {{ profile.role }}
+                        {% else %}
+                            не установлена <br>
+                        {% endif %}</p>
         {{ form.as_p }}
         <button type="submit">Сохранить</button>
     </form>

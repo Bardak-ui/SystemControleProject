@@ -16,10 +16,11 @@ urlpatterns = [
     # ----------------
     path('profile/', views.profile, name='profile'), # Профиль
     path('profile/settings', views.profile_settings, name='profile_settings'), # Настройки профиля
+    path('project/edit/<int:project_id>/', views.edit_project, name='edit_project'), # Изменение проекта
     # -----------------
     path('add_project/', views.add_project, name='add_project'), # Добавление проекта
-    path('project/edit/<int:project_id>', views.edit_project, name='edit_project'), # Изменение проекта
-    path('task/edit/<int:project_id>/<int:task_id>', views.edit_task, name='edit_task'), # Изменение задачи
+    path('task/delete/<int:task_id>/<int:project_id>/', views.delete_task, name='delete_task'), # Изменение задачи
+    path('task/edit/<int:project_id>/<int:task_id>/', views.edit_task, name='edit_task'), # Изменение задачи
     path('info_project/<int:project_id>/', views.info_project, name='info_project'), # Информация о проекте
     path('info_project/add_task/<int:project_id>/', views.add_task, name='add_task'), # Добавление задачи к проекту
 ]

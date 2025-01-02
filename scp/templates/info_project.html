@@ -42,8 +42,8 @@
                 {% csrf_token %}
                 <button type="submit" class="nav-button">Добавить задачу</button>
             </form>
-            <form method="get" action="{% url 'edit_project' project.id %}">
-                <!-- {% csrf_token %} -->
+            <form method="POST" action="{% url 'edit_project' project.id%}">
+                {% csrf_token %}
                 <button type="submit" class="nav-button">Изменить проект</button>
             </form>
             <form method="post" action="{% url 'profile' %}">
@@ -61,7 +61,7 @@
             <div class="task-container">
                 {% for task in tasks %}
                     <div class="task-btn">
-                        <form method="get" action="{% url 'edit_task' task.id project.id%}" class="task-form">
+                        <form method="get" action="{% url 'edit_task' project.id task.id%}" class="task-form">
                             <!-- {% csrf_token %} -->
                             <button type="submit">
                                 <p><strong>Название задачи:</strong> {{ task.title }}</p>
