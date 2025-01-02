@@ -28,6 +28,13 @@
                 {% else %}
                     <p><strong>О вас:</strong> Данные не указаны</p>
                 {% endif %}
+                    <p id="status"><strong>Статус:</strong></p>
+                        {% if profile.account %}
+                            <p style="color: green;">Онлайн</p>
+                        {% else %}
+                            <p style="color: red;"> Оффлайн</p>
+                        {% endif %}
+                    </p>
             </div>
         </div>
 
@@ -84,5 +91,32 @@
             </div>
         </div>
     </div>
+    <script>
+        const socket = new WebSocket('ws://' + window.location.host + '/ws/online_status/');
+    
+        socket.onopen = function() {
+            console.log("Соединение установлено");
+        };
+    
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            
+            // Обновляем текст на основе статуса
+            const statusElement = document.getElementById("status");
+            if (data.status === 'online') {
+                statusElement.textContent = 'Онлайн';
+            } else {
+                statusElement.textContent = 'Офлайн';
+            }
+        };
+    
+        socket.onclose = function() {
+            console.log("Соединение закрыто");
+        };
+    
+        socket.onerror = function(error) {
+            console.error("Ошибка WebSocket:", error);
+        };
+    </script>    
 </body>
 </html>

@@ -89,7 +89,7 @@ class Profile(models.Model):
     bio = models.TextField(blank=True, null=True)
     avatar = models.ImageField(upload_to='./profile_avatars/', blank=True, null=True)
     role = models.CharField(max_length=50, blank=True, choices=Role.ROLE_CHOICES, default='Executor')
-    account = models.CharField(max_length=50, choices=Status.ACCSTATUS_CHOICES_CHOICES, default='Online')
+    account = models.BooleanField(default=False)  # Это поле отвечает за статус пользователя
     status = models.CharField(max_length=50, choices=Status.BLACKLIST_CHOICES, default='NotBanned')
 
     def __str__(self):
