@@ -1,0 +1,122 @@
+/* Общие стили для сайта */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fb; /* Легкий фон для сайта */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* Заголовки на странице */
+h1 {
+    font-size: 32px;
+    color: #444;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Контейнер формы */
+form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Поля ввода и текстовые области */
+form input, form textarea, form select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* Фокус на полях ввода */
+form input:focus, form textarea:focus, form select:focus {
+    border-color: #3498db;
+    background-color: #ffffff;
+    outline: none;
+}
+
+/* Кнопка отправки формы */
+form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 14px;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #2980b9;
+}
+
+/* Стили для ссылок */
+form a {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* Отступы между полями */
+form .field {
+    margin-bottom: 15px;
+}
+
+/* Стилизация меток для полей формы */
+form label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Стили для сообщений об ошибках */
+form .error {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0;
+    text-align: center;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+        padding: 20px;
+    }
+
+    form input, form textarea, form select {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    form button {
+        font-size: 14px;
+        padding: 12px;
+    }
+}

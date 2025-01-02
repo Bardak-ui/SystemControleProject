@@ -1,0 +1,135 @@
+/* Общие стили для сайта */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fb;
+    color: #333;
+    margin: 0; /* Убираем лишние отступы */
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Гарантия, что контент всегда по центру */
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Заголовок */
+h1 {
+    font-size: 22px;
+    color: #444;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Контейнер формы */
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Более компактная ширина */
+    box-sizing: border-box;
+}
+
+/* Поля ввода и текстовые области */
+form input, form textarea, form select {
+    width: 100%;
+    padding: 8px; /* Уменьшен padding для компактности */
+    margin: 6px 0; /* Уменьшен отступ между элементами */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* Фокус на полях ввода */
+form input:focus, form textarea:focus, form select:focus {
+    border-color: #3498db;
+    background-color: #fff;
+    outline: none;
+}
+
+/* Кнопка отправки формы */
+form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px; /* Уменьшен padding */
+    width: 100%;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 8px; /* Уменьшен отступ */
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #2980b9;
+}
+
+/* Стили для ссылок */
+form a {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 12px;
+    display: block;
+    text-align: center;
+    margin-top: 8px; /* Уменьшен отступ */
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для меток */
+form label {
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 4px;
+    display: block;
+}
+
+/* Стили для сообщений об ошибках */
+form .error {
+    color: red;
+    font-size: 12px;
+    margin: 4px 0;
+    text-align: center;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+        padding: 15px;
+    }
+
+    form input, form textarea, form select {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    form button {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    form {
+        width: 95%;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 18px; /* Уменьшен заголовок для маленьких экранов */
+    }
+
+    form button {
+        font-size: 12px;
+        padding: 6px;
+    }
+}

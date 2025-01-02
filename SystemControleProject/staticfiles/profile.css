@@ -1,0 +1,182 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column; /* Делаем тело страницы вертикальным */
+    height: 100vh;  /* Страница должна растягиваться по высоте */
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex: 1;  /* Контейнер растягивается на всю оставшуюся высоту */
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 auto;  /* Центрируем по горизонтали */
+}
+
+.left-container {
+    flex: 1;
+    padding: 20px;
+    background: #f7f9fc;
+    border-right: 1px solid #e5e5e5;
+    overflow-y: auto; /* Если контент не помещается, добавляем прокрутку */
+}
+
+.right-container {
+    flex: 2;
+    padding: 20px;
+    overflow-y: auto; /* Добавляем прокрутку для правого контейнера */
+}
+
+h1 {
+    font-size: 24px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    color: #4a76a8;
+    text-align: center;
+}
+
+p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.avatar-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.avatar-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #4a76a8;
+    justify-self: center;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-avatar {
+    color: #777;
+    text-align: center;
+}
+
+.profile-info {
+    margin-top: 20px;
+    background: #eef4fc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.profile-info p {
+    margin: 5px 0;
+}
+
+.button-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-self: center;
+    margin-bottom: 20px;
+}
+
+.button-form .ban{
+    color: rgb(255, 255, 255);
+    background-color: red;
+}
+
+.button-form .unban{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 255, 34);
+}
+
+.button-form button {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a76a8;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.button-form button:hover {
+    background-color: #365b85;
+}
+
+hr {
+    margin: 12px 0;
+    border: none;
+    border-top: 1px solid #e5e5e5;
+}
+
+h2 {
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Контейнер для плиток проектов */
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;  /* Позволяет переносить плитки на следующую строку при необходимости */
+    gap: 20px;  /* Отступ между плитками */
+    justify-content:center;  /* Плитки выстраиваются слева */
+}
+
+.project-btn {
+    width: 300px;  /* Фиксированная ширина плитки */
+    text-align: left;
+    background: #eef4fc;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 10px;  /* Отступ снизу для плиток */
+}
+
+.project-btn h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #4a76a8;
+}
+
+.project-btn p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.project-btn:hover {
+    background: #d9e6f7;
+}
+
+/* Для маленьких экранов (например, мобильных устройств), плитки будут занимать всю ширину */
+@media (max-width: 768px) {
+    .project-btn {
+        width: 100%;  /* На маленьких экранах плитки занимают всю ширину */
+    }
+}
+.empty {
+    text-align: center;
+    color: #777;
+    margin-top: 20px;
+}

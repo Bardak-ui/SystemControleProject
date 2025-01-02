@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'profile.css' %}" rel="stylesheet"/>
+    <title>Профиль</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Левая часть -->
+        <div class="left-container">
+            <h1>Профиль</h1>
+            <hr>
+            {% if user.profile.avatar %}
+                <div class="avatar-container">
+                    <img src="{{ user.profile.avatar.url }}" alt="Profile Image" class="avatar"/>
+                </div>
+            {% else %}
+                <p class="no-avatar">Нет загруженной аватарки.</p>
+            {% endif %}
+            <h1>{{ profile.puser }}</h1>
+                <div class="profile-info">
+                    <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
+                {% if bio %}
+                    <p><strong>О вас:</strong> {{ profile.bio }}</p>
+                {% else %}
+                    <p><strong>О вас:</strong> Данные не указаны</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Правая часть -->
+        <div class="right-container">
+            <div class="button-form">
+                <form method="post" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <button type="submit">На главную</button>
+                </form>
+                <form method="post" action="{% url 'profiles' %}">
+                    {% csrf_token %}
+                    <button type="submit">Aдминка</button>
+                </form>
+                <form method="post" action="{% url 'add_project' %}">
+                    {% csrf_token %}
+                    <button type="submit">Создать проект</button>
+                </form>
+                <form method="get" action="{% url 'profile_settings' %}">
+                    <button type="submit">Настройки</button>
+                </form>
+                <form method="post" action="{% url 'logout_view' %}">
+                    {% csrf_token %}
+                    <button type="submit">Выйти</button>
+                </form>
+            </div>
+
+            <hr>
+            <div class="title-project">
+                <h2>Ваши проекты</h2>
+            </div>
+            <div class="projects-container">
+                {% for project in projects %}
+                    <form method="post" action="{% url 'info_project' project.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="project-btn">
+                            <h3>{{ project.title }}</h3>
+                            <p>{{ project.description }}</p>
+                            <p><strong>Проект создан:</strong> {{ project.created_at }}</p>
+                            <p><strong>Статус проекта:</strong> {{ project.status }}</p>
+                            <p><strong>Создатель проекта:</strong> {{ project.owner }}</p>
+                        </button>
+                    </form>
+                {% empty %}
+                    <p class="empty">Проекты отсутствуют</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

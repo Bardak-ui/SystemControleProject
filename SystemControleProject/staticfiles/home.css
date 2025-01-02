@@ -1,0 +1,123 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.fixed-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;  /* Сделано sticky, чтобы двигался со страницей */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55px;  /* Уменьшена высота верхнего бара */
+    background-color: #4a76a8;  /* Официальный цвет */
+    color: #fff;
+    padding: 10px 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 18px;  /* Уменьшение шрифта */
+    box-sizing: border-box;
+}
+
+.fixed-header .title-home {
+    font-size: 15px;  /* Уменьшен размер шрифта заголовка */
+    margin: auto;
+
+}
+
+/* Позиционирование аватара в правом верхнем углу */
+.fixed-header .avatar-wrapper {
+    position: absolute;  /* Позиционируем относительно родительского элемента */
+    top: 5px;           /* Отступ от верхней границы */
+    right: 60px;         /* Отступ от правой границы */
+    width: 40px;         /* Уменьшение размера контейнера */
+    height: 40px;        /* Уменьшение размера контейнера */
+    border-radius: 50%;  /* Круглый аватар */
+    overflow: hidden;    /* Скрываем всё, что выходит за круг */
+    border: 2px solid #fff;
+}
+
+/* Убираем неоновое кольцо, оставляем только аватар */
+.fixed-header .avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
+    margin: 60px auto 0; /* Корректируем отступ сверху для учёта фиксированного хедера */
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.left-container {
+    flex: 1;
+    padding: 20px;
+}
+
+.right-container {
+    display: flex; /* Выстраиваем кнопки в строку */
+    flex-wrap: wrap; /* Разрешаем перенос кнопок на новую строку */
+    gap: 15px; /* Отступы между кнопками */
+    padding: 20px;
+    justify-content: flex-start; /* Кнопки выравниваются по левому краю */
+}
+.left-container .title-home{
+    margin: auto;
+    text-align: center;
+}
+.button-projects {
+    flex: 0 1 calc(50% - 10px); /* Каждая кнопка занимает примерно 45% ширины контейнера */
+    max-width: calc(50% - 10px); /* Ограничиваем максимальную ширину кнопок */
+    min-width: 376px; /* Минимальная ширина кнопок */
+    text-align: left;
+    position: relative;
+    justify-self: center;
+    background-color: #eef4fc;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    color: #333;
+    cursor: pointer;
+}
+
+
+.button-projects:hover {
+    background-color: #d9e6f7;
+}
+
+.button-projects h3 {
+    font-size: 18px;
+    margin: 0 0 10px;
+    color: #4a76a8;
+}
+
+.button-projects p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.5;
+}
