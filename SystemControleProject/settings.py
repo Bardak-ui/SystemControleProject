@@ -79,6 +79,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'SystemControleProject.wsgi.application'
+
 ASGI_APPLICATION = "SystemControleProject.asgi.application"
 
 CHANNEL_LAYERS = {

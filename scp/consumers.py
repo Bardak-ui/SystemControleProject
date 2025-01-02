@@ -1,13 +1,13 @@
-from channels.generic.websocket import AsyncWebsocketConsumer
 import json
+from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import sync_to_async
 from .models import Profile
 
 class OnlineStatusConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        # Получаем пользователя из scope
+        # Получаем пользователя из scope (если он аутентифицирован)
         self.user = self.scope['user']
-
+        
         # Если пользователь не аутентифицирован, отклоняем подключение
         if not self.user.is_authenticated:
             await self.close()

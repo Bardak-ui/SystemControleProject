@@ -1,8 +1,7 @@
-# your_project/routing.py
-
-from django.urls import re_path
-from .consumers import OnlineStatusConsumer
+# routing.py
+from django.urls import path
+from .consumers import OnlineStatusConsumer  # Импортируйте ваш Consumer
 
 websocket_urlpatterns = [
-    re_path(r'ws/online_status/$', OnlineStatusConsumer.as_asgi()),  # Убедитесь, что этот URL есть
+    path('ws/online_status/', OnlineStatusConsumer.as_asgi()),
 ]
