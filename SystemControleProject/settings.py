@@ -31,7 +31,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-7x0xbh*ahs1oc5a_+3wl^79qs++^xsm1&2r@i##0o4s(w$s1v4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -50,7 +50,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -61,7 +60,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'SystemControleProject.urls'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 TEMPLATES = [
     {
@@ -129,10 +127,16 @@ USE_TZ = True
 
 # Настройка статических файлов
 STATIC_URL = 'https://bardak-ui.github.io/SystemControleProject/scp/static/'  # URL для доступа к статикам
+ADMIN_MEDIA_PREFIX = 'https://bardak-ui.github.io/SystemControleProject/scp/static/admin/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'scp/static/'),  # Папка, где находятся статические файлы
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Папка для сбора статических файлов (для продакшн)
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

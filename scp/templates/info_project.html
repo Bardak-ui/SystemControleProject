@@ -20,6 +20,7 @@
             <p><strong>Окончание разработки:</strong> {{ project.end_date }}</p>
             <p><strong>Статус проекта:</strong> {{ project.status }}</p>
             <p><strong>Создатель проекта:</strong> {{ project.owner }}</p>
+            <p><strong>Создатель проекта:</strong> {{ project.language }}</p>
             <p><strong>Код проекта:</strong> {{ project.code }}</p>
         </section>
 
@@ -28,7 +29,7 @@
             {% if project.participants.all %}
                 <ul class="participants-list">
                     {% for participant in project.participants.all %}
-                        <li>{{ participant.username }}</li>
+                        <a href="{% url 'profiles_info' participant.id %}">{{ participant.username }}</a>,
                     {% endfor %}
                 </ul>
             {% else %}

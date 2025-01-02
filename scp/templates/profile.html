@@ -21,9 +21,13 @@
                 <p class="no-avatar">Нет загруженной аватарки.</p>
             {% endif %}
             <h1>{{ profile.puser }}</h1>
-            <div class="profile-info">
-                <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
-                <p><strong>О вас:</strong> {{ profile.bio }}</p>
+                <div class="profile-info">
+                    <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
+                {% if bio %}
+                    <p><strong>О вас:</strong> {{ profile.bio }}</p>
+                {% else %}
+                    <p><strong>О вас:</strong> Данные не указаны</p>
+                {% endif %}
             </div>
         </div>
 

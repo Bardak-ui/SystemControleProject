@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
@@ -22,6 +23,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('scp.urls')),
+    path('login/', include('django.contrib.auth.urls')),  # Встроенные URL для входа/выхода
+    path('', lambda request: redirect('login/')),
 ]
 
 if settings.DEBUG:

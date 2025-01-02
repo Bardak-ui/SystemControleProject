@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 class Role(models.Model):
     ROLE_CHOICES = [
-        ('Администратор','Administrator'),
-        ('Исполнитель','Executor'),
+        ('Administrator','Администратор'),
+        ('Executor','Исполнитель'),
     ]
 
 
@@ -71,8 +71,8 @@ class Status(models.Model):
                         ('Not specified','Не указан')
                         ]
     
-    BLACKLIST_CHOICES = [('Заблокирован','Baned'),
-                         ('Не заблокирован','Not baned'),
+    BLACKLIST_CHOICES = [('Заблокирован','Banned'),
+                         ('Не заблокирован','Not banned'),
                          ]
     
 class Project(models.Model):
@@ -111,7 +111,7 @@ class Profile(models.Model):
     bio = models.TextField(blank=True, null=True)
     avatar = models.ImageField(upload_to='./profile_avatars/', blank=True, null=True)
     role = models.CharField(max_length=50, blank=True, choices=Role.ROLE_CHOICES, default='Executor')
-    status = models.CharField(max_length=50, choices=Status.BLACKLIST_CHOICES, default='Not baned')
+    status = models.CharField(max_length=50, choices=Status.BLACKLIST_CHOICES, default='Not banned')
 
     def __str__(self):
         return f"{self.puser}'s Profile"

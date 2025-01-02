@@ -17,7 +17,7 @@
                 </div>
             </a>
         {% else %}
-            <p class="no-avatar">Нет загруженной аватарки</p>
+            <a href="{% url 'profile' %}"><p class="no-avatar">Нет загруженной аватарки</p></a>
         {% endif %}
     </div>
 
@@ -37,7 +37,9 @@
                         {% if project.participants.all %}
                             <br> Над проектом работают: 
                             {% for participant in project.participants.all %}
-                                {{ participant.username }},
+                                <a href="{% url 'profiles_info' user.id%}">
+                                    {{ participant.username }},
+                                </a>
                             {% endfor %}
                         {% else %}
                             <br>Исполнители отсутствуют<br>

@@ -22,24 +22,24 @@ def logout_view(request):
     return redirect('/login/')
 
 def you_is_banned():
-    return HttpResponse("Вы были забанены администрацией сайта")
+    return HttpResponse("")
 
 def unban_user(request, user_id):
-    if not request.user.profile.role == "Администратор":
-        return HttpResponseForbidden("У вас нет прав для выполнения этого действия.")
+    if not request.user.profile.role == "Administrator":
+        return render(request, 'user_ban.html')
     user_to_ban = get_object_or_404(Profile, puser = user_id)
-    user_to_ban.status = 'Не заблокирован'
+    user_to_ban.status = 'Not banned'
     user_to_ban.save()
     return redirect('profiles')
 
 @login_required
 def ban_user(request, user_id):
     if not request.user.profile.role == "Администратор":
-        return HttpResponseForbidden("У вас нет прав для выполнения этого действия.")
+        return render(request, 'user_ban.html')
     if request.user.id == user_id:
         return HttpResponseForbidden("Вы не можете заблокировать сами себя.")
     user_to_ban = get_object_or_404(Profile, puser = user_id)
-    user_to_ban.status = 'Заблокирован'
+    user_to_ban.status = 'Banned'
     user_to_ban.save()
     return redirect('profiles')
 
@@ -54,7 +54,7 @@ def register(request):
         form = CustomeCreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('')
     else:
         form = CustomeCreateUserForm()
     return render(request, 'register.html', {'form':form})
@@ -145,6 +145,3 @@ def profiles_info(request, user_id):
     profiles = get_object_or_404(Profile, puser = user_id)
     projects = Project.objects.filter(owner = user_id)
     return render(request, 'profiles_info.html', {'profile':profiles, 'projects':projects})    
-
-#сделать функцию для вступления в проект и вступление в разруботку задачи для проекта
-
