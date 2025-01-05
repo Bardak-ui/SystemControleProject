@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'edit_project.css' %}">
+    <title>Редактирование проекта: {{ project.title }}</title>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Редактирование проекта: {{ project.title }}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                {{ form.description }}
+            </div>
+            <div class="form-group">
+                {{ form.code }}
+            </div>
+
+            <div class="form-group">
+                {{ form.language.label_tag }}
+                {{ form.language }}
+            </div>
+
+            <div class="form-group">
+                {{ form.status.label_tag }}
+                {{ form.status }}
+            </div>
+
+            <div class="form-group">
+                {{ form.start_date.label_tag }}
+                {{ form.start_date }}
+            </div>
+
+            <div class="form-group">
+                {{ form.end_date.label_tag }}
+                {{ form.end_date }}
+            </div>
+            <div class="form-actions">
+                <button type="submit">Сохранить</button>
+                <a href="{{ delete_project }}" class="delete-link">Удалить проект</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

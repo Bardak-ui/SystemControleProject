@@ -1,0 +1,110 @@
+/* Основной фон */
+body {
+    background-color: #121212; /* Темный фон */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #e0e0e0; /* Светлый текст */
+}
+
+/* Центрирование блока */
+.settings-container {
+    background-color: #1e1e1e; /* Темный фон блока */
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Темнее тень */
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    color: #e0e0e0; /* Светлый текст */
+}
+
+/* Стили для аватара */
+.avatar-section {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.avatar-label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.avatar-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #3498db; /* Синий акцент */
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.avatar-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #2c2c2c; /* Темный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #a0a0a0; /* Светло-серый текст */
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.hidde {
+    display: none;
+    text-decoration: none;
+    visibility: hidden;
+}
+
+/* Скрытое поле для загрузки */
+.id_avatar {
+    display: none;
+    text-decoration: none;
+    visibility: hidden;
+}
+
+/* Кнопки */
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #3498db; /* Синий фон */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9; /* Темно-синий при наведении */
+}
+
+/* Поля ввода и текстовые области */
+form input, form textarea, form select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #333; /* Темная граница */
+    border-radius: 6px;
+    background-color: #1e1e1e; /* Темный фон */
+    font-size: 16px;
+    color: #e0e0e0; /* Светлый текст */
+    box-sizing: border-box;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* Фокус на полях ввода */
+form input:focus, form textarea:focus, form select:focus {
+    border-color: #3498db; /* Синий цвет при фокусе */
+    outline: none;
+    background-color: #2a2a2a; /* Более темный фон при фокусе */
+}

@@ -1,0 +1,42 @@
+body{
+    background-color: #2e2e2e;
+}
+/* Контейнер */
+.container {
+    text-align: center;
+    justify-self: center;
+    margin-top: 20%;
+    padding: 10px;
+    flex: 1;
+    width: 35%;
+    background: #2e2e2e;  /* Темный фон */
+    border: 1px solid #444;  /* Более темный бордер */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Тень с темным оттенком */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Заголовок */
+.container h1 {
+    font-size: 1.75rem;
+    color: #f5f5f5;  /* Светлый цвет для заголовка */
+    margin-bottom: 10px;
+}
+
+/* Кнопка */
+.container button {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;  /* Синий фон для кнопки */
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+/* Изменения цвета кнопки при наведении */
+.container button:hover {
+    background-color: #2980b9;
+}

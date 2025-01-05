@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <title>Домашняя страница</title>
+</head>
+<body>
+    <div class="fixed-header">
+        <h1 class="title-home">Домашняя страница</h1>
+        {% if user.profile.avatar %}
+            <a href="{% url 'profile' %}">
+                <div class="avatar-wrapper">
+                    <img src="{{ user.profile.avatar.url }}" alt="Profile Image" class="avatar"/>
+                </div>
+            </a>
+        {% else %}
+            <a href="{% url 'profile' %}"><p class="no-avatar">Нет загруженной аватарки</p></a>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <div class="left-container">
+            <div class="left-content">
+                <h1 class="title-home">Список проектов</h1>
+            </div>
+        </div>
+        <div class="right-container">
+            {% for project in projects %}
+                <form method="post" action="{% url 'info_project' project.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="button-projects">
+                        <p>Название</p>
+                        <h3>{{ project.title }}</h3>
+                        <p>Описание</p>
+                        <span>{{ project.description }}</span>
+                        <hr>
+                        {% if project.participants.all %}
+                        <p>Над проектом работают</p>
+                            {% for participant in project.participants.all %}
+                                <a href="{% url 'profiles_info' user.id%}">
+                                    {{ participant.username }},
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            <p>Исполнители отсутствуют</p>
+                        {% endif %}
+                        <hr>
+                        <p>Проект создан</p>
+                        {{ project.created_at }} <br>
+                        <p>Разработка проекта начата</p>
+                        {{ project.start_date }} <br>
+                        <p>Разработка проекта окончена</p>
+                        {{ project.end_date }} <br>
+                        <hr>
+                        <p>Статус проекта</p>
+                        {{ project.status }} <br>
+                        <p>Создатель проекта</p> 
+                        <strong>{{ project.owner }}</strong><br>
+                    </button>
+                </form>
+            {% empty %}
+                <p class="not-found-project">Проекты отсутствуют</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

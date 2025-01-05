@@ -1,0 +1,106 @@
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background-color: #121212;
+    color: #eaeaea;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.form-container {
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Мягкая тень для глубины */
+    width: 100%;
+    max-width: 600px;
+}
+
+.form-container h1 {
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #eaeaea;
+}
+
+input[type="text"],
+textarea,
+select,
+input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    background-color: #333;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #eaeaea;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus,
+input[type="date"]:focus {
+    border-color: #4a76a8;
+    background-color: #2a2a2a; /* Немного темнее при фокусе */
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button, .delete-link {
+    display: grid;
+    padding: 12px 18px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button {
+    background-color: #4a76a8;
+    color: white;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Легкая тень для кнопки */
+}
+
+button:hover {
+    background-color: #365b85;
+}
+
+.delete-link {
+    background-color: #d9534f;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.delete-link:hover {
+    background-color: #c9302c;
+}

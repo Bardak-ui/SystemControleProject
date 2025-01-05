@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'profiles.css' %}">
+    <title>Управление исполнителями</title>
+</head>
+<body>
+    <div class = "head">
+        
+    </div>
+    <div class="container">
+        <header class="header">
+            <h1>Проект: {{project.title}}</h1>
+            <form method="post" class="button-form" action="{% url 'profile' %}">
+                {% csrf_token %}
+                <button type="submit">Назад</button>
+            </form>
+        </header>
+        <hr>
+        <section class="user-list">
+            {% if project.participants.all %}
+                {% for participant in project.participants.all %}
+                    {% if request.user.profile.role == "Администратор" %}
+                        <form method="post" action="{% url 'admin_panel' user.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="user-card-btn">
+                                <div class="user-card">
+                                    {% if user.profile.avatar %}
+                                        <div class="user-avatar">
+                                            <img src="{{ participant.profile.avatar.url }}" alt="{{ user.username }}'s avatar">
+                                        </div>
+                                    {% else %}
+                                        <p class="no-avatar">Нет загруженной аватарки.</p>
+                                    {% endif %}
+                                    <div class="user-info">
+                                        <h2>{{ participant.username }}</h2>
+                                        <p><strong>Биография:</strong> {{ participant.profile.bio }}</p>
+                                        <p><strong>Роль:</strong> {{ participant.profile.role }}</p>
+                                        <p><strong>Статус:</strong> {{ participant.profile.status }}</p>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    {% else %}
+                        <form method="post" action="{% url 'profiles_info' user.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="user-card-btn">
+                                <div class="user-card">
+                                    {% if user.profile.avatar %}
+                                        <div class="user-avatar">
+                                            <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}'s avatar">
+                                        </div>
+                                    {% else %}
+                                        <p class="no-avatar">Нет загруженной аватарки.</p>
+                                    {% endif %}
+                                    <div class="user-info">
+                                        <h2>{{ user.username }}</h2>
+                                        <p><strong>Биография:</strong> {{ user.profile.bio }}</p>
+                                        <p><strong>Роль:</strong> {{ user.profile.role }}</p>
+                                        <p><strong>Статус:</strong> {{ user.profile.status }}</p>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>Пользователи не найдены.</p>
+            {% endif %}
+        </section>        
+    </div>
+</body>
+</html>

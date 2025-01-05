@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить задачу</title>
+    <link rel="stylesheet" href="{% static 'edit_task.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Добавить задачу</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {{ form.description.label_tag }}
+                {{ form.description }}
+                {{ form.status.label_tag }}
+                {{ form.status }}
+                {{ form.priority.label_tag }}
+                {{ form.priority }}
+            </div>
+            <div class="form-actions">
+                <button type="submit">Добавить</button>
+                <button type="submit" onclick="history.back()">Назад</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

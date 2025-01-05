@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проект: {{ project.title }}</title>
+    <link rel="stylesheet" href="{% static 'info_project.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header class="project-header">
+            <h1>{{ project.title }}</h1>
+            <p><strong>Описание проекта:</strong> {{ project.description }}</p>
+        </header>
+
+        <section class="project-details">
+            <p><strong>Проект создан:</strong> {{ project.created_at }}</p>
+            <p><strong>Начало разработки:</strong> {{ project.start_date }}</p>
+            <p><strong>Окончание разработки:</strong> {{ project.end_date }}</p>
+            <p><strong>Статус проекта:</strong> {{ project.status }}</p>
+            <p><strong>Создатель проекта:</strong> {{ project.owner }}</p>
+            <p><strong>Создатель проекта:</strong> {{ project.language }}</p>
+            <p><strong>Код проекта:</strong> {{ project.code }}</p>
+        </section>
+        <section class="participants">
+            <h2>Над проектом работают:</h2>
+            {% if project.participants.all %}
+                <ul class="participants-list">
+                    {% for participant in project.participants.all %}
+                        <a href="{% url 'profiles_info' participant.id %}">{{ participant.username }}</a>,
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Исполнители отсутствуют</p>
+            {% endif %}
+        </section>
+
+        <section class="actions">
+            {% if request.user != project.owner %}
+                {% if is_participant %}
+                    <a href="{% url 'unjoin_project' project.id %}"><button type="submit" class="nav-button">Покинуть проект</button></a>
+                {% else %}
+                    <a href="{% url 'join_project' project.id %}"><button type="submit" class="nav-button">Принять участие</button></a>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'manage_particip' project.id %}"><button type="submit" class="nav-button">Управлять исполнителями</button></a>
+            {% endif %}
+            <form method="post" action="{% url 'add_task' project.id %}">
+                {% csrf_token %}
+                <button type="submit" class="nav-button">Добавить задачу</button>
+            </form>
+            <form method="get" action="{% url 'edit_project' project.id%}">
+                {% csrf_token %}
+                <button type="submit" class="nav-button">Изменить проект</button>
+            </form>
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                <button type="submit" class="nav-button">В профиль</button>
+            </form>
+            <form method="post" action="{% url 'home' %}">
+                {% csrf_token %}
+                <button type="submit" class="nav-button">На главную</button>
+            </form>
+        </section>
+        
+        <section class="tasks">
+            <h2>Задачи:</h2>
+            <div class="task-container">
+                {% for task in tasks %}
+                    <div class="task-btn">
+                        <form method="get" action="{% url 'edit_task' project.id task.id%}" class="task-form">
+                            <button type="submit">
+                                <p><strong>Название задачи:</strong> {{ task.title }}</p>
+                                <p><strong>Описание задачи:</strong> {{ task.description }}</p>
+                                {% if project.participants.all %}
+                                    <p><strong>Над проектом работают:</strong></p>
+                                    <ul class="participants-list">
+                                        {% for participant in project.participants.all %}
+                                            <li>{{ participant.username }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <p>Исполнители отсутствуют</p>
+                                {% endif %}
+                                <p><strong>Приоритет задачи:</strong> {{ task.priority }}</p>
+                                <p><strong>Статус задачи:</strong> {{ task.status }}</p>
+                            </button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</body>
+</html>

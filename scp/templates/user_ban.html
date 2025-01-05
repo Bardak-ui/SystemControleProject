@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'user_ban.css' %}">
+    <title>Блокировка учетной записи</title>
+</head>
+<body>
+    <div class="container">
+        <h1>У вас нет прав для выполнения этого действия.</h1>
+        <button type="submit" onclick="history.back(), project_id">
+            {% csrf_token %}
+            Назад
+        </button>
+    </div>
+</body>
+</html>
