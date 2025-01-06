@@ -1,5 +1,5 @@
 // websocket.js
-const socket = new WebSocket("ws://0.0.0.0:8000/ws/online_status/");
+const socket = new WebSocket("ws://scp-p141.onrender.com:8000/ws/online_status/");
 
 socket.onopen = function(event) {
     console.log('WebSocket подключен.');
