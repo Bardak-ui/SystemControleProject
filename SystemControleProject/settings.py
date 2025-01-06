@@ -140,9 +140,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 # Настройка статических файлов
-STATIC_URL = '/static/'
-#STATIC_URL = 'https://bardak-ui.github.io/SystemControleProject/scp/static/'  # URL для доступа к статикам
-#ADMIN_MEDIA_PREFIX = 'https://bardak-ui.github.io/SystemControleProject/scp/static/admin/'
+#STATIC_URL = '/static/'
+STATIC_URL = 'https://bardak-ui.github.io/SystemControleProject/scp/static/'  # URL для доступа к статикам
+ADMIN_MEDIA_PREFIX = 'https://bardak-ui.github.io/SystemControleProject/scp/static/admin/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'scp/static/'),  # Папка, где находятся статические файлы
 ]
