@@ -1,12 +1,6 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView
 from . import views
-from django.urls import re_path
-from .consumers import OnlineStatusConsumer
-
-websocket_urlpatterns = [
-    re_path(r'ws/online_status/$', OnlineStatusConsumer.as_asgi()),
-]
 
 urlpatterns = [ 
     path('logout/', views.logout_view, name='logout_view'), # Страница выхода

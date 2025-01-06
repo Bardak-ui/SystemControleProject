@@ -19,7 +19,7 @@ class AddProject(forms.ModelForm):
             'title': TextInput(attrs={
                 'class': 'title-project',
                 'placeholder': 'Введите название задачи',
-                'style': 'resize: none; border-color: green;',
+                'style': 'resize: none;',
                 'required': True,
             }),
             'description': Textarea(attrs={
@@ -29,7 +29,7 @@ class AddProject(forms.ModelForm):
                 'cols': 50,                                 # Количество символов в строке
                 'maxlength': 500,                           # Максимальная длина текста
                 'required': True,                           # Поле обязательно для заполнения
-                'style': 'resize: vertical; border-color: green;', # Inline-стили (запрет изменения размера и цвет границы)
+                'style': 'resize: vertical;', # Inline-стили (запрет изменения размера и цвет границы)
             }),
             'code': Textarea(attrs={
                 'class': 'desc-project',                     
@@ -37,7 +37,7 @@ class AddProject(forms.ModelForm):
                 'rows': 35,                                  
                 'cols': 50,                                  
                 'required': False,                           
-                'style': 'resize: vertical; border-color: green;',
+                'style': 'resize: vertical;',
             }),
             'start_date': DateInput(attrs={
                 'class': 'desc-project', 
@@ -101,7 +101,7 @@ class AddTask(forms.ModelForm):
             'title': TextInput(attrs={
                 'class': 'title-project',
                 'placeholder': 'Введите название задачи',
-                'style': 'resize: none; border-color: green;',
+                'style': 'resize: none;',
                 'required': True,
             }),
             'description': Textarea(attrs={
@@ -111,7 +111,7 @@ class AddTask(forms.ModelForm):
                 'cols': 50,                                 # Количество символов в строке
                 'maxlength': 500,                           # Максимальная длина текста
                 'required': True,                           # Поле обязательно для заполнения
-                'style': 'resize: vertical; border-color: green;', # Inline-стили (запрет изменения размера и цвет границы)
+                'style': 'resize: vertical;', # Inline-стили (запрет изменения размера и цвет границы)
             }),
 
         }
@@ -156,9 +156,4 @@ class ProfileSettings(forms.ModelForm):
             'avatar': forms.ClearableFileInput(attrs={'style': 'display: none; text-decoration: none;' , 'class': 'id_avatar'}),
             'bio': forms.Textarea(attrs={'class': 'bio-profile', 'rows': 5, 'style': 'resize: vertical'}),
         }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Убираем поле для очистки аватара
-        self.fields['avatar'].required = False  # Убираем обязательность
  

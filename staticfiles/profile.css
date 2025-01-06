@@ -192,8 +192,8 @@ hr {
     }
 
     .container {
-        flex-direction: column; /* Меняем контейнер на вертикальный */
-        margin: 10px; /* Убираем отступы по бокам */
+        flex-direction: row; /* Меняем контейнер на вертикальный */
+        margin: 0; /* Убираем отступы по бокам */
         box-sizing: border-box;
     }
 

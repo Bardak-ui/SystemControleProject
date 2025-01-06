@@ -1,3 +1,4 @@
+#consumers.py
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import sync_to_async
@@ -5,40 +6,64 @@ from .models import Profile
 
 class OnlineStatusConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        # Получаем пользователя из scope (если он аутентифицирован)
-        self.user = self.scope['user']
-        
-        # Если пользователь не аутентифицирован, отклоняем подключение
-        if not self.user.is_authenticated:
+        self.user = self.scope["user"]
+        if self.user.is_authenticated:
+            # Обновляем статус онлайн
+            await self.set_online_status(True)
+            await self.accept()
+        else:
             await self.close()
-            return
-        
-        # Получаем профиль пользователя
-        self.profile = await sync_to_async(Profile.objects.get)(puser=self.user)
-
-        # Устанавливаем аккаунт в True (онлайн)
-        await self.set_online_status(True)
-
-        # Подключаем WebSocket
-        await self.accept()
 
     async def disconnect(self, close_code):
-        # При отключении устанавливаем аккаунт в False (офлайн)
-        await self.set_online_status(False)
+        if self.user.is_authenticated:
+            # Обновляем статус оффлайн
+            await self.set_online_status(False)
 
-        # Закрываем соединение
-        await self.close()
+    @sync_to_async  # Делаем это синхронной функцией для работы с ORM
+    def set_online_status(self, status):
+        try:
+            # Используем puser для поиска профиля
+            profile = Profile.objects.get(puser=self.user)
+            profile.account = status  # Обновляем поле account
+            profile.save()  # Сохраняем изменения
+        except Profile.DoesNotExist:
+            pass
 
-    async def set_online_status(self, status):
-        # Обновляем поле account в базе данных
-        await sync_to_async(self.update_status)(status)
-
-        # Отправляем обновленный статус всем подключенным клиентам
+    async def receive(self, text_data):
+        # Обработка входящих сообщений
         await self.send(text_data=json.dumps({
-            'status': 'online' if status else 'offline'
+            'message': 'Сообщение получено!'
         }))
 
-    def update_status(self, status):
-        # Обновляем поле account
-        self.profile.account = status
-        self.profile.save()
+
+# import json
+# from channels.generic.websocket import AsyncWebsocketConsumer
+# from asgiref.sync import sync_to_async
+# from .models import Profile
+
+# class OnlineStatusConsumer(AsyncWebsocketConsumer):
+#     async def connect(self):
+#         self.user = self.scope["user"]
+#         if self.user.is_authenticated:
+#             await self.set_online_status(True)
+#             await self.accept()
+#         else:
+#             await self.close()
+
+#     async def disconnect(self, close_code):
+#         if self.user.is_authenticated:
+#             await self.set_online_status(False)
+
+#     @sync_to_async
+#     def set_online_status(self, status):
+#         try:
+#             profile = Profile.objects.get(puser=self.user)
+#             profile.account = status
+#             profile.save()
+#         except Profile.DoesNotExist:
+#             pass
+
+#     async def receive(self, text_data):
+#         await self.send(text_data=json.dumps({
+#             'message': 'Сообщение получено!'
+#         }))

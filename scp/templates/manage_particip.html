@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'profiles.css' %}">
+    <script src="{% static 'websocket.js' %}"></script>
     <title>Управление исполнителями</title>
 </head>
 <body>
     <div class = "head">
-        
     </div>
     <div class="container">
         <header class="header">
@@ -40,6 +40,13 @@
                                         <p><strong>Биография:</strong> {{ participant.profile.bio }}</p>
                                         <p><strong>Роль:</strong> {{ participant.profile.role }}</p>
                                         <p><strong>Статус:</strong> {{ participant.profile.status }}</p>
+                                        <p id="status"><strong>Статус:</strong></p>
+                                            {% if profile.account %}
+                                                <p style="color: green;">Онлайн</p>
+                                            {% else %}
+                                                <p style="color: red;"> Оффлайн</p>
+                                            {% endif %}
+                                        </p>
                                     </div>
                                 </div>
                             </button>

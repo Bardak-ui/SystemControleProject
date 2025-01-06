@@ -46,14 +46,16 @@
             {% else %}
                 <a href="{% url 'manage_particip' project.id %}"><button type="submit" class="nav-button">Управлять исполнителями</button></a>
             {% endif %}
-            <form method="post" action="{% url 'add_task' project.id %}">
-                {% csrf_token %}
-                <button type="submit" class="nav-button">Добавить задачу</button>
-            </form>
-            <form method="get" action="{% url 'edit_project' project.id%}">
-                {% csrf_token %}
-                <button type="submit" class="nav-button">Изменить проект</button>
-            </form>
+            {% if request.user == task.creator %}
+                <form method="post" action="{% url 'add_task' project.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-button">Добавить задачу</button>
+                </form>
+                <form method="get" action="{% url 'edit_project' project.id%}">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-button">Изменить проект</button>
+                </form>
+            {% endif %}
             <form method="post" action="{% url 'profile' %}">
                 {% csrf_token %}
                 <button type="submit" class="nav-button">В профиль</button>

@@ -39,15 +39,26 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'scp',
+    'django.contrib.admin',
+    'django.contrib.auth',
     'channels',
+    'scp',
+
 ]
+
+ASGI_APPLICATION = "SystemControleProject.asgi.application"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',  # Встроенный слой памяти
+    },
+}
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,16 +91,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SystemControleProject.wsgi.application'
 
-ASGI_APPLICATION = "SystemControleProject.asgi.application"
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}
 
 
 

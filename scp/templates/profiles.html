@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список пользователей</title>
     <link rel="stylesheet" href="{% static 'profiles.css' %}">
+    <script src="{% static 'websocket.js' %}"></script>
 </head>
 <body>
     <div class="container">
@@ -36,6 +37,13 @@
                                     <p><strong>Биография:</strong> {{ user.profile.bio }}</p>
                                     <p><strong>Роль:</strong> {{ user.profile.role }}</p>
                                     <p><strong>Статус:</strong> {{ user.profile.status }}</p>
+                                    <p id="status"><strong>Активность</strong></p>
+                                        {% if user.profile.account %}
+                                            <p style="color: green;">Онлайн</p>
+                                        {% else %}
+                                            <p style="color: red;"> Оффлайн</p>
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                         </button>

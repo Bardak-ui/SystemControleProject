@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'profile.css' %}" rel="stylesheet"/>
+    <script src="{% static 'websocket.js' %}"></script>
     <title>{{profile.puser}}</title>
 </head>
 <body>
@@ -25,7 +26,13 @@
                 <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
                 <p><strong>О вас:</strong> {{ profile.bio }}</p>
                 <p><strong>Статус блокировки:</strong> {{ profile.status }}</p>
-
+                <p id="status"><strong>Статус:</strong></p>
+                    {% if profile.account %}
+                        <p style="color: green;">Онлайн</p>
+                    {% else %}
+                        <p style="color: red;"> Оффлайн</p>
+                    {% endif %}
+                </p>
             </div>
         </div>
 
