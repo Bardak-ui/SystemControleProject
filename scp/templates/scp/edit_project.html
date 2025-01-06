@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'edit_project.css' %}">
-    <title>Создание проекта</title>
+    <link rel="stylesheet" href="{% static 'scp/css/edit_project.css' %}">
+    <title>Редактирование проекта: {{ project.title }}</title>
 </head>
 <body>
     <div class="form-container">
@@ -42,8 +42,11 @@
                 {{ form.end_date.label_tag }}
                 {{ form.end_date }}
             </div>
-            <button type="submit">Создать</button>
-            <button type="submit" onclick="history.back()">Назад</button>
+            <div class="form-actions">
+                <button type="submit">Сохранить</button>
+                <a href="{{ delete_project }}" class="delete-link">Удалить проект</a>
+            </div>
         </form>
+    </div>
 </body>
 </html>

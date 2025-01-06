@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проект: {{ project.title }}</title>
-    <link rel="stylesheet" href="{% static 'info_project.css' %}">
+    <link rel="stylesheet" href="{% static 'scp/css/info_project.css' %}">
 </head>
 <body>
     <div class="container">
@@ -46,7 +46,7 @@
             {% else %}
                 <a href="{% url 'manage_particip' project.id %}"><button type="submit" class="nav-button">Управлять исполнителями</button></a>
             {% endif %}
-            {% if request.user == task.creator %}
+            {% if request.user == project.owner %}
                 <form method="post" action="{% url 'add_task' project.id %}">
                     {% csrf_token %}
                     <button type="submit" class="nav-button">Добавить задачу</button>

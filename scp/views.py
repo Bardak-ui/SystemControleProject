@@ -14,9 +14,6 @@ from django.http import HttpResponse
 from django.http import HttpResponseForbidden
 from .models import Task, Project, Profile
 
-def index(request):
-    return render(request, 'index.html')
-
 def logout_view(request):
     logout(request)
     return redirect('/')
@@ -24,17 +21,17 @@ def logout_view(request):
 @login_required
 def manage_particip(request, project_id):
     project = get_object_or_404(Project, id = project_id)
-    return render(request, 'manage_particip.html', {"project":project, "project_id":project_id})
+    return render(request, 'scp/manage_particip.html', {"project":project, "project_id":project_id})
 
 @login_required
 def you_is_banned(request):
     profile = get_object_or_404(Profile, puser = request.user)
-    return render(request, 'you_is_banned.html', {'profile':profile})
+    return render(request, 'scp/you_is_banned.html', {'profile':profile})
 
 @login_required
 def delete_profile(request, profile_puser_id):
     if request.user.profile.role != "Администратор":
-        return render(request, 'user_ban.html')
+        return render(request, 'scp/user_ban.html')
     user = get_object_or_404(User, id = profile_puser_id)
     user.delete()
     return redirect('profiles')
@@ -42,7 +39,7 @@ def delete_profile(request, profile_puser_id):
 @login_required
 def unban_user(request, user_id):
     if not request.user.profile.role == "Администратор":
-        return render(request, 'user_ban.html')
+        return render(request, 'scp/user_ban.html')
     user_to_ban = get_object_or_404(Profile, puser = user_id)
     user_to_ban.status = 'Не заблокирован'
     user_to_ban.save()
@@ -51,7 +48,7 @@ def unban_user(request, user_id):
 @login_required
 def ban_user(request, user_id):
     if not request.user.profile.role == "Администратор":
-        return render(request, 'user_ban.html')
+        return render(request, 'scp/user_ban.html')
     if request.user.id == user_id:
         return HttpResponseForbidden("Вы не можете заблокировать сами себя.")
     user_to_ban = get_object_or_404(Profile, puser = user_id)
@@ -63,7 +60,7 @@ def ban_user(request, user_id):
 @login_required
 def home(request):
     projects = Project.objects.all()
-    return render(request, 'home.html', {'projects':projects})
+    return render(request, 'scp/home.html', {'projects':projects})
 
 def register(request):
     if request.method == 'POST':
@@ -73,7 +70,7 @@ def register(request):
             return redirect('/')
     else:
         form = CustomeCreateUserForm()
-    return render(request, 'register.html', {'form':form})
+    return render(request, 'scp/register.html', {'form':form})
 
 @login_required
 def profile_settings(request):
@@ -85,7 +82,7 @@ def profile_settings(request):
             return redirect('profile')
     else:
         form = ProfileSettings(instance=profile)
-    return render(request, 'profile_settings.html', {'form':form, 'profile':profile})
+    return render(request, 'scp/profile_settings.html', {'form':form, 'profile':profile})
 
 
 @login_required
@@ -100,7 +97,7 @@ def join_project(request, project_id):
         join_project.participants.add(request.user)
         join_project.save()
         return redirect('info_project', project_id = project.id)
-    return render(request, 'info_project.html', {'project_id':project_id})
+    return render(request, 'scp/info_project.html', {'project_id':project_id})
 
 @login_required
 def unjoin_project(request, project_id):
@@ -110,7 +107,7 @@ def unjoin_project(request, project_id):
         unjoin_project.participants.remove(request.user)
         unjoin_project.save()
         return redirect('info_project', project_id = project.id)
-    return render(request, 'info_project.html', {'project_id':project_id})
+    return render(request, 'scp/info_project.html', {'project_id':project_id})
     
 @login_required
 def delete_task(request, project_id, task_id):
@@ -119,7 +116,7 @@ def delete_task(request, project_id, task_id):
         del_task = get_object_or_404(Task, id=task_id)
         del_task.delete()  # Удаляем задачу
     else:
-        return render(request,'user_ban.html')   
+        return render(request,'scp/user_ban.html')   
     return redirect('info_project', project_id=project_id)  # Переходим на страницу проекта
 
 @login_required
@@ -129,7 +126,7 @@ def delete_project(request, project_id):
         del_task = get_object_or_404(Project, id=project_id)
         del_task.delete()  # Удаляем проект
     else:
-        return render(request,'user_ban.html')    
+        return render(request,'scp/user_ban.html')    
     return redirect('profile')  # Переходим на страницу проекта
 
 @login_required
@@ -148,10 +145,10 @@ def edit_project(request, project_id):
             form = EditProject(instance=project)
     else:
         # Если у пользователя нет доступа, возвращаем 403 Forbidden
-        return render(request, 'user_ban.html', {'project_id':project_id})
+        return render(request, 'scp/user_ban.html', {'project_id':project_id})
 
     # Гарантируем, что form всегда будет определен
-    return render(request, 'edit_project.html', {
+    return render(request, 'scp/edit_project.html', {
         'form': form,
         'project_id': project_id,
         'project': project,
@@ -170,7 +167,7 @@ def edit_task(request, project_id, task_id):
             return redirect('info_project', project_id=project_id)  # Исправлено: правильный редирект
     else:
         form = EditTask(instance=task)
-    return render(request, 'edit_task.html', {
+    return render(request, 'scp/edit_task.html', {
         'form': form, 
         'project_id': project_id, 
         'task_id': task_id, 
@@ -190,14 +187,14 @@ def info_project(request, project_id):
         'tasks':tasks
     }
 
-    return render(request, 'info_project.html', context)
+    return render(request, 'scp/info_project.html', context)
 
 @login_required
 def profile(request):
     profiles = get_object_or_404(Profile, puser = request.user)
     projects = Project.objects.filter(owner = request.user)
     memberprojects = Project.objects.filter(participants = request.user)
-    return render(request, 'profile.html', {'profile':profiles, 'projects':projects, "memberprojects":memberprojects})
+    return render(request, 'scp/profile.html', {'profile':profiles, 'projects':projects, "memberprojects":memberprojects})
 
 @login_required
 def add_project(request):
@@ -210,7 +207,7 @@ def add_project(request):
             return redirect('profile')
     else:
         form = AddProject()
-    return render(request,'add_project.html', {'form':form})
+    return render(request,'scp/add_project.html', {'form':form})
 
 @login_required
 def add_task(request, project_id):
@@ -225,21 +222,21 @@ def add_task(request, project_id):
             return redirect('info_project', project_id=project.id)
     else:
         form = AddTask()
-    return render(request, 'add_task.html', {'form': form})
+    return render(request, 'scp/add_task.html', {'form': form})
 
 @login_required
 def profiles(request):
     users = User.objects.all()
-    return render(request, 'profiles.html', {'users':users})
+    return render(request, 'scp/profiles.html', {'users':users})
 
 @login_required
 def profiles_info(request, user_id):
     profiles = get_object_or_404(Profile, puser = user_id)
     projects = Project.objects.filter(owner = user_id)
-    return render(request, 'profiles_info.html', {'profile':profiles, 'projects':projects})    
+    return render(request, 'scp/profiles_info.html', {'profile':profiles, 'projects':projects})    
 
 @login_required
 def admin_panel(request, user_id):
     profiles = get_object_or_404(Profile, puser = user_id)
     projects = Project.objects.filter(owner = user_id)
-    return render(request, 'admin_panel.html', {'profile':profiles, 'projects':projects})
+    return render(request, 'scp/admin_panel.html', {'profile':profiles, 'projects':projects})

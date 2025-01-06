@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'profile.css' %}" rel="stylesheet"/>
-    <script src="{% static 'websocket.js' %}"></script>
+    <link href="{% static 'scp/css/profile.css' %}" rel="stylesheet"/>
+    <script src="{% static 'scp/css/websocket.js' %}"></script>
     <title>{{profile.puser}}</title>
 </head>
 <body>
     <div class="container">
-        <!-- Левая часть -->
         <div class="left-container">
             <h1>Профиль пользователя</h1>
             <hr>
@@ -26,7 +25,7 @@
                 <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
                 <p><strong>О вас:</strong> {{ profile.bio }}</p>
                 <p><strong>Статус блокировки:</strong> {{ profile.status }}</p>
-                <p id="status"><strong>Статус:</strong></p>
+                <p id="status"><strong>Активность</strong></p>
                     {% if profile.account %}
                         <p style="color: green;">Онлайн</p>
                     {% else %}
@@ -35,8 +34,6 @@
                 </p>
             </div>
         </div>
-
-        <!-- Правая часть -->
         <div class="right-container">
             <div class="button-form">
                 <form method="post" action="{% url 'home' %}">
@@ -47,8 +44,22 @@
                     {% csrf_token %}
                     <button type="submit">Назад</button>
                 </form>
+                {% if request.user != profile.puser %}
+                    {% if profile.status == "Не заблокирован" %}
+                        <form method="post" action="{% url 'ban_user' profile.puser.id%}">
+                            {% csrf_token %}
+                            <button type="submit" class="ban">Забанить</button>
+                        </form>
+                    {% endif %}
+                    {% if profile.status == "Заблокирован" %}
+                        <form method="post" action="{% url 'unban_user' profile.puser.id%}">
+                            {% csrf_token %}
+                            <button type="submit" class="unban">Разбанить</button>
+                        </form>
+                    {% endif %}
+                    <a href="{% url 'delete_profile' profile.puser.id%}"><button type="submit" class="ban">Удалить уч.запись</button></a>
+                {% endif %}
             </div>
-
             <hr>
             <div class="title-project">
                 <h2>Проекты пользователя</h2>

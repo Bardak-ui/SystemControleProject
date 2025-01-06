@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [ 
     path('logout/', views.logout_view, name='logout_view'), # Страница выхода
-    path('login/', LoginView.as_view(template_name = 'login.html'), name='login'), # Страница входа
+    path('login/', LoginView.as_view(template_name = 'scp/login.html'), name='login'), # Страница входа
     path('register/', views.register, name='register'), # Страница регистрации
     path('home/', views.home, name='home'), # Домашняя страница (страница со всеми проектами)
     # работа с профилями других пользователей
