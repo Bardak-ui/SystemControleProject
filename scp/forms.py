@@ -119,7 +119,7 @@ class AddTask(forms.ModelForm):
 class EditTask(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title','description','status','priority']
+        fields = ['title','description','status','priority','assignee']
         widgets = {
             'title': TextInput(attrs={
                 'class': 'title-project',

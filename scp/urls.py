@@ -23,11 +23,14 @@ urlpatterns = [
     path('add_project/', views.add_project, name='add_project'), # Добавление проекта
     path('task/delete/<int:task_id>/<int:project_id>/', views.delete_task, name='delete_task'), # Изменение задачи
     path('project/delete/<int:project_id>/', views.delete_project, name='delete_project'), # Изменение задачи
-    path('task/edit/<int:project_id>/<int:task_id>/', views.edit_task, name='edit_task'), # Изменение задачи
+    path('task/edit/<int:task_id>/<int:project_id>/', views.edit_task, name='edit_task'), # Изменение задачи
     path('info_project/<int:project_id>/', views.info_project, name='info_project'), # Информация о проекте
     path('info_project/add_task/<int:project_id>/', views.add_task, name='add_task'), # Добавление задачи к проекту
     path('info_project/join_project/<int:project_id>/', views.join_project, name='join_project'), 
     path('info_project/unjoin_project/<int:project_id>/', views.unjoin_project, name='unjoin_project'), 
     path('info_project/manage_particip/<int:project_id>/', views.manage_particip, name='manage_particip'), 
+    path('info_task/<int:task_id>/<int:project_id>/', views.info_task, name='info_task'), 
+    path('info_task/join_task/<int:task_id>/<int:project_id>/', views.join_task, name='join_task'), 
+    path('info_task/unjoin_task/<int:task_id>/<int:project_id>/', views.unjoin_task, name='unjoin_task'), 
     #path('manage_particip/delete/<int:user_id>/')
 ]

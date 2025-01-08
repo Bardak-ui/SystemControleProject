@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача: {{ task.title }}</title>
+    <link rel="stylesheet" href="{% static 'scp/css/info_task.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header class="project-header">
+            <h1>{{ task.title }}</h1>
+            <p><strong>Описание задачи<br></strong> {{ task.description }}</p>
+        </header>
+        <section class="project-details">
+            <p><strong>Задача создана<br><br></strong> {{ task.created_at }}</p>
+            <p><strong>Статус задачи<br><br></strong> {{ task.status }}</p>
+            <p><strong>Создатель задачи<br><br></strong> {{ task.creator }}</p>
+            <p><strong>Приоритет<br><br><br></strong> {{ task.priority }}</p>
+            <!-- <p><strong>Код проекта:</strong> {{ project.code }}</p>  сделать отдельный блок на этой странице с кодом для исправления -->
+        </section>
+        <section class="participants">
+            <h2>Над проектом работают</h2>
+            {% if task.assignee %}
+                {% if task.assignee.profile.avatar %}
+                    <div class="avatar-container">
+                        <a href="{% url 'profiles_info' task.assignee.id %}" class="avatar"><img src="{{ task.assignee.profile.avatar.url }}" class="avatar" alt="Profile Image" /></a>
+                    </div>
+                {% else %}
+                    <p>Изображение отсутствует</p>
+                {% endif %}
+            {% else %}
+                <p>Исполнители отсутствуют</p>
+            {% endif %}
+        </section>
+        <section class="actions">
+            {% if request.user != task.creator %}
+                {% if request.user != is_assignee %}
+                    {% if is_assignee%}
+                        <a href="{% url 'unjoin_task' task_id project_id%}"><button type="submit" class="nav-button">Отказаться от выполнение</button></a>
+                    {% else %}
+                        <a href="{% url 'join_task' task_id  project_id%}"><button type="submit" class="nav-button">Приступить к выполенению</button></a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            {% if request.user == task.creator %}
+                <form method="get" action="{% url 'edit_task' task_id project_id%}">
+                    <button type="submit" class="nav-button">Изменить задачу</button>
+                </form>
+            {% endif %}
+            <form method="post" action="{% url 'info_project' project_id%}">
+                {% csrf_token %}
+                <button type="submit" class="nav-button">К проекту</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>

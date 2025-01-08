@@ -12,10 +12,8 @@
     <div class="container">
         <header class="header">
             <h1>Все зарегистрированные пользователи</h1>
-            <form method="post" class="button-form" action="{% url 'profile' %}">
-                {% csrf_token %}
-                <button type="submit">Назад</button>
-            </form>
+            <a href="{% url 'profile' %}"><img src="https://cdn-icons-png.flaticon.com/512/17286/17286984.png" style="height: 100px; width: 100px;"></a>
+            <br><strong>Назад</strong>
         </header>
         <hr>
         <section class="user-list">
@@ -34,7 +32,6 @@
                                 {% endif %}
                                 <div class="user-info">
                                     <h2>{{ user.username }}</h2>
-                                    <p><strong>Биография:</strong> {{ user.profile.bio }}</p>
                                     <p><strong>Роль:</strong> {{ user.profile.role }}</p>
                                     <p><strong>Статус:</strong> {{ user.profile.status }}</p>
                                     <p id="status"><strong>Активность</strong></p>

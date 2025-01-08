@@ -87,7 +87,7 @@ body {
 }
 
 .nav-button:hover {
-    background-color: #4a76a8; /* Синий при наведении */
+    background-color: #4aa866; /* Синий при наведении */
 }
 
 .nav-button:focus {
@@ -109,8 +109,8 @@ body {
 }
 
 .task-btn button {
-    width: 100%;
-    text-align: left;
+    width: 45%;
+    text-align: center;
     background-color: #292929; /* Темный фон для задач */
     padding: 15px;
     border: none;
@@ -132,4 +132,35 @@ body {
 
 .task-btn p strong {
     color: #4a76a8; /* Акцент на важной информации */
+}
+
+.avatar-wrapper {
+    display: flex;
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали, если потребуется */
+    margin: 20px 0;
+    width: 100%; /* Для мобильных экранов, чтобы обнулять возможные отступы */
+}
+
+.avatar-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #81d4fa;
+    display: flex; /* Обеспечиваем точное центрирование */
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* Для дополнительного центрирования */
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-avatar {
+    color: #777;
+    text-align: center;
 }

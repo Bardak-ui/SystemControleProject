@@ -20,7 +20,7 @@
             <p><strong>Окончание разработки:</strong> {{ project.end_date }}</p>
             <p><strong>Статус проекта:</strong> {{ project.status }}</p>
             <p><strong>Создатель проекта:</strong> {{ project.owner }}</p>
-            <p><strong>Создатель проекта:</strong> {{ project.language }}</p>
+            <p><strong>Язык программирования:</strong> {{ project.language }}</p>
             <p><strong>Код проекта:</strong> {{ project.code }}</p>
         </section>
         <section class="participants">
@@ -71,22 +71,18 @@
             <div class="task-container">
                 {% for task in tasks %}
                     <div class="task-btn">
-                        <form method="get" action="{% url 'edit_task' project.id task.id%}" class="task-form">
+                        <form method="post" action="{% url 'info_task' task.id project.id%}" class="task-form">
+                            {% csrf_token %}
                             <button type="submit">
-                                <p><strong>Название задачи:</strong> {{ task.title }}</p>
-                                <p><strong>Описание задачи:</strong> {{ task.description }}</p>
-                                {% if project.participants.all %}
-                                    <p><strong>Над проектом работают:</strong></p>
-                                    <ul class="participants-list">
-                                        {% for participant in project.participants.all %}
-                                            <li>{{ participant.username }}</li>
-                                        {% endfor %}
-                                    </ul>
+                                
+                                <p><strong>Название задачи<br></strong> {{ task.title }}</p>
+                                {% if task.assignee %} 
+                                    
                                 {% else %}
                                     <p>Исполнители отсутствуют</p>
                                 {% endif %}
-                                <p><strong>Приоритет задачи:</strong> {{ task.priority }}</p>
-                                <p><strong>Статус задачи:</strong> {{ task.status }}</p>
+                                <p><strong>Приоритет задачи<br></strong> {{ task.priority }}</p>
+                                <p><strong>Статус задачи<br></strong> {{ task.status }}</p>
                             </button>
                         </form>
                     </div>

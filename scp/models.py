@@ -75,8 +75,8 @@ class Task(models.Model):
     description = models.TextField(verbose_name="Описание задачи")
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='t_creator')
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='t_project')
-    assignee = models.ForeignKey(User, on_delete=models.CASCADE, null=True,related_name='t_assignee')
-    priority = models.CharField(max_length=50, choices=Status.PRIORITY_CHOICES, verbose_name="Статус",default='Не указан')
+    assignee = models.ForeignKey(User, on_delete=models.CASCADE, blank = True,null=True,related_name='t_assignee')
+    priority = models.CharField(max_length=50, choices=Status.PRIORITY_CHOICES,verbose_name="Статус",default='Не указан')
     status = models.CharField(max_length=50,choices=Status.STATUS_CHOICES, verbose_name="Cтатус",default='Ожидает')
     created_at = models.DateField(auto_now_add=True)
     # updated_at = models.DateField() #Реализовать дату последнего обновления
