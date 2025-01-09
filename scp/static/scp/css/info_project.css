@@ -66,6 +66,7 @@ body {
 
 .actions {
     padding: 20px;
+    margin-bottom: -25px;
     display: flex;
     flex-direction: column;
 }

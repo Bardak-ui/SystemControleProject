@@ -14,7 +14,7 @@ class CustomeCreateUserForm(UserCreationForm):
 class AddProject(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['title','description','code','language','status','start_date','end_date']
+        fields = ['title','description','code','language','status']
         widgets = {
             'title': TextInput(attrs={
                 'class': 'title-project',
@@ -39,23 +39,13 @@ class AddProject(forms.ModelForm):
                 'required': False,                           
                 'style': 'resize: vertical;',
             }),
-            'start_date': DateInput(attrs={
-                'class': 'desc-project', 
-                'type':'date',
-                'required': False,
-            }),
-            'end_date': DateInput(attrs={
-                'class': 'desc-project', 
-                'type':'date',
-                'required': False,
-            })
 
         }
 
 class EditProject(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['title','description','code','language','status','start_date','end_date']
+        fields = ['title','description','code','language','status']
         widgets = {
             'title': TextInput(attrs={
                 'class': 'title-project',
@@ -80,16 +70,6 @@ class EditProject(forms.ModelForm):
                 'required': False,                           
                 'style': 'resize: vertical;',
             }),
-            'start_date': DateInput(attrs={
-                'class': 'desc-project', 
-                'type':'date',
-                'required': False,
-            }),
-            'end_date': DateInput(attrs={
-                'class': 'desc-project', 
-                'type':'date',
-                'required': False,
-            })
 
         }
 

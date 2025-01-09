@@ -7,6 +7,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name = 'scp/login.html'), name='login'), # Страница входа
     path('register/', views.register, name='register'), # Страница регистрации
     path('home/', views.home, name='home'), # Домашняя страница (страница со всеми проектами)
+    path('forum/', views.forum, name='forum'), # Форум (страница с постами пользователей)
     # работа с профилями других пользователей
     path('profiles/info/<int:user_id>/', views.profiles_info, name='profiles_info'), 
     path('profiles/ban/you', views.you_is_banned, name='you_is_banned'),

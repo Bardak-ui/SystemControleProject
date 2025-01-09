@@ -53,6 +53,14 @@ class Status(models.Model):
         ('Деактивирована','Deactivated')
     ]
 
+class Forum(models.Model):
+    title = models.CharField(max_length=100)
+    anons = models.CharField(max_length=250, verbose_name='Краткое описание поста')
+    text = models.TextField()
+    creator = models.OneToOneField(User, on_delete=models.CASCADE, related_name='forum_user')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
 class Project(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -63,8 +71,6 @@ class Project(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name='p_owner')
     participants = models.ManyToManyField(User, blank=True, related_name='p_participants')
     created_at = models.DateField(auto_now_add=True)
-    start_date = models.DateField(verbose_name="Дата начала")
-    end_date = models.DateField(verbose_name="Дата окончания")
     # updated_at = models.DateField() #Реализовать дату последнего обновления 
 
     def __str__(self):

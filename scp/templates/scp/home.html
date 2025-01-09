@@ -44,9 +44,9 @@
                         {% if project.participants.all %}
                         <p>Над проектом работают</p>
                             {% for participant in project.participants.all %}
-                                <a href="{% url 'profiles_info' user.id%}">
-                                    {{ participant.username }},
-                                </a>
+                                <a href="{% url 'profiles_info' user.id%}" style="text-decoration: none;">
+                                    {{ participant.username }}
+                                </a>|
                             {% endfor %}
                         {% else %}
                             <p>Исполнители отсутствуют</p>

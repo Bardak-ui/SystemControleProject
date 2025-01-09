@@ -16,12 +16,9 @@
 
         <section class="project-details">
             <p><strong>Проект создан:</strong> {{ project.created_at }}</p>
-            <p><strong>Начало разработки:</strong> {{ project.start_date }}</p>
-            <p><strong>Окончание разработки:</strong> {{ project.end_date }}</p>
             <p><strong>Статус проекта:</strong> {{ project.status }}</p>
             <p><strong>Создатель проекта:</strong> {{ project.owner }}</p>
             <p><strong>Язык программирования:</strong> {{ project.language }}</p>
-            <p><strong>Код проекта:</strong> {{ project.code }}</p>
         </section>
         <section class="participants">
             <h2>Над проектом работают:</h2>
@@ -52,7 +49,7 @@
                     <button type="submit" class="nav-button">Добавить задачу</button>
                 </form>
                 <form method="get" action="{% url 'edit_project' project.id%}">
-                    {% csrf_token %}
+                    <!-- {% csrf_token %} -->
                     <button type="submit" class="nav-button">Изменить проект</button>
                 </form>
             {% endif %}
@@ -65,9 +62,9 @@
                 <button type="submit" class="nav-button">На главную</button>
             </form>
         </section>
-        
         <section class="tasks">
-            <h2>Задачи:</h2>
+            <hr>
+            <h2 style="text-align: center;">Задачи</h2>
             <div class="task-container">
                 {% for task in tasks %}
                     <div class="task-btn">
@@ -88,6 +85,13 @@
                     </div>
                 {% endfor %}
             </div>
+        </section>
+        <!--дополнить css и сделать по середине вывод 
+            cделать изменение кода прямо в проекте а не в изменении его данных-->
+        <section class="code-project" style="align-items: center; text-align: center;"> 
+            <h2>Код проекта</h2>
+            <hr>
+            <p>{{ project.code }}</p>
         </section>
     </div>
 </body>

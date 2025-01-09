@@ -18,6 +18,9 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
+def forum(request):
+    return render(request, 'scp/forum.html')
+
 def home(request):
     project = Project.objects.all()
     return render(request, "scp/home.html", {"projects":project})

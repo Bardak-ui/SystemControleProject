@@ -10,9 +10,8 @@
 <body>
     <div class="form-container">
         <h1>Редактирование проекта: {{ project.title }}</h1>
-        <form method="POST">
+        <form method="post">
             {% csrf_token %}
-            
             <div class="form-group">
                 {{ form.title }}
             </div>
@@ -22,7 +21,6 @@
             <div class="form-group">
                 {{ form.code }}
             </div>
-
             <div class="form-group">
                 {{ form.language.label_tag }}
                 {{ form.language }}
@@ -32,8 +30,7 @@
                 {{ form.status.label_tag }}
                 {{ form.status }}
             </div>
-
-            <div class="form-group">
+            <!-- <div class="form-group">
                 {{ form.start_date.label_tag }}
                 {{ form.start_date }}
             </div>
@@ -41,7 +38,7 @@
             <div class="form-group">
                 {{ form.end_date.label_tag }}
                 {{ form.end_date }}
-            </div>
+            </div> -->
             <div class="form-actions">
                 <button type="submit">Сохранить</button>
                 <a href="{{ delete_project }}" class="delete-link">Удалить проект</a>
