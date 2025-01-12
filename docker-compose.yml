@@ -1,0 +1,10 @@
+version: '24.0.7'
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/scp
+    environment:
+      - DEBUG=True
