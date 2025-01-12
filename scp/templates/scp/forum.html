@@ -1,12 +1,33 @@
 <!-- заготовка для форума html -->
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'scp/css/forum.css' %}">
     <title>Форум</title>
 </head>
 <body>
-    
+    <div class="fixed-header">
+        <h1 class="title-forum">Форум</h1>
+        {% if user.profile.avatar %}
+            <a href="{% url 'profile' %}">
+                <div class="avatar-wrapper">
+                    <img src="{{ user.profile.avatar.url }}" alt="Profile Image" class="avatar"/>
+                </div>
+            </a>
+        {% else %}
+            <a href="{% url 'profile' %}"><p class="no-avatar">Нет загруженной аватарки</p></a>
+        {% endif %}
+    </div>
+    <div class="news">
+        {% for news in newss %}
+            
+        {% empty %}
+            <h1>К сожалению нет новостей</h1>
+        {% endfor %}
+
+    </div>
 </body>
 </html>

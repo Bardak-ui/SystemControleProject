@@ -17,13 +17,13 @@
         </header>
         <hr>
         <section class="user-list">
-            {% for user in users %}
+            {% for filt in filter %}
                 {% if request.user.profile.role == "Администратор" %}
                     <form method="post" action="{% url 'admin_panel' user.id %}">
                         {% csrf_token %}
                         <button type="submit" class="user-card-btn">
                             <div class="user-card">
-                                {% if user.profile.avatar %}
+                                {% if filt.profile.avatar %}
                                     <div class="user-avatar">
                                         <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}'s avatar">
                                     </div>
@@ -32,10 +32,10 @@
                                 {% endif %}
                                 <div class="user-info">
                                     <h2>{{ user.username }}</h2>
-                                    <p><strong>Роль:</strong> {{ user.profile.role }}</p>
-                                    <p><strong>Статус:</strong> {{ user.profile.status }}</p>
+                                    <p><strong>Роль:</strong> {{ filt.profile.role }}</p>
+                                    <p><strong>Статус:</strong> {{ filt.profile.status }}</p>
                                     <p id="status"><strong>Активность</strong></p>
-                                        {% if user.profile.account %}
+                                        {% if filt.profile.account %}
                                             <p style="color: green;">Онлайн</p>
                                         {% else %}
                                             <p style="color: red;"> Оффлайн</p>

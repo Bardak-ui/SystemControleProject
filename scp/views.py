@@ -162,13 +162,15 @@ def edit_project(request, project_id):
         # Если у пользователя нет доступа, возвращаем 403 Forbidden
         return render(request, 'scp/user_ban.html', {'project_id':project_id})
 
-    # Гарантируем, что form всегда будет определен
-    return render(request, 'scp/edit_project.html', {
+    context = {
         'form': form,
         'project_id': project_id,
         'project': project,
         'delete_project': delete_project
-    })
+    }
+
+    # Гарантируем, что form всегда будет определен
+    return render(request, 'scp/edit_project.html', context)
 
 @login_required
 def edit_task(request, task_id, project_id):
@@ -183,13 +185,15 @@ def edit_task(request, task_id, project_id):
     else:
         form = EditTask(instance=task)
 
-    return render(request, 'scp/edit_task.html', {
+    context = {
         'form': form, 
         'project_id': project_id, 
         'task_id': task_id, 
         'task': task,
         'delete_task': delete_task  # Передаем URL для удаления задачи
-    })
+    }
+
+    return render(request, 'scp/edit_task.html', context)
 
 @login_required
 def info_project(request, project_id):
@@ -203,7 +207,6 @@ def info_project(request, project_id):
         'is_participant':is_participant,
         'tasks':tasks,
         'profile':profile,
-
     }
 
     return render(request, 'scp/info_project.html', context)
@@ -231,7 +234,7 @@ def profile(request):
 
 @login_required
 def profiles(request):
-    users = User.objects.all()
+    users = Profile.objects.all()
     return render(request, 'scp/profiles.html', {'users':users})
 
 @login_required

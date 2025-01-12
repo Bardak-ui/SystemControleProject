@@ -73,6 +73,9 @@ class EditProject(forms.ModelForm):
 
         }
 
+class EditCodeProject(forms.ModelForm):
+    pass
+
 class AddTask(forms.ModelForm):
     class Meta:
         model = Task

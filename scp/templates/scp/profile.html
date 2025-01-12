@@ -44,6 +44,10 @@
                     {% csrf_token %}
                     <button type="submit">На главную</button>
                 </form>
+                <form method="post" action="{% url 'forum' %}">
+                    {% csrf_token %}
+                    <button type="submit">На форум</button>
+                </form>
                 {% if profile.role == "Администратор" %}
                     <form method="post" action="{% url 'profiles'%}">
                         {% csrf_token %}
@@ -74,7 +78,7 @@
             </div>
             <div class="projects-container">
                 {% for project in projects %}
-                    <form method="post" action="{% url 'info_project' project.id %}">
+                    <form method="get" action="{% url 'info_project' project.id %}">
                         {% csrf_token %}
                         <button type="submit" class="project-btn">
                             <h3>{{ project.title }}</h3>

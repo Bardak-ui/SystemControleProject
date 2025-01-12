@@ -60,12 +60,11 @@ class Forum(models.Model):
     creator = models.OneToOneField(User, on_delete=models.CASCADE, related_name='forum_user')
     created_at = models.DateTimeField(auto_now_add=True)
 
-
 class Project(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
+    title = models.CharField(max_length=100, verbose_name='Название проекта')
+    description = models.TextField(verbose_name='Описание проекта')
     # tasks = models.ManyToManyField(Task, related_name='p_tasks')
-    code = models.TextField()
+    code = models.TextField(blank=True, null=True)
     language = models.CharField(max_length=50, choices=Language.LANGUAGE_CHOICES, verbose_name='Язык программирования',default='Не указан')
     status = models.CharField(max_length=50,choices=Status.STATUS_CHOICES, verbose_name="Статус",default='Ожидает')
     owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name='p_owner')
