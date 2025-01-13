@@ -62,6 +62,13 @@
                                     <p><strong>Биография:</strong> {{ user.bio }}</p>
                                     <p><strong>Роль:</strong> {{ user.role }}</p>
                                     <p><strong>Статус:</strong> {{ user.status }}</p>
+                                    <p id="status"><strong>Активность</strong></p>
+                                        {% if user.account %}
+                                            <p style="color: green;">Онлайн</p>
+                                        {% else %}
+                                            <p style="color: red;"> Оффлайн</p>
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                         </button>

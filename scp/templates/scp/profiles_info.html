@@ -43,10 +43,7 @@
                     {% csrf_token %}
                     <button type="submit">На главную</button>
                 </form>
-                <form method="post" action="{% url 'profiles' %}">
-                    {% csrf_token %}
-                    <button type="submit">Назад</button>
-                </form>
+                <button onclick="history.back()">Назад</button>
             </div>
 
             <hr>

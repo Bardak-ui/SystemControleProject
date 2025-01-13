@@ -26,7 +26,7 @@
             {% if project.participants.all %}
                 {% for participant in project.participants.all %}
                     {% if request.user.profile.role == "Администратор" %}
-                        <form method="post" action="{% url 'admin_panel' user.id %}">
+                        <form method="post" action="{% url 'admin_panel' p_participant.id %}">
                             {% csrf_token %}
                             <button type="submit" class="user-card-btn">
                                 <div class="user-card">
@@ -46,7 +46,7 @@
                                             {% if profile.account %}
                                                 <p style="color: green;">Онлайн</p>
                                             {% else %}
-                                                <p style="color: red;"> Оффлайн</p>
+                                                <p style="color: red;"> Офлайн</p>
                                             {% endif %}
                                         </p>
                                     </div>
@@ -70,6 +70,13 @@
                                         <p><strong>Биография:</strong> {{ user.profile.bio }}</p>
                                         <p><strong>Роль:</strong> {{ user.profile.role }}</p>
                                         <p><strong>Статус:</strong> {{ user.profile.status }}</p>
+                                        <p id="status"><strong>Статус:</strong></p>
+                                            {% if profile.account %}
+                                                <p style="color: green;">Онлайн</p>
+                                            {% else %}
+                                                <p style="color: red;"> Офлайн</p>
+                                            {% endif %}
+                                        </p>
                                     </div>
                                 </div>
                             </button>

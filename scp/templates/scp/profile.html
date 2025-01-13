@@ -78,7 +78,7 @@
             </div>
             <div class="projects-container">
                 {% for project in projects %}
-                    <form method="get" action="{% url 'info_project' project.id %}">
+                    <form method="post" action="{% url 'info_project' project.id %}">
                         {% csrf_token %}
                         <button type="submit" class="project-btn">
                             <h3>{{ project.title }}</h3>

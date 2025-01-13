@@ -40,10 +40,7 @@
                     {% csrf_token %}
                     <button type="submit">На главную</button>
                 </form>
-                <form method="post" action="{% url 'profiles' %}">
-                    {% csrf_token %}
-                    <button type="submit">Назад</button>
-                </form>
+                <button onclick="history.back()">Назад</button>
                 {% if request.user != profile.puser %}
                     {% if profile.status == "Не заблокирован" %}
                         <form method="post" action="{% url 'ban_user' profile.puser.id%}">

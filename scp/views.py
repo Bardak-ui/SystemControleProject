@@ -242,10 +242,11 @@ def profiles(request):
     return render(request, 'scp/profiles.html', {'users':users})
 
 @login_required
-def profiles_info(request, user_id):
+def profiles_info(request, user_id, participant_id):
     profiles = get_object_or_404(Profile, id = user_id)
+    profiles = get_object_or_404(Profile, id = participant_id)
     projects = Project.objects.filter(owner = user_id)
-    return render(request, 'scp/profiles_info.html', {'profile':profiles, 'projects':projects})
+    return render(request, 'scp/profiles_info.html', {'profile':profiles, 'projects':projects, 'user_id':user_id})
 
 @login_required
 def admin_panel(request, user_id):
