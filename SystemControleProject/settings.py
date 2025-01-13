@@ -141,8 +141,8 @@ USE_TZ = True
 
 # Настройка статических файлов
 #STATIC_URL = '/static/scp/'
-STATIC_URL = 'https://bardak-ui.github.io/SystemControleProject/scp/static/'  # URL для доступа к статикам
-ADMIN_MEDIA_PREFIX = 'https://bardak-ui.github.io/SystemControleProject/scp/static/admin/'
+STATIC_URL = 'https://bardak-ui.github.io/SCP/scp/static/'  # URL для доступа к статикам
+ADMIN_MEDIA_PREFIX = 'https://bardak-ui.github.io/SCP/scp/static/admin/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'scp/static/'),  # Папка, где находятся статические файлы
 ]
