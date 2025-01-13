@@ -17,25 +17,25 @@
         </header>
         <hr>
         <section class="user-list">
-            {% for filt in filter %}
+            {% for user in users %}
                 {% if request.user.profile.role == "Администратор" %}
                     <form method="post" action="{% url 'admin_panel' user.id %}">
                         {% csrf_token %}
                         <button type="submit" class="user-card-btn">
                             <div class="user-card">
-                                {% if filt.profile.avatar %}
+                                {% if user.avatar %}
                                     <div class="user-avatar">
-                                        <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}'s avatar">
+                                        <img src="{{ user.avatar.url }}" alt="{{ user.puser }}'s avatar">
                                     </div>
                                 {% else %}
                                     <p class="no-avatar">Нет загруженной аватарки.</p>
                                 {% endif %}
                                 <div class="user-info">
-                                    <h2>{{ user.username }}</h2>
-                                    <p><strong>Роль:</strong> {{ filt.profile.role }}</p>
-                                    <p><strong>Статус:</strong> {{ filt.profile.status }}</p>
+                                    <h2>{{ user.puser }}</h2>
+                                    <p><strong>Роль:</strong> {{ user.role }}</p>
+                                    <p><strong>Статус:</strong> {{ user.status }}</p>
                                     <p id="status"><strong>Активность</strong></p>
-                                        {% if filt.profile.account %}
+                                        {% if user.account %}
                                             <p style="color: green;">Онлайн</p>
                                         {% else %}
                                             <p style="color: red;"> Оффлайн</p>
@@ -50,18 +50,18 @@
                         {% csrf_token %}
                         <button type="submit" class="user-card-btn">
                             <div class="user-card">
-                                {% if user.profile.avatar %}
+                                {% if user.avatar %}
                                     <div class="user-avatar">
-                                        <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}'s avatar">
+                                        <img src="{{ user.avatar.url }}" alt="{{ user.username }}'s avatar">
                                     </div>
                                 {% else %}
                                     <p class="no-avatar">Нет загруженной аватарки.</p>
                                 {% endif %}
                                 <div class="user-info">
-                                    <h2>{{ user.username }}</h2>
-                                    <p><strong>Биография:</strong> {{ user.profile.bio }}</p>
-                                    <p><strong>Роль:</strong> {{ user.profile.role }}</p>
-                                    <p><strong>Статус:</strong> {{ user.profile.status }}</p>
+                                    <h2>{{ user.puser }}</h2>
+                                    <p><strong>Биография:</strong> {{ user.bio }}</p>
+                                    <p><strong>Роль:</strong> {{ user.role }}</p>
+                                    <p><strong>Статус:</strong> {{ user.status }}</p>
                                 </div>
                             </div>
                         </button>

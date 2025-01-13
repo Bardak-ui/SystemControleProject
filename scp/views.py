@@ -239,13 +239,13 @@ def profiles(request):
 
 @login_required
 def profiles_info(request, user_id):
-    profiles = get_object_or_404(Profile, puser = user_id)
+    profiles = get_object_or_404(Profile, id = user_id)
     projects = Project.objects.filter(owner = user_id)
     return render(request, 'scp/profiles_info.html', {'profile':profiles, 'projects':projects})
 
 @login_required
 def admin_panel(request, user_id):
-    profiles = get_object_or_404(Profile, puser = user_id)
+    profiles = get_object_or_404(Profile, id = user_id)
     projects = Project.objects.filter(owner = user_id)
     return render(request, 'scp/admin_panel.html', {'profile':profiles, 'projects':projects})
 

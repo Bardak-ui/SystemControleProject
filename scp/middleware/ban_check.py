@@ -19,7 +19,7 @@ class BanCheckMiddleware:
             # Если у пользователя есть профиль и статус "Заблокирован"
             if profile and profile.status == 'Заблокирован':
                 # Если пользователь заблокирован, передаем данные профиля в шаблон блокировки
-                return render(request, 'you_is_banned.html', {'profile': profile})
+                return render(request, 'scp/you_is_banned.html', {'profile': profile})
 
         # Если пользователь не заблокирован, продолжаем обработку запроса
         response = self.get_response(request)

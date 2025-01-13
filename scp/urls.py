@@ -10,7 +10,7 @@ urlpatterns = [
     path('forum/', views.forum, name='forum'), # Форум (страница с постами пользователей)
     # работа с профилями других пользователей
     path('profiles/info/<int:user_id>/', views.profiles_info, name='profiles_info'), 
-    path('profiles/ban/you', views.you_is_banned, name='you_is_banned'),
+    path('profiles/ban/you/', views.you_is_banned, name='you_is_banned'),
     path('profiles/ban/<int:user_id>', views.ban_user, name='ban_user'),
     path('profiles/delete_user/<int:profile_puser_id>', views.delete_profile, name='delete_profile'),
     path('profiles/unban/<int:user_id>', views.unban_user, name='unban_user'),
