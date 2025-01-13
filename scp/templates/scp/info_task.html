@@ -45,7 +45,7 @@
                 {% endif %}
             {% endif %}
             {% if request.user == task.creator %}
-                <form method="get" action="{% url 'edit_task' task_id project_id%}">
+                <form method="get" action="{% url 'edit_task' project_id task_id%}">
                     <button type="submit" class="nav-button">Изменить задачу</button>
                 </form>
             {% endif %}

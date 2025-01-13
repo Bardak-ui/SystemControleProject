@@ -12,6 +12,7 @@
         <h1>Редактирование проекта: {{ project.title }}</h1>
         <form method="post">
             {% csrf_token %}
+            {{ user_input }}
             <div class="form-group">
                 {{ form.title.label_tag }}
                 {{ form.title }}
@@ -35,6 +36,7 @@
             <div class="form-actions">
                 <button type="submit">Сохранить</button>
                 <a href="{{ delete_project }}" class="delete-link">Удалить проект</a>
+                <button onclick="history.back()">Назад</button>
             </div>
         </form>
     </div>

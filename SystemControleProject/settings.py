@@ -31,7 +31,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-7x0xbh*ahs1oc5a_+3wl^79qs++^xsm1&2r@i##0o4s(w$s1v4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -140,8 +140,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 # Настройка статических файлов
-STATIC_URL = '/static/scp/'
-#STATIC_URL = 'https://bardak-ui.github.io/SystemControleProject/scp/static/'  # URL для доступа к статикам
+#STATIC_URL = '/static/scp/'
+STATIC_URL = 'https://bardak-ui.github.io/SystemControleProject/scp/static/'  # URL для доступа к статикам
 ADMIN_MEDIA_PREFIX = 'https://bardak-ui.github.io/SystemControleProject/scp/static/admin/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'scp/static/'),  # Папка, где находятся статические файлы

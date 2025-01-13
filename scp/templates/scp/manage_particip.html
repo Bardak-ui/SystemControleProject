@@ -14,10 +14,12 @@
     <div class="container">
         <header class="header">
             <h1>Проект: {{project.title}}</h1>
-            <form method="post" class="button-form" action="{% url 'profile' %}">
-                {% csrf_token %}
-                <button type="submit">Назад</button>
-            </form>
+            <div class="button-form">
+                <form method="post" action="{% url 'info_project' project.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Назад</button>
+                </form>
+            </div>
         </header>
         <hr>
         <section class="user-list">

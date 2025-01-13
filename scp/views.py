@@ -14,16 +14,20 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
+
 def logout_view(request):
     logout(request)
     return redirect('/')
 
+@login_required
 def forum(request):
     return render(request, 'scp/forum.html')
 
+@login_required
 def home(request):
     project = Project.objects.all()
     return render(request, "scp/home.html", {"projects":project})
+
 def register(request):
     if request.method == 'POST':
         form = CustomeCreateUserForm(request.POST)
@@ -181,14 +185,14 @@ def edit_task(request, task_id, project_id):
         form = EditTask(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('info_task', task_id=task_id,project_id=project_id )  # Исправлено: правильный редирект
+            return redirect('info_task',project_id=project_id,task_id=task_id )  # Исправлено: правильный редирект
     else:
         form = EditTask(instance=task)
 
     context = {
         'form': form, 
-        'project_id': project_id, 
-        'task_id': task_id, 
+        'project_id': project.id, 
+        'task_id': task.id, 
         'task': task,
         'delete_task': delete_task  # Передаем URL для удаления задачи
     }

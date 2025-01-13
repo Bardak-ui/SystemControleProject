@@ -27,6 +27,10 @@
             <div class="form-actions">
                 <button type="submit">Добавить</button>
                 <a href="{{ delete_task }}" class="delete-link">Удалить задачу</a>
+                <form method="post" action="{% url 'info_task' task.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Назад</button>
+                </form>
             </div>
         </form>
     </div>
