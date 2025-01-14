@@ -26,8 +26,9 @@
             {% if task.assignee %}
                 {% if task.assignee.profile.avatar %}
                     <div class="avatar-container">
-                        <a href="{% url 'profiles_info' user.id %}" class="avatar"><img src="{{ task.assignee.profile.avatar.url }}" class="avatar" alt="Profile Image" /></a>
+                        <a href="{% url 'profiles_info' task.assignee.id %}" class="avatar"><img src="{{ task.assignee.profile.avatar.url }}" class="avatar" alt="Profile Image" /></a>
                     </div>
+                    <br><strong>{{task.assignee.profile.puser}}</strong>
                 {% else %}
                     <p>Изображение отсутствует</p>
                 {% endif %}

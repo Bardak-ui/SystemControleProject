@@ -19,7 +19,7 @@
         <section class="user-list">
             {% for user in users %}
                 {% if request.user.profile.role == "Администратор" %}
-                    <form method="post" action="{% url 'admin_panel' user.id %}">
+                    <form method="post" action="{% url 'admin_panel' user.puser.id %}">
                         {% csrf_token %}
                         <button type="submit" class="user-card-btn">
                             <div class="user-card">

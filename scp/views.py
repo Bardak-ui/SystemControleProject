@@ -41,7 +41,8 @@ def register(request):
 @login_required
 def manage_particip(request, project_id):
     project = get_object_or_404(Project, id = project_id)
-    return render(request, 'scp/manage_particip.html', {"project":project, "project_id":project_id})
+    all_parsip = project.participants.prefetch_related('p_participants')
+    return render(request, 'scp/manage_particip.html', {"all_parsip":all_parsip, 'project':project,"project_id":project_id})
 
 @login_required
 def you_is_banned(request):
@@ -191,8 +192,8 @@ def edit_task(request, task_id, project_id):
 
     context = {
         'form': form, 
-        'project_id': project.id, 
-        'task_id': task.id, 
+        'project_id': project_id, 
+        'task_id': task_id, 
         'task': task,
         'delete_task': delete_task  # Передаем URL для удаления задачи
     }
@@ -202,6 +203,7 @@ def edit_task(request, task_id, project_id):
 @login_required
 def info_project(request, project_id):
     project = get_object_or_404(Project, id = project_id)
+    all_parsip = project.participants.prefetch_related('p_participants')
     profile = Profile.objects.select_related('profile')
     is_participant = project.participants.filter(id=request.user.id).exists()
     tasks = Task.objects.filter(project = project_id)
@@ -211,20 +213,22 @@ def info_project(request, project_id):
         'is_participant':is_participant,
         'tasks':tasks,
         'profile':profile,
+        'all_parsip':all_parsip,
     }
 
     return render(request, 'scp/info_project.html', context)
 
 @login_required
-def info_task(request, task_id, project_id):
+def info_task(request,project_id,task_id):
     project = get_object_or_404(Project, id = project_id)
     task = get_object_or_404(Task, id = task_id)
     is_assignee = task.assignee is not None
     context = {
         'is_assignee':is_assignee,
         'task':task,
+        'project':project,
+        'project_id': project.id,
         'task_id': task.id,
-        'project_id': project.id
     }
 
     return render(request, 'scp/info_task.html', context)
@@ -242,15 +246,14 @@ def profiles(request):
     return render(request, 'scp/profiles.html', {'users':users})
 
 @login_required
-def profiles_info(request, user_id, participant_id):
-    profiles = get_object_or_404(Profile, id = user_id)
-    profiles = get_object_or_404(Profile, id = participant_id)
+def profiles_info(request, user_id):
+    profiles = get_object_or_404(Profile, puser = user_id)
     projects = Project.objects.filter(owner = user_id)
-    return render(request, 'scp/profiles_info.html', {'profile':profiles, 'projects':projects, 'user_id':user_id})
+    return render(request, 'scp/profiles_info.html', {'profile':profiles, 'projects':projects})
 
 @login_required
 def admin_panel(request, user_id):
-    profiles = get_object_or_404(Profile, id = user_id)
+    profiles = get_object_or_404(Profile, puser = user_id)
     projects = Project.objects.filter(owner = user_id)
     return render(request, 'scp/admin_panel.html', {'profile':profiles, 'projects':projects})
 

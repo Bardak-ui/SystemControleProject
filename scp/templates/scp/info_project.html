@@ -11,29 +11,10 @@
 <body>
     <div class="container">
         <header class="project-header">
-            <h1>{{ project.title }}</h1>
-            <p><strong>Описание проекта:</strong> {{ project.description }}</p>
+            <h1>{{ project.title }}</h1><hr>
+            <strong>Описание проекта</strong><br>
+            <span>{{ project.description }}</span>
         </header>
-
-        <section class="project-details">
-            <p><strong>Проект создан:</strong> {{ project.created_at }}</p>
-            <p><strong>Статус проекта:</strong> {{ project.status }}</p>
-            <p><strong>Создатель проекта:</strong> {{ project.owner }}</p>
-            <p><strong>Язык программирования:</strong> {{ project.language }}</p>
-        </section>
-        <section class="participants">
-            <h2>Над проектом работают:</h2>
-            {% if project.participants.all %}
-                <ul class="participants-list">
-                    {% for participant in project.participants.all %}
-                        <a href="{% url 'profiles_info' participant.id %}">{{ participant.username }}</a>,
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Исполнители отсутствуют</p>
-            {% endif %}
-        </section>
-
         <section class="actions">
             {% if request.user != project.owner %}
                 {% if is_participant %}
@@ -42,7 +23,7 @@
                     <a href="{% url 'join_project' project.id %}"><button type="submit" class="nav-button">Принять участие</button></a>
                 {% endif %}
             {% else %}
-                <a href="{% url 'manage_particip' project.id %}"><button type="submit" class="nav-button">Управлять исполнителями</button></a>
+                <a href="{% url 'manage_particip' project.id %}"><button type="submit" class="nav-button">Исполнители</button></a>
             {% endif %}
             {% if request.user == project.owner %}
                 <form method="post" action="{% url 'add_task' project.id %}">
@@ -63,22 +44,51 @@
                 <button type="submit" class="nav-button">На главную</button>
             </form>
         </section>
+        <section class="project-details">
+            <p><strong>Проект создан:</strong> {{ project.created_at }}</p>
+            <p><strong>Статус проекта:</strong> {{ project.status }}</p>
+            <p><strong>Создатель проекта:</strong> {{ project.owner }}</p>
+            <p><strong>Язык программирования:</strong> {{ project.language }}</p>
+        </section>
+        <section class="participants">
+            <h2>Над проектом работают:</h2>
+            {% if all_parsip %}
+                <ul class="participants-list">
+                    {% for participant in all_parsip %}
+                        {% if request.user.profile.role == "Администратор" %}
+                            <a href="{% url 'admin_panel' participant.id %}">{{ participant.username }}</a>,
+                        {% else %}
+                            <a href="{% url 'profiles_info' participant.id %}">{{ participant.username }}</a>,
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Исполнители отсутствуют</p>
+            {% endif %}
+        </section>
         <section class="tasks">
             <hr>
             <h2 style="text-align: center;">Задачи</h2>
             <div class="task-container">
                 {% for task in tasks %}
                     <div class="task-btn">
-                        <form method="post" action="{% url 'info_task' task.id project.id%}" class="task-form">
+                        <form method="post" action="{% url 'info_task' project.id task.id %}" class="task-form">
                             {% csrf_token %}
                             <button type="submit">
-                                
-                                <p><strong>Название задачи<br></strong> {{ task.title }}</p>
                                 {% if task.assignee %} 
+                                    {% if task.assignee.profile.avatar %}
+                                        <div class="avatar-container">
+                                            <img class="avatar" src="{{ task.assignee.profile.avatar.url }}" alt="{{ assignee.user }}'s avatar">
+                                        </div>
+                                        <br><strong>{{task.assignee.profile.puser}}</strong>
+                                    {% else %}
+                                        <p>Изображение отсутствует</p>
+                                    {% endif %}
                                     
                                 {% else %}
                                     <p>Исполнители отсутствуют</p>
                                 {% endif %}
+                                <p><strong>Название задачи<br></strong> {{ task.title }}</p>
                                 <p><strong>Приоритет задачи<br></strong> {{ task.priority }}</p>
                                 <p><strong>Статус задачи<br></strong> {{ task.status }}</p>
                             </button>
