@@ -2,6 +2,7 @@ import os
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Role(models.Model):
     ROLE_CHOICES = [
         ('Администратор','Administrator'),
@@ -53,12 +54,23 @@ class Status(models.Model):
         ('Деактивирована','Deactivated')
     ]
 
-class Forum(models.Model):
+class Post(models.Model):
     title = models.CharField(max_length=100)
     anons = models.CharField(max_length=250, verbose_name='Краткое описание поста')
     text = models.TextField()
-    creator = models.OneToOneField(User, on_delete=models.CASCADE, related_name='forum_user')
+    creator = models.OneToOneField(User, on_delete=models.CASCADE, related_name='statia_user')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Post by {self.creator} on {self.created_at}"
+    
+class Comment(models.Model):
+    message = models.CharField(max_length=3000)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment_post')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='message_user')
+
+    def __str__(self):
+        return f"Comment by {self.user} on {self.created_at}"
 
 class Project(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название проекта')
@@ -70,7 +82,8 @@ class Project(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name='p_owner')
     participants = models.ManyToManyField(User, blank=True, related_name='p_participants')
     created_at = models.DateField(auto_now_add=True)
-    # updated_at = models.DateField() #Реализовать дату последнего обновления 
+    files = models.FileField(upload_to='user_file/', blank=True, null=True)
+    # updated_at = models.DateField() #Реализовать дату последнего обновления
 
     def __str__(self):
         return self.title

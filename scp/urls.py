@@ -1,5 +1,6 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [ 
@@ -33,5 +34,20 @@ urlpatterns = [
     path('info_task/<int:project_id>/<int:task_id>/', views.info_task, name='info_task'), 
     path('info_task/join_task/<int:task_id>/<int:project_id>/', views.join_task, name='join_task'), 
     path('info_task/unjoin_task/<int:task_id>/<int:project_id>/', views.unjoin_task, name='unjoin_task'), 
-    #path('manage_particip/delete/<int:user_id>/')
+    #path('manage_particip/delete/<int:user_id>/', views.delete_user_particip, name='delete_user_particip')
+    #Восстановление пароля
+    path('password_reset/', 
+        auth_views.PasswordResetView.as_view(), 
+        name='password_reset'),
+    path('password_reset_done/', 
+        auth_views.PasswordResetDoneView.as_view(), 
+        name='password_reset_done'),
+    path('password_reset_confirm/<uidb64>/<token>/', 
+        auth_views.PasswordResetConfirmView.as_view(),
+        name='password_reset_confirm'),
+    path('password_reset_complete/', 
+        auth_views.PasswordResetCompleteView.as_view(), 
+        name='password_reset_complete'),
+    
+
 ]

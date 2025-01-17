@@ -71,7 +71,6 @@ body {
 
 .right-container {
     display: grid;
-    grid-row:;
     flex-direction: row;
     gap: 15px;
     padding: 20px;

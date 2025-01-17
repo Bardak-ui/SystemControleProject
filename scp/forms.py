@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import TextInput, DateInput, Textarea
-from .models import Task, Profile, Project
+from .models import Task, Profile, Project, Post, Comment
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -11,6 +11,11 @@ class CustomeCreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Этот email уже используется")
+        return email    
 class AddProject(forms.ModelForm):
     class Meta:
         model = Project
@@ -139,4 +144,13 @@ class ProfileSettings(forms.ModelForm):
             'avatar': forms.ClearableFileInput(attrs={'style': 'display: none; text-decoration: none;' , 'class': 'id_avatar'}),
             'bio': forms.Textarea(attrs={'class': 'bio-profile', 'rows': 5, 'style': 'resize: vertical'}),
         }
- 
+
+class CreatePost(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title','anons','text','creator']
+
+class SendComment(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['message']

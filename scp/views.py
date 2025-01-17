@@ -5,15 +5,16 @@ from .forms import EditProject
 from .forms import ProfileSettings
 from .forms import ProjectFilterForm
 from .forms import CustomeCreateUserForm
-from django.http import HttpResponseForbidden
-from django.http import HttpResponse
+from .forms import SendComment, CreatePost
+from django.http import HttpResponseForbidden, HttpResponse
 from django.urls import reverse
-from .models import Task, Project, Profile
+from .models import Task, Project, Profile, Post, Comment
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from .file_utils import create_file, edit_file, delete_file
+from django.core.mail import send_mail
 
 def logout_view(request):
     logout(request)
@@ -150,6 +151,10 @@ def delete_project(request, project_id):
     return redirect('profile')  # Переходим на страницу проекта
 
 @login_required
+def delete_user_particip(request): # удаление исполнителя из задачи
+    pass
+
+@login_required
 def edit_project(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     delete_project = reverse('delete_project', args=[project.id])
@@ -263,8 +268,11 @@ def add_project(request):
         form = AddProject(request.POST)
         if form.is_valid():
             project = form.save(commit=False)
-            project.owner = request.user
+            username = project.owner = request.user
             project.save()
+            file_code = form.cleaned_data['code']
+            file = form.cleaned_data['title']
+            create_file(code = file_code, user=username, title_file=file)
             return redirect('profile')
     else:
         form = AddProject()
@@ -272,7 +280,7 @@ def add_project(request):
 
 @login_required
 def add_task(request, project_id):
-    project = get_object_or_404(Project, id=project_id)  # Изменено на Project
+    project = get_object_or_404(Project, id=project_id)
     if request.method == "POST":
         form = AddTask(request.POST)
         if form.is_valid():

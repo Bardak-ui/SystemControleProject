@@ -23,12 +23,35 @@
         {% endif %}
     </div>
     <div class="news">
-        {% for news in newss %}
-            
+        <h2>Создать новый пост</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ post_form.as_p }}
+            <button type="submit" name="post_form">Создать пост</button>
+        </form>
+        {% for post in posts %}
+            <div>
+                <p><strong>{{ post.user.username }}</strong>: {{ post.content }}</p>
+                <p>Опубликовано: {{ post.created_at }}</p>
+
+                <!-- Форма для комментариев -->
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                    <button type="submit" name="comment_form">Оставить комментарий</button>
+                </form>
+
+                <!-- Отображаем комментарии -->
+                <h3>Комментарии</h3>
+                {% for comment in post.comments.all %}
+                    <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+                    <p>Опубликовано: {{ comment.created_at }}</p>
+                {% endfor %}
+            </div>
         {% empty %}
             <h1>К сожалению нет новостей</h1>
         {% endfor %}
-
     </div>
 </body>
 </html>
