@@ -28,7 +28,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'systemcontroleproject1@gmail.com'
-EMAIL_HOST_PASSWORD = 'jhbk autw vwbe ckpa'
+EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Quick-start development settings - unsuitable for production
@@ -147,9 +147,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 # Настройка статических файлов
-STATIC_URL = '/static/scp/'
-#STATIC_URL = 'https://bardak-ui.github.io/SCP/scp/static/'  # URL для доступа к статикам
-#ADMIN_MEDIA_PREFIX = 'https://bardak-ui.github.io/SCP/scp/static/admin/'
+#STATIC_URL = '/static/scp/'
+STATIC_URL = 'https://bardak-ui.github.io/SCP/scp/static/'  # URL для доступа к статикам
+ADMIN_MEDIA_PREFIX = 'https://bardak-ui.github.io/SCP/scp/static/admin/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'scp/static/'),  # Папка, где находятся статические файлы
 ]
