@@ -26,17 +26,18 @@ def forum(request):
 
 @login_required
 def home(request):
-    project = Project.objects.all()
     sort_project = request.GET.get('sort')
     if sort_project == 'asc':
         project = Project.objects.order_by('title')
     elif sort_project == 'desc':
-        project = Project.objects.order_by('title')
+        project = Project.objects.order_by('-title')
     elif sort_project == 'complexity':
-        pass # project = Project.objects.order_by('title')
+        project = Project.objects.all()
     elif sort_project == 'Completed':
         project = Project.objects.filter(status = "Выполнено")
     elif sort_project == 'Cancel':
+        project = Project.objects.all()
+    else:
         project = Project.objects.all()
     return render(request, "scp/home.html", {"projects":project})
 
@@ -156,7 +157,9 @@ def delete_project(request, project_id):
     project = get_object_or_404(Project, id = project_id)
     if request.user == project.owner:
         del_task = get_object_or_404(Project, id=project_id)
+        # file = del_task.clean_fields('title')
         del_task.delete()  # Удаляем проект
+        # delete_task(user = project.owner, title_file = file)
     else:
         return render(request,'scp/user_ban.html')    
     return redirect('profile')  # Переходим на страницу проекта
@@ -279,11 +282,11 @@ def add_project(request):
         form = AddProject(request.POST)
         if form.is_valid():
             project = form.save(commit=False)
-            username = project.owner = request.user
+            project.owner = request.user
             project.save()
             file_code = form.cleaned_data['code']
             file = form.cleaned_data['title']
-            create_file(code = file_code, user=username, title_file=file)
+            create_file(code = file_code, user=project.owner, title_file=file)
             return redirect('profile')
     else:
         form = AddProject()

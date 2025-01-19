@@ -32,7 +32,7 @@
                                 <div class="user-card">
                                     {% if participant.profile.avatar %}
                                         <div class="user-avatar">
-                                            <img src="{{ participant.profile.avatar.url }}" alt="{{ user.username }}'s avatar">
+                                            <img src="{{ participant.profile.avatar.url }}" alt="{{ participant.username }}'s avatar">
                                         </div>
                                     {% else %}
                                         <p class="no-avatar">Нет загруженной аватарки.</p>
@@ -54,22 +54,22 @@
                             </button>
                         </form>
                     {% else %}
-                        <form method="post" action="{% url 'profiles_info' user.id %}">
+                        <form method="post" action="{% url 'profiles_info' participant.id %}">
                             {% csrf_token %}
                             <button type="submit" class="user-card-btn">
                                 <div class="user-card">
-                                    {% if user.profile.avatar %}
+                                    {% if participant.profile.avatar %}
                                         <div class="user-avatar">
-                                            <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}'s avatar">
+                                            <img src="{{ participant.profile.avatar.url }}" alt="{{ participant.username }}'s avatar">
                                         </div>
                                     {% else %}
                                         <p class="no-avatar">Нет загруженной аватарки.</p>
                                     {% endif %}
                                     <div class="user-info">
-                                        <h2>{{ user.username }}</h2>
-                                        <p><strong>Биография:</strong> {{ user.profile.bio }}</p>
-                                        <p><strong>Роль:</strong> {{ user.profile.role }}</p>
-                                        <p><strong>Статус:</strong> {{ user.profile.status }}</p>
+                                        <h2>{{ participant.username }}</h2>
+                                        <p><strong>Биография:</strong> {{ participant.profile.bio }}</p>
+                                        <p><strong>Роль:</strong> {{ participant.profile.role }}</p>
+                                        <p><strong>Статус:</strong> {{ participant.profile.status }}</p>
                                         <p id="status"><strong>Статус:</strong></p>
                                             {% if profile.account %}
                                                 <p style="color: green;">Онлайн</p>

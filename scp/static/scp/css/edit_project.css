@@ -1,3 +1,4 @@
+/* Основные стили */
 body {
     font-family: Arial, sans-serif;
     background-color: #121212; /* Очень темный фон */
@@ -10,6 +11,7 @@ body {
     min-height: 100vh;
 }
 
+/* Контейнер формы */
 .form-container {
     background-color: #2c2c2c; /* Темный фон формы */
     border-radius: 8px;
@@ -17,18 +19,23 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Более выраженная тень */
     width: 100%;
     max-width: 600px;
+    box-sizing: border-box; /* Учитываем паддинги */
 }
 
+/* Заголовок формы */
 .form-container h1 {
     font-size: 1.5em;
     margin-bottom: 20px;
     color: #fff; /* Белый цвет для заголовка */
+    text-align: center; /* Центровка заголовка */
 }
 
+/* Группы полей формы */
 .form-group {
     margin-bottom: 15px;
 }
 
+/* Метки полей */
 label {
     display: block;
     font-weight: bold;
@@ -36,6 +43,7 @@ label {
     color: #eaeaea; /* Светлый цвет для меток */
 }
 
+/* Поля ввода */
 input[type="text"],
 textarea,
 select,
@@ -49,20 +57,25 @@ input[type="date"] {
     font-size: 14px;
     color: #eaeaea; /* Светлый текст внутри полей */
     box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Плавные переходы */
 }
 
 textarea {
     resize: vertical;
+    min-height: 100px; /* Минимальная высота для textarea */
 }
 
+/* Фокус на полях ввода */
 input[type="text"]:focus,
 textarea:focus,
 select:focus,
 input[type="date"]:focus {
     border-color: #4a76a8; /* Синий цвет для фокуса */
     outline: none;
+    box-shadow: 0 0 5px rgba(74, 118, 168, 0.5); /* Эффект подсветки */
 }
 
+/* Список ошибок */
 .errorlist {
     list-style: none;
     color: #d9534f; /* Красный цвет для ошибок */
@@ -75,12 +88,16 @@ input[type="date"]:focus {
     margin: 0;
 }
 
+/* Действия формы */
 .form-actions {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
+/* Кнопки */
 button, .delete-link {
     padding: 10px 15px;
     border-radius: 5px;
@@ -108,4 +125,40 @@ button:hover {
 
 .delete-link:hover {
     background-color: #c9302c; /* Темный красный при наведении */
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .form-container {
+        padding: 15px;
+        max-width: 100%;
+        border-radius: 5px; /* Уменьшение радиуса */
+    }
+
+    .form-container h1 {
+        font-size: 1.2em; /* Уменьшение заголовка */
+        margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    textarea,
+    select,
+    input[type="date"] {
+        padding: 8px; /* Уменьшение отступов */
+        font-size: 12px;
+    }
+
+    button, .delete-link {
+        padding: 8px 10px; /* Компактные кнопки */
+        font-size: 12px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

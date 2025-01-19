@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'scp/css/profile_settings.css' %}">
+    <link rel="icon" href="{% static 'image/favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'image/favicon.ico' %}" type="image/x-icon">
     <script src="{% static 'scp/js/websocket.js' %}"></script>
     <title>Настройки</title>
 </head>
@@ -30,7 +32,8 @@
             <div class="form-group">
                 {{ form.bio }}
             </div>
-            <button type="submit" class="save-button">Сохранить</button>
+            <button type="submit"><img src="{% static 'scp/image/save.png' %}" alt="Иконка удаления"></button>
+            <button onclick="history.back()"><img src="{% static 'scp/image/back.png' %}" alt="Иконка удаления"></button>
         </form>
     </div>
 </body>

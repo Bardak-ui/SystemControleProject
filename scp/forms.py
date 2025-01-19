@@ -50,7 +50,7 @@ class AddProject(forms.ModelForm):
 class EditProject(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['title','description','code','language','status']
+        fields = ['title','description','code','language','status','complexity']
         widgets = {
             'title': TextInput(attrs={
                 'class': 'title-project',

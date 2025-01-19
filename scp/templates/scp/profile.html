@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'scp/css/profile.css' %}" rel="stylesheet"/>
+    <link rel="icon" href="{% static 'image/profile.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'image/profile.ico' %}" type="image/x-icon">
     <script src="{% static 'scp/js/websocket.js' %}"></script>
     <title>Профиль</title>
 </head>
@@ -81,11 +83,15 @@
                     <form method="post" action="{% url 'info_project' project.id %}">
                         {% csrf_token %}
                         <button type="submit" class="project-btn">
-                            <h3>{{ project.title }}</h3>
+                            <h3>{{ project.title }}</h3><br>
+                            <strong>Описание проекта</strong>
                             <p>{{ project.description }}</p>
-                            <p><strong>Проект создан:</strong> {{ project.created_at }}</p>
-                            <p><strong>Статус проекта:</strong> {{ project.status }}</p>
-                            <p><strong>Создатель проекта:</strong> {{ project.owner }}</p>
+                            <strong>Проект создан</strong> 
+                            <p>{{ project.created_at }}</p>
+                            <strong>Статус проекта</strong> 
+                            <p>{{ project.status }}</p>
+                            <strong>Создатель проекта</strong> 
+                            <p>{{ project.owner }}</p>
                         </button>
                     </form>
                 {% empty %}

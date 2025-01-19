@@ -77,13 +77,13 @@ class Project(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название проекта')
     description = models.TextField(verbose_name='Описание проекта')
     # tasks = models.ManyToManyField(Task, related_name='p_tasks')
-    code = models.TextField(blank=True, null=True)
+    code = models.TextField(verbose_name="Код",blank=True, null=True)
     language = models.CharField(max_length=50, choices=Language.LANGUAGE_CHOICES, verbose_name='Язык программирования',default='Не указан')
     status = models.CharField(max_length=50,choices=Status.STATUS_CHOICES, verbose_name="Статус",default='Ожидает')
     owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name='p_owner')
     participants = models.ManyToManyField(User, blank=True, related_name='p_participants')
     created_at = models.DateField(auto_now_add=True)
-    complexity = models.OneToOneField(Status, choices=Status.STATUS_CHOICES, verbose_name="Сложность", on_delete=models.CASCADE,default='Не указан',related_name='p_complexity')
+    complexity = models.CharField(max_length=100 ,choices=Status.PRIORITY_CHOICES, verbose_name="Сложность", default='Не указан')
     # updated_at = models.DateField() #Реализовать дату последнего обновления
 
     def __str__(self):

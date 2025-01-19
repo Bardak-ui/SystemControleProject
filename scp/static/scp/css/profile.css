@@ -108,9 +108,9 @@ p {
 /* Кнопки */
 .button-form {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-self: center;
+    flex-wrap: wrap; /* Позволяет переносить кнопки на следующую строку */
+    gap: 10px; /* Отступ между кнопками */
+    justify-content: center; /* Кнопки начинаются с начала строки */
     margin-bottom: 20px;
 }
 
@@ -125,7 +125,7 @@ p {
 }
 
 .button-form button {
-    flex: 1;
+    flex: 0 1 auto; /* Кнопки не растягиваются, но могут сжиматься */
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
@@ -134,6 +134,8 @@ p {
     cursor: pointer;
     font-size: 14px;
     transition: background 0.3s;
+    min-width: 150px; /* Минимальная ширина кнопок */
+    max-width: 200px; /* Максимальная ширина кнопок */
 }
 
 .button-form button:hover {
@@ -156,8 +158,10 @@ hr {
 }
 
 .project-btn {
+    display: grid;
+    flex-wrap: wrap;
     width: 300px; /* Фиксированная ширина плитки */
-    text-align: left;
+    text-align: center;
     background: #2a2a2a; /* Темный фон плитки */
     padding: 15px;
     border: none;
@@ -167,6 +171,7 @@ hr {
     color: #e0e0e0; /* Светлый текст */
     cursor: pointer;
     margin-bottom: 10px; /* Отступ снизу */
+
 }
 
 .project-btn h3 {
@@ -179,6 +184,8 @@ hr {
     margin: 5px 0;
     font-size: 14px;
     color: #bbbbbb; /* Светло-серый текст */
+    overflow: hidden; /* Защита от переполнения */
+    word-wrap: break-word; /* Перенос длинного текста */
 }
 
 .project-btn:hover {
@@ -189,6 +196,13 @@ hr {
 @media (max-width: 768px) {
     body {
         font-size: 14px; /* Уменьшаем шрифт на мобильных устройствах */
+    }
+    
+    h2 {
+        text-align: center;
+        font-size: 15px;
+        color: #81d4fa; /* Голубой акцент */
+        margin-bottom: 10px;
     }
 
     .container {
@@ -224,12 +238,15 @@ hr {
     }
 
     .button-form {
-        flex-direction: column; /* Кнопки в столбик */
-        gap: 15px;
+        gap: 8px; /* Уменьшаем отступ между кнопками */
     }
 
     .button-form button {
+        flex: 1 1 100%; /* Кнопки занимают всю ширину на мобильных устройствах */
+        max-width: 100%; /* Максимальная ширина 100% */
+        width: 100px;
         font-size: 12px; /* Уменьшаем шрифт на мобильных устройствах */
+        padding: 8px 12px; /* Уменьшаем отступы внутри кнопок */
     }
 }
 

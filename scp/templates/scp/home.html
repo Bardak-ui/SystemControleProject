@@ -9,33 +9,42 @@
     <title>Домашняя страница</title>
 </head>
 <body>
-    <div class="fixed-header">
+    <!-- Фиксированный заголовок -->
+    <header class="fixed-header">
         <h1 class="title-home">Домашняя страница</h1>
         {% if user.profile.avatar %}
             <a href="{% url 'profile' %}">
                 <div class="avatar-wrapper">
-                    <img src="{{ user.profile.avatar.url }}" alt="Profile Image" class="avatar"/>
+                    <img src="{{ user.profile.avatar.url }}" alt="Аватар пользователя" class="avatar"/>
                 </div>
             </a>
         {% else %}
-            <a href="{% url 'profile' %}"><p class="no-avatar">Нет загруженной аватарки</p></a>
+            <a href="{% url 'profile' %}">
+                <div class="no-avatar">Нет загруженной аватарки</div>
+            </a>
         {% endif %}
-    </div>
-    <div class="container_filter">
-        <div class="filter" style="text-decoration: none;">
-            <a href="?sort=asc">По возростанию</a> |
-            <a href="?sort=desc" value="ubav" >По убыванию</a> |
+    </header>
+
+    <!-- Фильтры -->
+    <nav class="container_filter">
+        <div class="filter">
+            <a href="?sort=asc">По возрастанию</a> |
+            <a href="?sort=desc">По убыванию</a> |
             <a href="?sort=complexity">По сложности</a> |
             <a href="?sort=Completed">Завершенные</a> |
-            <a href="?sort=cancel">Сбросить</a>
+            <a href="?sort=Cancel">Сбросить</a>
         </div>
-    </div>
-    <div class="container">
+    </nav>
+
+    <!-- Основной контейнер -->
+    <main class="container">
         <div class="left-container">
             <div class="left-content">
                 <h1 class="title-home">Список проектов</h1>
             </div>
         </div>
+
+        <!-- Контейнер для проектов -->
         <div class="right-container">
             {% for project in projects %}
                 <form method="post" action="{% url 'info_project' project.id %}">
@@ -47,33 +56,31 @@
                         <span>{{ project.description }}</span>
                         <hr>
                         {% if project.participants.all %}
-                        <p>Над проектом работают</p>
-                            {% for participant in project.participants.all %}
-                                <a href="{% url 'profiles_info' user.id%}" style="text-decoration: none;">
-                                    {{ participant.username }}
-                                </a>|
-                            {% endfor %}
+                            <p>Над проектом работают</p>
+                            <div class="participants-list">
+                                {% for participant in project.participants.all %}
+                                    <a href="{% url 'profiles_info' user.id %}">
+                                        {{ participant.username }}
+                                    </a>
+                                {% endfor %}
+                            </div>
                         {% else %}
                             <p>Исполнители отсутствуют</p>
                         {% endif %}
-                        <hr>
                         <p>Проект создан</p>
-                        {{ project.created_at }} <br>
-                        <p>Разработка проекта начата</p>
-                        {{ project.start_date }} <br>
-                        <p>Разработка проекта окончена</p>
-                        {{ project.end_date }} <br>
-                        <hr>
+                        <span>{{ project.created_at }}</span>
                         <p>Статус проекта</p>
-                        {{ project.status }} <br>
-                        <p>Создатель проекта</p> 
-                        <strong>{{ project.owner }}</strong><br>
+                        <span>{{ project.status }}</span>
+                        <p>Сложность проекта</p>
+                        <span>{{ project.complexity }}</span>
+                        <p>Создатель проекта</p>
+                        <strong>{{ project.owner }}</strong>
                     </button>
                 </form>
             {% empty %}
                 <p class="not-found-project">Проекты отсутствуют</p>
             {% endfor %}
         </div>
-    </div>
+    </main>
 </body>
 </html>

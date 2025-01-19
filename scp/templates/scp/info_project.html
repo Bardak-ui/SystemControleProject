@@ -12,36 +12,56 @@
     <div class="container">
         <header class="project-header">
             <h1>{{ project.title }}</h1><hr>
-            <strong>Описание проекта</strong><br>
-            <span>{{ project.description }}</span>
+            <strong>Описание проекта</strong>
+            <br><span>{{ project.description }}</span>
         </header>
         <section class="actions">
             {% if request.user != project.owner %}
                 {% if is_participant %}
-                    <a href="{% url 'unjoin_project' project.id %}"><button type="submit" class="nav-button">Покинуть проект</button></a>
+                    <a href="{% url 'unjoin_project' project.id %}">
+                        <button type="submit" class="nav-button">Покинуть проект</button>
+                    </a>
                 {% else %}
-                    <a href="{% url 'join_project' project.id %}"><button type="submit" class="nav-button">Принять участие</button></a>
+                    <a href="{% url 'join_project' project.id %}">
+                        <button type="submit" class="nav-button">Принять участие</button>
+                    </a>
                 {% endif %}
             {% else %}
-                <a href="{% url 'manage_particip' project.id %}"><button type="submit" class="nav-button">Исполнители</button></a>
+                <a href="{% url 'manage_particip' project.id %}">
+                    <button type="submit" class="nav-button">
+                        <img src="{% static 'scp/image/manage_particip.png' %}" alt="Иконка Исполнителей">
+                        <p>Исполнители</p>
+                    </button>
+                </a>
             {% endif %}
             {% if request.user == project.owner %}
                 <form method="post" action="{% url 'add_task' project.id %}">
                     {% csrf_token %}
-                    <button type="submit" class="nav-button">Добавить задачу</button>
+                    <button type="submit" class="nav-button">
+                        <img src="{% static 'scp/image/add_task.png' %}" alt="Иконка удаления">
+                        <p>Добавить задачу</p>
+                    </button>
                 </form>
                 <form method="get" action="{% url 'edit_project' project.id%}">
-                    <!-- {% csrf_token %} -->
-                    <button type="submit" class="nav-button">Изменить проект</button>
+                    <button type="submit" class="nav-button">
+                        <img src="{% static 'scp/image/edit_project.png' %}" alt="Иконка Исполнителей">
+                        <p>Изменить задачу</p>
+                    </button>
                 </form>
             {% endif %}
             <form method="post" action="{% url 'profile' %}">
                 {% csrf_token %}
-                <button type="submit" class="nav-button">В профиль</button>
+                <button type="submit" class="nav-button">
+                    <img src="{% static 'scp/image/profile.png' %}" alt="Иконка профиля">
+                    <p>Профиль</p>
+                </button>
             </form>
             <form method="post" action="{% url 'home' %}">
                 {% csrf_token %}
-                <button type="submit" class="nav-button">На главную</button>
+                <button type="submit" class="nav-button">
+                    <img src="{% static 'scp/image/home.png' %}" alt="Иконка домой">
+                    <p>Домой</p>
+                </button>
             </form>
         </section>
         <section class="project-details">
@@ -56,9 +76,13 @@
                 <ul class="participants-list">
                     {% for participant in all_parsip %}
                         {% if request.user.profile.role == "Администратор" %}
-                            <a href="{% url 'admin_panel' participant.id %}">{{ participant.username }}</a>,
+                            <a href="{% url 'admin_panel' participant.id %}">
+                                {{ participant.username }}
+                            </a>,
                         {% else %}
-                            <a href="{% url 'profiles_info' participant.id %}">{{ participant.username }}</a>,
+                            <a href="{% url 'profiles_info' participant.id %}">
+                                {{ participant.username }}
+                            </a>,
                         {% endif %}
                     {% endfor %}
                 </ul>

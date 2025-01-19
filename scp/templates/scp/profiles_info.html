@@ -52,11 +52,16 @@
                     <form method="post" action="{% url 'info_project' project.id %}">
                         {% csrf_token %}
                         <button type="submit" class="project-btn">
+                            <strong>Название проекта</strong>
                             <h3>{{ project.title }}</h3>
+                            <strong>Описание проекта</strong>
                             <p>{{ project.description }}</p>
-                            <p><strong>Проект создан:</strong> {{ project.created_at }}</p>
-                            <p><strong>Статус проекта:</strong> {{ project.status }}</p>
-                            <p><strong>Создатель проекта:</strong> {{ project.owner }}</p>
+                            <strong>Проект создан</strong> 
+                            <p>{{ project.created_at }}</p>
+                            <p><strong>Статус проекта</strong> 
+                                {{ project.status }}</p>
+                            <p><strong>Создатель проекта</strong> 
+                                {{ project.owner }}</p>
                         </button>
                     </form>
                 {% empty %}

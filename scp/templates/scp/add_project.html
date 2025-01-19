@@ -10,41 +10,36 @@
 </head>
 <body>
     <div class="form-container">
-        <h1>Редактирование проекта: {{ project.title }}</h1>
-        <form method="POST">
+        <h1>Создание проекта</h1>
+        <form method="post">
             {% csrf_token %}
-            
+            {{ user_input }}
             <div class="form-group">
+                {{ form.title.label_tag }}
                 {{ form.title }}
             </div>
             <div class="form-group">
+                {{ form.description.label_tag }}
                 {{ form.description }}
             </div>
             <div class="form-group">
+                {{ form.code.label_tag }}
                 {{ form.code }}
             </div>
-
             <div class="form-group">
                 {{ form.language.label_tag }}
                 {{ form.language }}
             </div>
-
             <div class="form-group">
                 {{ form.status.label_tag }}
                 {{ form.status }}
             </div>
-
             <div class="form-group">
-                {{ form.start_date.label_tag }}
-                {{ form.start_date }}
-            </div>
-
-            <div class="form-group">
-                {{ form.end_date.label_tag }}
-                {{ form.end_date }}
+                {{ form.complexity.label_tag }}
+                {{ form.complexity }}
             </div>
             <button type="submit">Создать</button>
-            <button type="submit" onclick="history.back()">Назад</button>
+            <button type="button" onclick="history.back()">Назад</button>
         </form>
 </body>
 </html>

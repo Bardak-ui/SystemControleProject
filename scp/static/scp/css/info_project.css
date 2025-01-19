@@ -23,6 +23,7 @@ body {
     background-color: #2b2b2b; /* Тёмный оттенок для хедера */
     color: #ffffff;
     text-align: center;
+
 }
 
 .project-header h1 {
@@ -32,10 +33,12 @@ body {
 
 .project-header span {
     margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 16px;
-    text-decoration: none;
+    overflow: hidden;
+    word-wrap: break-word; /* Перенос длинного текста */
+    white-space: pre-wrap; /* Сохраняет переносы строк */
 }
-
 
 .project-details {
     padding: 20px;
@@ -71,12 +74,11 @@ body {
     display: flex;
     flex-direction: row-reverse;
     align-self: center;
-    
 }
 
 .nav-button {
-    width: 180px;
-    margin: 0  15px 0;
+    width: 185px;
+    margin: 0  10px 0;
     height: 50px;
     text-align: center;
     background-color: #333; /* Темный фон кнопок */
@@ -85,7 +87,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     color: #eaeaea; /* Светлый текст */
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     transition: backgrund-color 0.3s ease;
 }
@@ -172,32 +174,34 @@ body {
 @media (max-width: 768px) {
     .actions {
         padding: 20px;
+        gap: 10px;
         display: flex;
         flex-direction: row-reverse;
         align-self: center;
-        
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
     .nav-button {
         width: 100px;
-        margin: 0  15px 0;
+        margin: 0  10px 0;
         height: 50px;
         text-align: center;
         background-color: #333; /* Темный фон кнопок */
-        padding: 15px;
+        padding: 5px;
         border: none;
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         color: #eaeaea; /* Светлый текст */
-        font-size: 16px;
+        font-size: 14px;
         cursor: pointer;
         transition: backgrund-color 0.3s ease;
     }
-    
+
     .nav-button:hover {
         background-color: #4aa866; /* Синий при наведении */
     }
-    
+
     .nav-button:focus {
         outline: none;
         box-shadow: 0 0 4px rgba(74, 118, 168, 0.8);

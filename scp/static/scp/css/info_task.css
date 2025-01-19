@@ -1,57 +1,85 @@
+/* Основные стили */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #121212; /* Тёмный фон */
-    color: #eaeaea; /* Светлый текст */
+    background-color: #121212;
+    color: #eaeaea;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     max-width: 700px;
-    width: 100%;
-    margin: 60px auto 0; /* Корректируем отступ для фиксированного хедера */
-    background-color: #1e1e1e; /* Фон контейнера */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Глубокая тень */
+    width: 90%;
+    margin: 60px auto 0;
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     overflow: hidden;
 }
 
+/* Шапка задачи */
 .project-header {
-    padding: 20px;
-    background-color: #2b2b2b; /* Тёмный оттенок для хедера */
+    background-color: #2b2b2b;
     color: #ffffff;
     text-align: center;
+    padding: 20px;
 }
 
 .project-header h1 {
     margin: 0;
-    text-align: center;
     font-size: 24px;
 }
 
-.project-header p {
+.task-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 10px;
-    font-size: 16px;
 }
 
-.project-details {
+.task-description p {
+    margin: 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+.task-description strong {
+    margin-right: 10px;
+}
+
+/* Детали задачи */
+.task-details {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
     padding: 20px;
-    background-color: #1a1a1a; /* Ещё более тёмный фон для деталей */
+    background-color: #1a1a1a;
     font-size: 16px;
-    
 }
 
-.project-details p {
-    padding: 10px;
+.detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    
+    flex: 1;
+    min-width: 150px;
 }
 
+.detail strong {
+    color: #4a76a8;
+    margin-bottom: 5px;
+}
+
+.detail span {
+    color: #cccccc;
+}
+
+/* Участники задачи */
 .participants {
     padding: 20px;
     text-align: center;
@@ -59,8 +87,7 @@ body {
 
 .participants h2 {
     font-size: 18px;
-    text-align: center;
-    color: #4a76a8; /* Синий для выделения заголовка */
+    color: #4a76a8;
 }
 
 .participants-list {
@@ -70,86 +97,14 @@ body {
 
 .participants-list li {
     font-size: 16px;
-    color: #cccccc; /* Светлый текст */
+    color: #cccccc;
 }
 
-.actions {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.nav-button {
-    width: 100%;
-    flex-direction: column;
-    text-align: center;
-    background-color: #333; /* Темный фон кнопок */
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    color: #eaeaea; /* Светлый текст */
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    height: 50px;
-    margin-bottom: 15px;
-}
-
-.nav-button:hover {
-    background-color: #4aa866; /* Синий при наведении */
-}
-
-.nav-button:focus {
-    outline: none;
-    box-shadow: 0 0 4px rgba(74, 118, 168, 0.8);
-}
-
-.tasks {
-    padding: 20px;
-}
-
-.task-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.task-btn {
-    margin-bottom: 20px;
-}
-
-.task-btn button {
-    width: 100%;
-    text-align: left;
-    background-color: #292929; /* Темный фон для задач */
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s ease;
-    color: #cccccc; /* Светлый текст */
-    cursor: pointer;
-}
-
-.task-btn button:hover {
-    background-color: #3b3b3b; /* Светлее фон при наведении */
-}
-
-.task-btn p {
-    font-size: 14px;
-    margin: 5px 0;
-}
-
-.task-btn p strong {
-    color: #4a76a8; /* Акцент на важной информации */
-}
-
+/* Аватар */
 .avatar-wrapper {
     display: flex;
-    justify-content: center; /* Центрируем по горизонтали */
-    align-items: center; /* Центрируем по вертикали, если потребуется */
+    justify-content: center;
     margin: 20px 0;
-    width: 100%; /* Для мобильных экранов, чтобы обнулять возможные отступы */
 }
 
 .avatar-container {
@@ -158,10 +113,6 @@ body {
     border-radius: 50%;
     overflow: hidden;
     border: 4px solid #81d4fa;
-    display: flex; /* Обеспечиваем точное центрирование */
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto; /* Для дополнительного центрирования */
 }
 
 .avatar {
@@ -173,4 +124,52 @@ body {
 .no-avatar {
     color: #777;
     text-align: center;
+}
+
+/* Кнопки действий */
+.actions {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #eaeaea;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+    background-color: #333;
+}
+
+.nav-button:hover {
+    background-color: #4aa866;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .task-details {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        padding: 20px;
+        background-color: #1a1a1a;
+        font-size: 16px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
 }

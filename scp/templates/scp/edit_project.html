@@ -31,13 +31,23 @@
                 {{ form.status }}
             </div>
             <div class="form-group">
+                {{ form.complexity.label_tag }}
+                {{ form.complexity }}
+            </div>
+            <div class="form-group">
                 {{ form.code.label_tag }}
                 {{ form.code }}
             </div>
             <div class="form-actions">
-                <button type="submit">Сохранить</button>
-                <a href="{{ delete_project }}" class="delete-link">Удалить проект</a>
-                <button onclick="history.back()">Назад</button>
+                <button type="submit">
+                    <img src="{% static 'scp/image/save.png' %}" alt="Иконка удаления">
+                </button>
+                <a href="{{ delete_project }}" class="delete-link">
+                    <img src="{% static 'scp/image/delete.png' %}" alt="Иконка удаления">
+                </a>
+                <button onclick="history.back()">
+                    <img src="{% static 'scp/image/back.png' %}" alt="Иконка удаления">
+                </button>
             </div>
         </form>
     </div>

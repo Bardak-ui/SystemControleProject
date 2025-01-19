@@ -1,64 +1,50 @@
+/* Основные стили */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     background-color: #2c2c2c; /* Темный фон */
     color: #eaeaea; /* Светлый текст */
+    box-sizing: border-box; /* Общий стиль для всех элементов */
 }
 
-.container_filter{
-    display: flex;
-    background-color:#333;
-    width: 100%;
-    font-size: 20px;
-    justify-content: center;
-    border-bottom: 10px;
-    
+*, *::before, *::after {
+    box-sizing: inherit; /* Учитываем отступы во всех элементах */
 }
 
-.container_filter .filter a{
-    position: sticky;
-    box-sizing: border-box;
-    text-decoration: none;
-    color: rgb(83, 107, 48);
-}
-
-.filter a:hover{
-    color:  rgb(133, 161, 91);
-}
-
+/* Фиксированный заголовок */
 .fixed-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Центрируем заголовок */
     position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     height: 55px;
-    background-color: #1a1a1a; /* Темный фон хедера */
-    color: #fff; /* Белый текст */
+    background-color: #1a1a1a;
+    color: #fff;
     padding: 10px 20px;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Темная тень */
+    z-index: 1000; /* Указан z-index для header */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     font-size: 18px;
-    box-sizing: border-box;
 }
 
 .fixed-header .title-home {
-    font-size: 15px;
-    margin: auto;
+    margin: 0;
+    text-align: center;
+    flex: 1; /* Занимает все доступное пространство */
 }
 
 .fixed-header .avatar-wrapper {
     position: absolute;
     top: 5px;
-    right: 60px;
+    right: 20px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid #2c2c2c; /* Тот же цвет, что и фон */
+    border: 2px solid #2c2c2c;
 }
 
 .fixed-header .avatar {
@@ -67,200 +53,246 @@ body {
     object-fit: cover;
 }
 
+.fixed-header .no-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px; /* Уменьшенный размер текста */
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    overflow: hidden; /* Текст не выходит за границы */
+    white-space: nowrap; /* Текст не переносится */
+    text-overflow: ellipsis; /* Добавляем многоточие, если текст не помещается */
+}
+
+/* Контейнер фильтра */
+.container_filter {
+    display: flex;
+    background-color: #333;
+    width: 100%;
+    font-size: 20px;
+    justify-content: center;
+    border-bottom: 2px solid #444;
+    z-index: 100; /* Указан z-index для sticky */
+    padding: 10px 0;
+}
+
+.container_filter .filter a {
+    position: relative;
+    text-decoration: none;
+    color: rgb(83, 107, 48);
+    margin: 0 10px; /* Отступы между ссылками */
+}
+
+.filter a:hover {
+    color: rgb(133, 161, 91);
+}
+
+/* Основной контейнер */
 .container {
     display: flex;
     flex-direction: column;
     max-width: 1200px;
     width: 100%;
     margin: 60px auto 0;
-    background-color: #333; /* Темный фон контейнера */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Темная тень */
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
-    overflow: hidden;
-}
-
-.content {
-    display: flex;
-    flex-direction: row;
     padding: 20px;
 }
 
+/* Левый контейнер */
 .left-container {
     flex: 1;
     padding: 20px;
+    text-align: center; /* Центрируем текст */
 }
 
 .left-container .title-home {
     margin: 0;
-    text-align: center;
-    color: #fff; /* Белый текст */
+    color: #fff;
 }
 
+/* Правый контейнер */
 .right-container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 20px;
-    justify-content: center;
+    flex-wrap: wrap; /* Проекты переносятся на следующую строку, если не хватает места */
+    gap: 10px; /* Отступы между проектами */
+    padding: 10px;
+    justify-content: center; /* Проекты начинаются с начала строки */
 }
 
+/* Кнопки проектов */
 .button-projects {
-    flex: 0 1 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-    min-width: 376px;
-    text-align: center;
-    background-color: #4a4a4a; /* Темный фон кнопок */
+    flex: 1 1 auto; /* Гибкая ширина, зависит от содержимого */
+    min-width: 250px; /* Минимальная ширина */
+    max-width: 360px; /* Максимальная ширина */
+    align-items: center;
+    background-color: #4a4a4a;
     padding: 15px;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Тень для кнопок */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
-    color: #eaeaea; /* Светлый текст */
+    color: #eaeaea;
     cursor: pointer;
+    overflow: hidden; /* Защита от переполнения */
+    word-wrap: break-word; /* Перенос длинного текста */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Равномерное распределение контента */
 }
 
-.button-projects:hover {
-    background-color: #616161; /* Более светлый оттенок при наведении */
-}
-
-.button-projects h3 {
-    font-size: 18px;
-    margin: 0 0 10px;
-    color: #ffffff; /* Синий цвет для заголовков */
-}
+.button-projects h3,
 .button-projects span {
     font-size: 18px;
     margin: 0 0 10px;
-    color: #ffffff; /* Синий цвет для заголовков */
+    color: #ffffff;
+    word-break: break-word; /* Перенос длинных слов */
 }
 
 .button-projects p {
     margin: 5px 0;
     font-size: 14px;
-    color: #ccc; /* Более светлый текст */
+    color: #ccc;
+    word-break: break-word; /* Перенос длинных слов */
 }
 
+.button-projects hr {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid #666; /* Стиль разделительной линии */
+}
+
+/* Стили для списка участников */
+.button-projects .participants-list {
+    display: flex;
+    flex-wrap: wrap; /* Участники переносятся на новую строку */
+    gap: 5px; /* Отступы между участниками */
+    margin: 10px 0;
+}
+
+.button-projects .participants-list a {
+    text-decoration: none;
+    color: #4a76a8; /* Цвет ссылок */
+    white-space: nowrap; /* Не переносить текст участников */
+}
+
+.button-projects .participants-list a:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+/* Сообщение об отсутствии проектов */
 .not-found-project {
     margin: auto;
     padding: 100px;
     font-size: 20px;
     line-height: 1.5;
-    color: #aaa; /* Более светлый серый */
+    color: #aaa;
     text-align: center;
 }
 
-p {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #ccc; /* Светлый текст */
+/* Адаптация для планшетов */
+@media (max-width: 1024px) {
+    .container {
+        margin: 30px auto 0;
+        padding: 15px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .right-container {
+        gap: 10px;
+    }
+
+    .button-projects {
+        flex: 1 1 45%; /* Два проекта в строку */
+        min-width: 250px;
+    }
 }
 
-.no-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #666; /* Темный фон для аватара */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 8px;
-    text-align: center;
-    color: #fff; /* Белый текст для аватара */
-    margin-bottom: 10px;
-    margin-left: -50px;
-    cursor: pointer;
-}
+/* Адаптация для мобильных устройств */
 @media (max-width: 768px) {
-    /* Блокировка горизонтального скроллинга */
     body {
-        font-size: 14px; /* Уменьшаем размер шрифта */
+        font-size: 14px;
         line-height: 1.5;
         margin: 0;
         padding: 0;
-        max-width: 100%;
-        background-color: #2c2c2c; /* Темный фон */
-        color: #eaeaea; /* Светлый текст */
-        overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
+        overflow-x: hidden;
     }
-    .container_filter{
-        display: flex;
-        background-color:#333;
-        width: 100%;
+
+    .container_filter {
         font-size: 13px;
-        justify-content: center;
-        border-bottom: 10px;
     }
-    
-    .container_filter .filter a{
-        position: sticky;
-        box-sizing: border-box;
-        text-decoration: none;
-        color: rgb(83, 107, 48);
-    }
-    
 
     .fixed-header {
-        height: 50px; /* Уменьшаем высоту хедера */
-        width: 100%;
+        height: 50px;
         padding: 5px 10px;
-        font-size: 16px; /* Уменьшаем шрифт */
+        font-size: 16px;
     }
 
     .fixed-header .avatar-wrapper {
         top: 5px;
         right: 10px;
         width: 35px;
-        height: 35px; /* Уменьшаем размер аватара */
+        height: 35px;
     }
 
     .container {
         margin: 10px auto 0;
-        border-radius: 5px; /* Уменьшаем скругление */
+        border-radius: 5px;
         padding: 10px;
-        width: 100%; /* Убедимся, что контейнер не выходит за пределы экрана */
-        box-sizing: border-box; /* Учитываем padding в ширину */
-    }
-
-    .content {
-        flex-direction: column;
-        padding: 10px;
-        width: 100%; /* Убедимся, что контент не выходит за пределы экрана */
-        box-sizing: border-box; /* Учитываем padding в ширину */
     }
 
     .right-container {
-        flex-direction: column; /* Кнопки в столбик */
-        gap: 10px; /* Уменьшаем зазор между кнопками */
+        gap: 10px;
         padding: 10px;
-        align-items: center;
-        width: 100%; /* Убедимся, что правый контейнер не выходит за пределы экрана */
-        box-sizing: border-box; /* Учитываем padding в ширину */
     }
 
     .button-projects {
-        flex: 1 1 100%; /* Кнопки занимают всю ширину */
-        max-width: 100%;
-        padding: 10px; /* Уменьшаем внутренние отступы */
-        font-size: 14px; /* Уменьшаем шрифт */
+        flex: 1 1 100%; /* Один проект в строку */
+        min-width: 100%;
     }
 
     .button-projects h3 {
-        font-size: 16px; /* Уменьшаем размер заголовков */
+        font-size: 16px;
     }
 
     .button-projects p {
-        font-size: 12px; /* Уменьшаем шрифт текста */
+        font-size: 12px;
     }
 
     .not-found-project {
-        font-size: 16px; /* Уменьшаем шрифт текста */
-        padding: 50px; /* Уменьшаем отступы */
+        font-size: 16px;
+        padding: 50px;
     }
 
     .no-avatar {
         width: 40px;
-        height: 40px; /* Уменьшаем размер */
-        font-size: 10px; /* Уменьшаем шрифт */
+        height: 40px;
+        font-size: 10px;
+    }
+}
+
+/* Адаптация для очень маленьких экранов */
+@media (max-width: 480px) {
+    .button-projects {
+        flex: 1 1 100%; /* Один проект в строку */
+        min-width: 100%;
+    }
+
+    .button-projects h3 {
+        font-size: 14px;
+    }
+
+    .button-projects p {
+        font-size: 10px;
     }
 }
