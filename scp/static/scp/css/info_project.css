@@ -168,3 +168,38 @@ body {
     color: #777;
     text-align: center;
 }
+
+@media (max-width: 768px) {
+    .actions {
+        padding: 20px;
+        display: flex;
+        flex-direction: row-reverse;
+        align-self: center;
+        
+    }
+
+    .nav-button {
+        width: 100px;
+        margin: 0  15px 0;
+        height: 50px;
+        text-align: center;
+        background-color: #333; /* Темный фон кнопок */
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        color: #eaeaea; /* Светлый текст */
+        font-size: 16px;
+        cursor: pointer;
+        transition: backgrund-color 0.3s ease;
+    }
+    
+    .nav-button:hover {
+        background-color: #4aa866; /* Синий при наведении */
+    }
+    
+    .nav-button:focus {
+        outline: none;
+        box-shadow: 0 0 4px rgba(74, 118, 168, 0.8);
+    }
+}

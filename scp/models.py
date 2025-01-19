@@ -30,7 +30,7 @@ class Language(models.Model):
         ('Lua', 'Lua'),
         ('SQL', 'SQL'),
         ('Assembly', 'Ассемблер'),
-        ('Not specified', 'Не указан'),
+        ('Не указан', 'Не указан'),
     ]
 
 class Status(models.Model):
@@ -82,7 +82,7 @@ class Project(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name='p_owner')
     participants = models.ManyToManyField(User, blank=True, related_name='p_participants')
     created_at = models.DateField(auto_now_add=True)
-    files = models.FileField(upload_to='user_file/', blank=True, null=True)
+    complexity = models.CharField(max_length=100, choices=Status.STATUS_CHOICES, verbose_name="Сложность",default='Не указан' )
     # updated_at = models.DateField() #Реализовать дату последнего обновления
 
     def __str__(self):

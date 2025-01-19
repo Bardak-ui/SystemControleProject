@@ -6,6 +6,22 @@ body {
     color: #eaeaea; /* Светлый текст */
 }
 
+.container_filter{
+    display: flex;
+    background-color:#333;
+    width: 100%;
+    
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.container_filter .filter{
+    position: sticky;
+    box-sizing: border-box;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
 .fixed-header {
     display: flex;
     align-items: center;
@@ -70,12 +86,11 @@ body {
 }
 
 .right-container {
-    display: grid;
+    display: flex;
     flex-direction: row;
     gap: 15px;
     padding: 20px;
-    align-self: flex-start;
-
+    align-self: center;
 }
 
 .left-container .title-home {
