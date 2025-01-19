@@ -68,6 +68,7 @@ class Comment(models.Model):
     message = models.CharField(max_length=3000)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment_post')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='message_user')
+    created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"Comment by {self.user} on {self.created_at}"
@@ -82,7 +83,7 @@ class Project(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name='p_owner')
     participants = models.ManyToManyField(User, blank=True, related_name='p_participants')
     created_at = models.DateField(auto_now_add=True)
-    complexity = models.CharField(max_length=100, choices=Status.STATUS_CHOICES, verbose_name="Сложность",default='Не указан' )
+    complexity = models.OneToOneField(Status, choices=Status.STATUS_CHOICES, verbose_name="Сложность", on_delete=models.CASCADE,default='Не указан',related_name='p_complexity')
     # updated_at = models.DateField() #Реализовать дату последнего обновления
 
     def __str__(self):

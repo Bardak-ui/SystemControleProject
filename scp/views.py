@@ -27,6 +27,17 @@ def forum(request):
 @login_required
 def home(request):
     project = Project.objects.all()
+    sort_project = request.GET.get('sort')
+    if sort_project == 'asc':
+        project = Project.objects.order_by('title')
+    elif sort_project == 'desc':
+        project = Project.objects.order_by('title')
+    elif sort_project == 'complexity':
+        pass # project = Project.objects.order_by('title')
+    elif sort_project == 'Completed':
+        project = Project.objects.filter(status = "Выполнено")
+    elif sort_project == 'Cancel':
+        project = Project.objects.all()
     return render(request, "scp/home.html", {"projects":project})
 
 def register(request):
