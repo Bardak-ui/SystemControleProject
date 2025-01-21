@@ -25,20 +25,18 @@
             {% endif %}
             <h1>{{ profile.puser }}</h1>
                 <div class="profile-info">
-                    <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
-                {% if profile.bio %}
-                    <p><strong>О вас:</strong> {{ profile.bio }}</p>
-                {% else %}
-                    <p><strong>О вас:</strong> Данные не указаны</p>
-                {% endif %}
-                <p id="status"><strong>Статус:</strong></p>
-                    {% if profile.account %}
-                        <p style="color: green;">Онлайн</p>
+                        <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
+                    {% if profile.bio %}
+                        <p><strong>О вас:</strong> {{ profile.bio }}</p>
                     {% else %}
-                        <p style="color: red;"> Оффлайн</p>
+                        <p><strong>О вас:</strong> Данные не указаны</p>
                     {% endif %}
-                </p>
-            </div>
+                    <!-- {% if profile.account %}
+                        <p class="account-color"><strong>Статус: </strong>Онлайн</p>
+                    {% else %}    
+                        <strong>Статус: </strong><p class="account-color">Оффлайн</p>
+                    {% endif %} -->
+                </div>
         </div>
         <div class="right-container">
             <div class="button-form">
