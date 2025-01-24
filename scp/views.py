@@ -26,20 +26,32 @@ def forum(request):
 
 @login_required
 def home(request):
-    sort_project = request.GET.get('sort')
+    sort_project = request.GET.get('sort', 'created-now')
     if sort_project == 'asc':
         project = Project.objects.order_by('title')
     elif sort_project == 'desc':
         project = Project.objects.order_by('-title')
-    elif sort_project == 'complexity':
-        project = Project.objects.all()
+    elif sort_project == 'low-complexity':
+        project = Project.objects.filter(complexity = 'Низкий')
+    elif sort_project == 'middle-complexity':
+        project = Project.objects.filter(complexity = 'Cредний')
+    elif sort_project == 'hard-complexity':
+        project = Project.objects.filter(complexity = 'Высокий')
     elif sort_project == 'Completed':
         project = Project.objects.filter(status = "Выполнено")
-    elif sort_project == 'Cancel':
-        project = Project.objects.all()
+    elif sort_project == 'In developer':
+        project = Project.objects.filter(status = "В разработке")
+    elif sort_project == 'Waiting':
+        project = Project.objects.filter(status = "Ожидает")
+    elif sort_project == 'created-now':
+        project = Project.objects.order_by('-created_at')
+    elif sort_project == 'created-old':
+        project = Project.objects.order_by('created_at')
     else:
         project = Project.objects.all()
-    return render(request, "scp/home.html", {"projects":project})
+
+    
+    return render(request, "scp/home.html", {'projects':project})
 
 def register(request):
     if request.method == 'POST':

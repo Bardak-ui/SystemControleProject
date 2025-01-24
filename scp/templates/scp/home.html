@@ -27,13 +27,27 @@
 
     <!-- Фильтры -->
     <nav class="container_filter">
-        <div class="filter">
-            <a href="?sort=asc">По возрастанию</a> |
-            <a href="?sort=desc">По убыванию</a> |
-            <a href="?sort=complexity">По сложности</a> |
-            <a href="?sort=Completed">Завершенные</a> |
-            <a href="?sort=Cancel">Сбросить</a>
-        </div>
+        <form method="get" action="{% url 'home' %}">
+            <!-- {% csrf_token %} -->
+            <div class="filter">
+                <select  name="sort">
+                    <option value=""></option> 
+                    <option value="asc">По возрастанию</option> 
+                    <option value="desc">По убыванию</option> 
+                    <option value="low-complexity">По сложности (Низкая)</option> 
+                    <option value="middle-complexity">По сложности (Средняя)</option> 
+                    <option value="hard-complexity">По сложности (Высокая)</option> 
+                    <option value="Completed">Завершенные</option> 
+                    <option value="In developer">В разработке</option> 
+                    <option value="Waiting">Ожидают</option> 
+                    <option value="created-old">По дате (старые)</option> 
+                    <option value="created-now">По дате (новые)</option> 
+
+                </select>
+                <button type="submit" value="sort">Фильтровать</button>
+                <a href="{% url 'home' %}">Сбросить</a>
+            </div>
+        </form>
     </nav>
 
     <!-- Основной контейнер -->

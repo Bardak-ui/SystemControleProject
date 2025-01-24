@@ -25,13 +25,6 @@
                 <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
                 <p><strong>О вас:</strong> {{ profile.bio }}</p>
                 <p><strong>Статус блокировки:</strong> {{ profile.status }}</p>
-                <p id="status"><strong>Активность</strong></p>
-                    {% if profile.account %}
-                        <p style="color: green;">Онлайн</p>
-                    {% else %}
-                        <p style="color: red;"> Оффлайн</p>
-                    {% endif %}
-                </p>
             </div>
         </div>
         <div class="right-container">
