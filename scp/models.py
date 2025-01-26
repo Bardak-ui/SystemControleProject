@@ -58,7 +58,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     anons = models.CharField(max_length=250, verbose_name='Краткое описание поста')
     text = models.TextField()
-    creator = models.OneToOneField(User, on_delete=models.CASCADE, related_name='statia_user')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True ,related_name='statia_user')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -48,10 +48,12 @@ body {
 
 .project-details p {
     margin: 10px 0;
+    
 }
 
 .participants {
     padding: 20px;
+    
 }
 
 .participants h2 {
@@ -62,6 +64,12 @@ body {
 .participants-list {
     list-style-type: none;
     padding: 0;
+    
+}
+
+.participants-list a{
+    text-decoration: none;
+    color: #777;
 }
 
 .participants-list li {

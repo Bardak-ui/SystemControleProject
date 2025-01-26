@@ -22,7 +22,8 @@ def logout_view(request):
 
 @login_required
 def forum(request):
-    return render(request, 'scp/forum.html')
+    posts = Post.objects.all()
+    return render(request, 'scp/forum.html', {'posts':posts})
 
 @login_required
 def home(request):
@@ -318,3 +319,16 @@ def add_task(request, project_id):
     else:
         form = AddTask()
     return render(request, 'scp/add_task.html', {'form': form})
+
+@login_required
+def create_post(request):
+    if request.method == 'POST':
+        form = CreatePost(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.creator = request.user
+            post.save()
+            return redirect('forum')
+    else:
+        form = CreatePost()
+    return render(request, 'scp/create_post.html', {'form':form})

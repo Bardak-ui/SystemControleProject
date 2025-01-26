@@ -130,8 +130,8 @@ body {
 /* Кнопки проектов */
 .button-projects {
     flex: 1 1 auto; /* Гибкая ширина, зависит от содержимого */
-    min-width: 250px; /* Минимальная ширина */
-    max-width: 360px; /* Максимальная ширина */
+    width: 250px; /* Минимальная ширина */
+    height: 100%; /* Максимальная ширина */
     align-items: center;
     background-color: #4a4a4a;
     padding: 15px;
@@ -184,7 +184,7 @@ body {
 }
 
 .button-projects .participants-list a:hover {
-    text-decoration: underline; /* Подчеркивание при наведении */
+    text-decoration: none; /* Подчеркивание при наведении */
 }
 
 /* Сообщение об отсутствии проектов */
@@ -212,9 +212,25 @@ body {
         gap: 10px;
     }
 
+    /* Кнопки проектов */
     .button-projects {
-        flex: 1 1 45%; /* Два проекта в строку */
-        min-width: 250px;
+        flex: 1 1 auto; /* Гибкая ширина, зависит от содержимого */
+        width: 250px; /* Минимальная ширина */
+        height: 100%; /* Максимальная ширина */
+        align-items: center;
+        background-color: #4a4a4a;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+        color: #eaeaea;
+        cursor: pointer;
+        overflow: hidden; /* Защита от переполнения */
+        word-wrap: break-word; /* Перенос длинного текста */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Равномерное распределение контента */
     }
 }
 
@@ -256,9 +272,25 @@ body {
         padding: 10px;
     }
 
+    /* Кнопки проектов */
     .button-projects {
-        flex: 1 1 100%; /* Один проект в строку */
-        min-width: 100%;
+        flex: 1 1 auto; /* Гибкая ширина, зависит от содержимого */
+        width: 200px; /* Минимальная ширина */
+        height: 100%; /* Максимальная ширина */
+        align-items: center;
+        background-color: #4a4a4a;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+        color: #eaeaea;
+        cursor: pointer;
+        overflow: hidden; /* Защита от переполнения */
+        word-wrap: break-word; /* Перенос длинного текста */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Равномерное распределение контента */
     }
 
     .button-projects h3 {

@@ -110,15 +110,6 @@ p {
 }
 
 
-/* Кнопки */
-.button-form {
-    display: flex;
-    flex-wrap: wrap; /* Позволяет переносить кнопки на следующую строку */
-    gap: 10px; /* Отступ между кнопками */
-    justify-content: center; /* Кнопки начинаются с начала строки */
-    margin-bottom: 20px;
-}
-
 .button-form .ban {
     color: white;
     background-color: red;
@@ -129,22 +120,33 @@ p {
     background-color: green;
 }
 
+  /* Кнопки */
+.button-form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row; /* Позволяет переносить кнопки на следующую строку */
+    gap: 10px; /* Отступ между кнопками */
+    justify-content: center; /* Кнопки начинаются с начала строки */
+    margin-bottom: 20px;
+}
+
 .button-form button {
+    width: 150px;
     flex: 0 1 auto; /* Кнопки не растягиваются, но могут сжиматься */
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
-    background-color: #1e88e5; /* Синий акцент */
+    background-color: #333; /* Синий акцент */
     color: white;
     cursor: pointer;
     font-size: 14px;
     transition: background 0.3s;
-    min-width: 150px; /* Минимальная ширина кнопок */
-    max-width: 200px; /* Максимальная ширина кнопок */
+    text-align: center;
+    align-items: center;
 }
 
 .button-form button:hover {
-    background-color: #1565c0; /* Темнее при наведении */
+    background: #37474f; /* Темнее при наведении */
 }
 
 /* Горизонтальная линия */
@@ -166,6 +168,7 @@ hr {
     display: grid;
     flex-wrap: wrap;
     width: 300px; /* Фиксированная ширина плитки */
+    height: 300px;
     text-align: center;
     background: #2a2a2a; /* Темный фон плитки */
     padding: 15px;
@@ -228,6 +231,24 @@ hr {
         margin-bottom: 10px;
     }
 
+    
+    .project-btn {
+        display: grid;
+        flex-wrap: wrap;
+        width: 200px; /* Плитки занимают всю ширину экрана */
+        height: 100%;
+        text-align: center;
+        background: #2a2a2a; /* Темный фон плитки */
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        transition: background 0.3s;
+        color: #e0e0e0; /* Светлый текст */
+        cursor: pointer;
+        margin-bottom: 10px; /* Отступ снизу */
+    }
+
     .container {
         flex-direction: row; /* Меняем контейнер на вертикальный */
         margin: 0; /* Убираем отступы по бокам */
@@ -256,21 +277,50 @@ hr {
         
     }
 
-    .project-btn {
-        width: 100%; /* Плитки занимают всю ширину экрана */
-    }
 
     .button-form {
         gap: 8px; /* Уменьшаем отступ между кнопками */
     }
 
-    .button-form button {
-        flex: 1 1 100%; /* Кнопки занимают всю ширину на мобильных устройствах */
-        max-width: 100%; /* Максимальная ширина 100% */
-        width: 100px;
-        font-size: 12px; /* Уменьшаем шрифт на мобильных устройствах */
-        padding: 8px 12px; /* Уменьшаем отступы внутри кнопок */
+    .button-form .ban {
+        color: white;
+        background-color: red;
     }
+    
+    .button-form .unban {
+        color: white;
+        background-color: green;
+    }
+    
+    /* Кнопки */
+    .button-form {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row; /* Позволяет переносить кнопки на следующую строку */
+        gap: 10px; /* Отступ между кнопками */
+        justify-content: center; /* Кнопки начинаются с начала строки */
+        margin-bottom: 20px;
+    }
+    
+    .button-form button {
+        width: 150px;
+        flex: 0 1 auto; /* Кнопки не растягиваются, но могут сжиматься */
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #333; /* Синий акцент */
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .button-form button:hover {
+        background: #37474f; /* Темнее при наведении */
+    }
+    
 }
 
 .empty {

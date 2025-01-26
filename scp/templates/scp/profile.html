@@ -43,10 +43,10 @@
                 <form method="post" action="{% url 'home' %}">
                     {% csrf_token %}
                     <div class="button-control">
-                    <button type="submit">
-                        <img src="{% static 'scp/image/home.png' %}" />
-                        <p>На главную</p>
-                    </button>
+                        <button type="submit">
+                            <img src="{% static 'scp/image/home.png' %}" />
+                            <p>На главную</p>
+                        </button>
                     </div>
                 </form>
                 <form method="post" action="{% url 'forum' %}">

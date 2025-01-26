@@ -51,7 +51,7 @@ body {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff; /* Синий цвет для кнопок */
+    background-color: #333; /* Синий цвет для кнопок */
     color: white;
     cursor: pointer;
     font-size: 14px;
@@ -59,7 +59,7 @@ body {
 }
 
 .button-form button:hover {
-    background-color: #0056b3; /* Темнее при наведении */
+    background-color: #5c5b5b; /* Темнее при наведении */
 }
 
 /* Карточка пользователя */

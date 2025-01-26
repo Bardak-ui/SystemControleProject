@@ -109,7 +109,7 @@ button, .delete-link {
 }
 
 button {
-    background-color: #4a76a8; /* Синий фон кнопки */
+    background: #37474f; /* Синий фон кнопки */
     color: white;
     border: none;
 }
@@ -158,7 +158,7 @@ button:hover {
     }
 
     .form-actions {
-        flex-direction: column;
+        flex-direction: row;
         gap: 10px;
     }
 }

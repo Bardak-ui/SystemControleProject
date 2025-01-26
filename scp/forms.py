@@ -148,7 +148,7 @@ class ProfileSettings(forms.ModelForm):
 class CreatePost(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title','anons','text','creator']
+        fields = ['title','anons','text']
 
 class SendComment(forms.ModelForm):
     class Meta:
