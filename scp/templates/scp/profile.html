@@ -42,33 +42,69 @@
             <div class="button-form">
                 <form method="post" action="{% url 'home' %}">
                     {% csrf_token %}
-                    <button type="submit">На главную</button>
+                    <div class="button-control">
+                    <button type="submit">
+                        <img src="{% static 'scp/image/home.png' %}" />
+                        <p>На главную</p>
+                    </button>
+                    </div>
                 </form>
                 <form method="post" action="{% url 'forum' %}">
                     {% csrf_token %}
-                    <button type="submit">На форум</button>
+                    <div class="button-control">
+                        <button type="submit">
+                            <img src="{% static 'scp/image/forum.png' %}" />
+                            <p>На форум</p>
+                        </button>
+                    </div>
+                    
                 </form>
                 {% if profile.role == "Администратор" %}
                     <form method="post" action="{% url 'profiles'%}">
                         {% csrf_token %}
-                        <button type="submit">Aдминка</button>
+                        <div class="button-control">
+                            <button type="submit">
+                                <img src="{% static 'scp/image/admin.png' %}" />
+                                <p>Aдминка</p>
+                            </button>
+                        </div>
                     </form>
                 {% else %}
                     <form method="post" action="{% url 'profiles' %}">
                         {% csrf_token %}
-                        <button type="submit">Участники</button>
+                        <div class="button-control">
+                            <button type="submit">
+                                <img src="{% static 'scp/image/groups.png' %}" />
+                                <p>Участники</p>
+                            </button>
+                        </div>
                     </form>
                 {% endif %}
                 <form method="post" action="{% url 'add_project' %}">
                     {% csrf_token %}
-                    <button type="submit">Создать проект</button>
+                    <div class="button-control">
+                        <button type="submit">
+                            <img src="{% static 'scp/image/create_project.png' %}" />
+                            <p>Создать проект</p>
+                        </button>
+                    </div>
                 </form>
                 <form method="get" action="{% url 'profile_settings' %}">
-                    <button type="submit">Настройки</button>
+                    <div class="button-control">
+                        <button type="submit">
+                            <img src="{% static 'scp/image/settings.png' %}" />
+                            Настройки
+                        </button>
+                    </div>
                 </form>
                 <form method="post" action="{% url 'logout_view' %}">
                     {% csrf_token %}
-                    <button type="submit">Выйти</button>
+                    <div class="button-control">
+                        <button type="submit">
+                            <img src="{% static 'scp/image/exit.png' %}" />    
+                            Выйти
+                        </button>
+                    </div>
                 </form>
             </div>
 

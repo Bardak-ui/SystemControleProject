@@ -32,8 +32,10 @@
             <div class="form-group">
                 {{ form.bio }}
             </div>
-            <button type="submit"><img src="{% static 'scp/image/save.png' %}" alt="Иконка удаления"></button>
-            <button onclick="history.back()"><img src="{% static 'scp/image/back.png' %}" alt="Иконка удаления"></button>
+            <div class="button">
+                <button type="submit"><img src="{% static 'scp/image/save.png' %}" style="height: 20px; width: 20px;" alt="Иконка удаления"></button>
+                <button onclick="history.back()"><img src="{% static 'scp/image/back.png' %}" style="height: 20px; width: 20px;" alt="Иконка удаления"></button>
+            </div>
         </form>
     </div>
 </body>

@@ -49,16 +49,12 @@
             </div>
         </form>
     </nav>
-
-    <!-- Основной контейнер -->
     <main class="container">
         <div class="left-container">
             <div class="left-content">
                 <h1 class="title-home">Список проектов</h1>
             </div>
         </div>
-
-        <!-- Контейнер для проектов -->
         <div class="right-container">
             {% for project in projects %}
                 <form method="post" action="{% url 'info_project' project.id %}">

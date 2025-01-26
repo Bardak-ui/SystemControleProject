@@ -197,6 +197,24 @@ hr {
     background: #37474f; /* Темно-серый при наведении */
 }
 
+.button-control button{
+    display: flex;
+    height: 50px
+}
+.button-control img{
+    margin-right: 15px;
+    width: 24px;
+    height: 24px;
+    align-self: center;
+
+}
+.button-control p{
+    text-align: center;
+    align-items: center;
+    justify-self: center;
+
+}
+
 /* Для маленьких экранов */
 @media (max-width: 768px) {
     body {
