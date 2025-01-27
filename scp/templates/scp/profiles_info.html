@@ -22,16 +22,9 @@
             {% endif %}
             <h1>{{ profile.puser }}</h1>
             <div class="profile-info">
-                <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
-                <p><strong>О вас:</strong> {{ profile.bio }}</p>
+                <p><strong>Роль:</strong> {{ profile.role }}</p>
+                <p><strong>Обо мне:</strong> {{ profile.bio }}</p>
                 <p><strong>Статус блокировки:</strong> {{ profile.status }}</p>
-                <p id="status"><strong>Статус:</strong></p>
-                    {% if profile.account %}
-                        <p style="color: green;">Онлайн</p>
-                    {% else %}
-                        <p style="color: red;"> Оффлайн</p>
-                    {% endif %}
-                </p>
             </div>
         </div>
         <div class="right-container">

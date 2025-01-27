@@ -28,11 +28,17 @@
             <button type="submit">Создать пост</button>
         </form>
         {% for post in posts %}
-            <div>
+            <div class = "post">
+                <a href="{% url 'profiles_info' user.id %}">
+                    <div class="avatar-post">
+                        <img src="{{ user.profile.avatar.url }}" alt="Profile Image" class="avatar"/>
+                    </div>
+                </a>
                 <p><strong>{{ post.user.username }}</strong>: {{ post.content }}</p>
                 <p>Название: {{ post.title }}</p>
                 <p>Анонс: {{ post.anons }}</p>
                 <p>{{ post.text }}</p>
+                <p>{{ post.creator }}</p>
                 <p>: {{ post.created_at }}</p>
                 
                 <!-- Отображаем комментарии -->

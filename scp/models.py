@@ -109,6 +109,7 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to='./profile_avatars/', blank=True, null=True)
     role = models.CharField(max_length=50, blank=True, choices=Role.ROLE_CHOICES, default='Исполнитель')
     account = models.BooleanField(default=False)  # Это поле отвечает за статус пользователя
+    contacts = models.TextField(default='Контакты не указаны')
     status = models.CharField(max_length=50, choices=Status.BLACKLIST_CHOICES, default='Не заблокирован')
     def __str__(self):
         return f"{self.puser}'s Profile"

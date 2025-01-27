@@ -25,12 +25,16 @@
             {% endif %}
             <h1>{{ profile.puser }}</h1>
                 <div class="profile-info">
+                    <h3>Обо мне</h3>
                         <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
                     {% if profile.bio %}
-                        <p><strong>О вас:</strong> {{ profile.bio }}</p>
+                        <p><strong>Статус:</strong> {{ profile.bio }}</p>
                     {% else %}
-                        <p><strong>О вас:</strong> Данные не указаны</p>
+                        <p><strong>Статус:</strong> Данные не указаны</p>
                     {% endif %}
+                    <hr>
+                    <p><strong>Контакты</strong></p>
+                    {{ profile.contacts }}
                     <!-- {% if profile.account %}
                         <p class="account-color"><strong>Статус: </strong>Онлайн</p>
                     {% else %}    

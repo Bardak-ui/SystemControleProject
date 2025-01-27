@@ -64,37 +64,13 @@ body {
     overflow: hidden;
 }
 
-.content {
-    display: flex;
-    flex-direction: row;
-    padding: 20px;
-}
-
-.left-container {
-    flex: 1;
-    padding: 20px;
-}
-
-.right-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 20px;
-    align-self: center;
-    justify-content: flex-start;
-}
-
-.left-container .title-home {
-    margin: 0;
-    text-align: center;
-    color: #fff; /* Белый текст */
-}
-
-.button-projects {
+.post {
     flex: 0 1 calc(50% - 10px);
     max-width: calc(50% - 10px);
     min-width: 376px;
+    justify-self: center;
     text-align: center;
+    gap: 10px;
     background-color: #4a4a4a; /* Темный фон кнопок */
     padding: 15px;
     border: none;
@@ -105,17 +81,17 @@ body {
     cursor: pointer;
 }
 
-.button-projects:hover {
+.post:hover {
     background-color: #616161; /* Более светлый оттенок при наведении */
 }
 
-.button-projects h3 {
+.post h3 {
     font-size: 18px;
     margin: 0 0 10px;
     color: #ffffff; /* Синий цвет для заголовков */
 }
 
-.button-projects p {
+.post p {
     margin: 5px 0;
     font-size: 14px;
     color: #ccc; /* Более светлый текст */
@@ -151,6 +127,7 @@ p {
     margin-left: -50px;
     cursor: pointer;
 }
+
 @media (max-width: 768px) {
     /* Блокировка горизонтального скроллинга */
     body {
