@@ -12,7 +12,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Левая часть -->
         <div class="left-container">
             <h1>Профиль</h1>
             <hr>
@@ -27,19 +26,16 @@
                 <div class="profile-info">
                     <h3>Обо мне</h3>
                         <p><strong>Ваша роль:</strong> {{ profile.role }}</p>
+                    <hr>    
                     {% if profile.bio %}
-                        <p><strong>Статус:</strong> {{ profile.bio }}</p>
+                        <strong>Биография</strong> 
+                        <p>{{ profile.bio }}</p>
                     {% else %}
                         <p><strong>Статус:</strong> Данные не указаны</p>
                     {% endif %}
                     <hr>
                     <p><strong>Контакты</strong></p>
                     {{ profile.contacts }}
-                    <!-- {% if profile.account %}
-                        <p class="account-color"><strong>Статус: </strong>Онлайн</p>
-                    {% else %}    
-                        <strong>Статус: </strong><p class="account-color">Оффлайн</p>
-                    {% endif %} -->
                 </div>
         </div>
         <div class="right-container">
@@ -61,7 +57,6 @@
                             <p>На форум</p>
                         </button>
                     </div>
-                    
                 </form>
                 {% if profile.role == "Администратор" %}
                     <form method="post" action="{% url 'profiles'%}">

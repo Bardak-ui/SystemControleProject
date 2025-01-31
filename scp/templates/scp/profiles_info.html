@@ -22,9 +22,14 @@
             {% endif %}
             <h1>{{ profile.puser }}</h1>
             <div class="profile-info">
+                <h3>Обо мне</h3>
                 <p><strong>Роль:</strong> {{ profile.role }}</p>
-                <p><strong>Обо мне:</strong> {{ profile.bio }}</p>
-                <p><strong>Статус блокировки:</strong> {{ profile.status }}</p>
+                <hr>
+                <strong>Биография</strong> 
+                <p>{{ profile.bio }}</p>
+                <hr>
+                <strong>Контакты</strong> 
+                <p>{{ profile.contacts }}</p>
             </div>
         </div>
         <div class="right-container">

@@ -51,7 +51,7 @@
                 <form method="get" action="{% url 'edit_project' project.id%}">
                     <button type="submit" class="nav-button">
                         <img src="{% static 'scp/image/edit_project.png' %}" alt="Иконка Исполнителей">
-                        <p>Изменить задачу</p>
+                        <p>Изменить проект</p>
                     </button>
                 </form>
             {% endif %}
@@ -105,6 +105,9 @@
                         <form method="post" action="{% url 'info_task' project.id task.id %}" class="task-form">
                             {% csrf_token %}
                             <button type="submit">
+                                <p><strong>Название задачи<br></strong> {{ task.title }}</p>
+                                <p><strong>Приоритет задачи<br></strong> {{ task.priority }}</p>
+                                <p><strong>Статус задачи<br></strong> {{ task.status }}</p>
                                 {% if task.assignee %} 
                                     {% if task.assignee.profile.avatar %}
                                         <div class="avatar-container">
@@ -118,9 +121,6 @@
                                 {% else %}
                                     <p>Исполнители отсутствуют</p>
                                 {% endif %}
-                                <p><strong>Название задачи<br></strong> {{ task.title }}</p>
-                                <p><strong>Приоритет задачи<br></strong> {{ task.priority }}</p>
-                                <p><strong>Статус задачи<br></strong> {{ task.status }}</p>
                             </button>
                         </form>
                     </div>

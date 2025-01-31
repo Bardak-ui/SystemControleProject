@@ -6,7 +6,7 @@ body {
     color: #e0e0e0; /* Светлый текст */
     display: flex;
     flex-direction: column; /* Делаем тело страницы вертикальным */
-    height: 100vh; /* Страница должна растягиваться по высоте */
+    height: 105vh; /* Страница должна растягиваться по высоте */
     padding: 0;
     overflow-x: hidden; /* Отключаем горизонтальный скроллинг */
 }
@@ -25,6 +25,7 @@ body {
 
 .left-container {
     flex: 1;
+    max-width: 300px;
     padding: 20px;
     background: #1a1a1a; /* Темный фон для левого контейнера */
     border-right: 1px solid #333; /* Темная граница */
@@ -74,7 +75,7 @@ p {
     height: 150px;
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid #81d4fa;
+    border: 2px solid #f0f0f0;
     display: flex; /* Обеспечиваем точное центрирование */
     justify-content: center;
     align-items: center;
@@ -94,15 +95,23 @@ p {
 
 /* Информация профиля */
 .profile-info {
-    margin-top: 20px;
+    align-items: center;
+    margin-top: 5px;
     background: #2a2a2a; /* Темный фон секции профиля */
     padding: 10px;
     border-radius: 5px;
 }
 
 .profile-info p {
+    display: flex;
+    word-wrap: break-word; /* Перенос длинного текста */
+    white-space: pre-wrap; /* Сохраняет переносы строк */
     margin: 5px 0;
     color: #e0e0e0;
+}
+
+.profile-info h3{
+    text-align: center;
 }
 
 .profile-info .account-color p{
@@ -136,7 +145,7 @@ p {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
-    background-color: #333; /* Синий акцент */
+    background-color: #333;
     color: white;
     cursor: pointer;
     font-size: 14px;
@@ -168,7 +177,7 @@ hr {
     display: grid;
     flex-wrap: wrap;
     width: 300px; /* Фиксированная ширина плитки */
-    height: 300px;
+    height: 100%;
     text-align: center;
     background: #2a2a2a; /* Темный фон плитки */
     padding: 15px;
