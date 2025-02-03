@@ -19,7 +19,7 @@ class CustomeCreateUserForm(UserCreationForm):
 class AddProject(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['title','description','code','language','status','complexity']
+        fields = ['title','description','language','status','complexity']
         widgets = {
             'title': TextInput(attrs={
                 'class': 'title-project',
@@ -36,21 +36,14 @@ class AddProject(forms.ModelForm):
                 'required': True,                           # Поле обязательно для заполнения
                 'style': 'resize: vertical;', # Inline-стили (запрет изменения размера и цвет границы)
             }),
-            'code': Textarea(attrs={
-                'class': 'desc-project',                     
-                'placeholder': 'Введите код проекта',         
-                'rows': 35,                                  
-                'cols': 50,                                  
-                'required': False,                           
-                'style': 'resize: vertical;',
-            }),
+            
 
         }
 
 class EditProject(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['title','description','code','language','status','complexity']
+        fields = ['title','description','language','status','complexity']
         widgets = {
             'title': TextInput(attrs={
                 'class': 'title-project',
@@ -67,14 +60,7 @@ class EditProject(forms.ModelForm):
                 'required': True,                           # Поле обязательно для заполнения
                 'style': 'resize: vertical;', # Inline-стили (запрет изменения размера и цвет границы)
             }),
-            'code': Textarea(attrs={
-                'class': 'desc-project',                     
-                'placeholder': 'Введите код проекта',         
-                'rows': 35,                                  
-                'cols': 50,                                  
-                'required': False,                           
-                'style': 'resize: vertical;',
-            }),
+            
 
         }
 
@@ -84,7 +70,7 @@ class EditCodeProject(forms.ModelForm):
 class AddTask(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title','description','status','priority']
+        fields = ['title','description','code','status','priority']
         widgets = {
             'title': TextInput(attrs={
                 'class': 'title-project',
@@ -100,6 +86,14 @@ class AddTask(forms.ModelForm):
                 'maxlength': 500,                           # Максимальная длина текста
                 'required': True,                           # Поле обязательно для заполнения
                 'style': 'resize: vertical;', # Inline-стили (запрет изменения размера и цвет границы)
+            }),
+            'code': Textarea(attrs={
+                'class': 'desc-project',                     
+                'placeholder': 'Введите код проекта',         
+                'rows': 35,                                  
+                'cols': 50,                                  
+                'required': False,                           
+                'style': 'resize: vertical;',
             }),
 
         }
@@ -107,7 +101,7 @@ class AddTask(forms.ModelForm):
 class EditTask(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title','description','status','priority','assignee']
+        fields = ['title','description','code','status','priority','assignee']
         widgets = {
             'title': TextInput(attrs={
                 'class': 'title-project',
@@ -123,6 +117,14 @@ class EditTask(forms.ModelForm):
                 'maxlength': 500,                           # Максимальная длина текста
                 'required': True,                           # Поле обязательно для заполнения
                 'style': 'resize: vertical;', # Inline-стили (запрет изменения размера и цвет границы)
+            }),
+            'code': Textarea(attrs={
+                'class': 'desc-project',                     
+                'placeholder': 'Введите код проекта',         
+                'rows': 35,                                  
+                'cols': 50,                                  
+                'required': False,                           
+                'style': 'resize: vertical;',
             }),
 
         }

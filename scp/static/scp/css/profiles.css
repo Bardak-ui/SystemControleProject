@@ -35,6 +35,7 @@ body {
 
 /* Карточка пользователя */
 .user-card-btn {
+    margin-top: 10px;
     background: none;
     border: none;
     cursor: pointer;

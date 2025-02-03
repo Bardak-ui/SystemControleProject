@@ -13,7 +13,7 @@
         <!-- Шапка задачи -->
         <header class="project-header">
             <h1>{{ task.title }}</h1>
-            <p><strong>Описание задачи:</strong><br>{{ task.description }}</p>
+            <p><strong>Описание задачи</strong><br><br>{{ task.description }}</p>
         </header>
 
         <section class="task-details">
@@ -37,7 +37,7 @@
 
         <!-- Участники задачи -->
         <section class="participants">
-            <h2>Над проектом работают</h2>
+            <h2>Над задачей работает(-ют)</h2>
             {% if task.assignee %}
                 {% if task.assignee.profile.avatar %}
                     <div class="avatar-wrapper">
@@ -52,7 +52,7 @@
                     <p>Изображение отсутствует</p>
                 {% endif %}
             {% else %}
-                <p>Исполнители отсутствуют</p>
+                <p>Исполнитель(-ли) отсутствуют</p>
             {% endif %}
         </section>
 
@@ -74,13 +74,19 @@
 
             {% if request.user == task.creator %}
                 <form method="get" action="{% url 'edit_task' project_id task_id %}">
-                    <button type="submit" class="nav-button">Изменить задачу</button>
+                    <button type="submit" class="nav-button">
+                        <img src="{% static 'scp/image/edit_project.png' %}" />
+                        <p>Изменить задачу</p>
+                    </button>
                 </form>
             {% endif %}
 
             <form method="post" action="{% url 'info_project' project_id %}">
                 {% csrf_token %}
-                <button type="submit" class="nav-button">К проекту</button>
+                <button type="submit" class="nav-button">
+                    <img src="{% static 'scp/image/back.png' %}" />
+                    <p>К проекту</p>
+                </button>
             </form>
         </section>
     </div>

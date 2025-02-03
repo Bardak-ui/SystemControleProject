@@ -18,14 +18,20 @@
                 {{ form.title }}
                 {{ form.description.label_tag }}
                 {{ form.description }}
+                {{ form.code.label_tag }}
+                {{ form.code }}
                 {{ form.status.label_tag }}
                 {{ form.status }}
                 {{ form.priority.label_tag }}
                 {{ form.priority }}
             </div>
             <div class="form-actions">
-                <button type="submit">Добавить</button>
-                <button type="submit" onclick="history.back()">Назад</button>
+                <button type="submit">
+                    <img style="height: 20px; width: 20px;" src="{% static 'scp/image/save.png' %}" />    
+                </button>
+                <button type="submit" onclick="history.back()">
+                    <img style="height: 20px; width: 20px;" src="{% static 'scp/image/back.png' %}" />    
+                </button>
             </div>
         </form>
     </div>

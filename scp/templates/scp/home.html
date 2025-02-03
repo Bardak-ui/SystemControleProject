@@ -12,6 +12,28 @@
     <!-- Фиксированный заголовок -->
     <header class="fixed-header">
         <h1 class="title-home">Домашняя страница</h1>
+        <nav class="container_filter">
+            <form method="get" action="{% url 'home' %}">
+                <div class="filter">
+                    <select name="sort">
+                        <option value="">Сбросить фильтр</option> 
+                        <option value="asc">По возрастанию</option> 
+                        <option value="desc">По убыванию</option> 
+                        <option value="low-complexity">По сложности (Низкая)</option> 
+                        <option value="middle-complexity">По сложности (Средняя)</option> 
+                        <option value="hard-complexity">По сложности (Высокая)</option> 
+                        <option value="Completed">Завершенные</option> 
+                        <option value="In developer">В разработке</option> 
+                        <option value="Waiting">Ожидают</option> 
+                        <option value="created-old">По дате (старые)</option> 
+                        <option value="created-now">По дате (новые)</option> 
+                    </select>
+                    <button type="submit" value="sort">
+                        <img style="height: 20px; width: 20px;" src="{% static 'scp/image/search.png' %}" />    
+                    </button>
+                </div>
+            </form>
+        </nav>
         {% if user.profile.avatar %}
             <a href="{% url 'profile' %}">
                 <div class="avatar-wrapper">
@@ -25,30 +47,7 @@
         {% endif %}
     </header>
 
-    <!-- Фильтры -->
-    <nav class="container_filter">
-        <form method="get" action="{% url 'home' %}">
-            <!-- {% csrf_token %} -->
-            <div class="filter">
-                <select  name="sort">
-                    <option value=""></option> 
-                    <option value="asc">По возрастанию</option> 
-                    <option value="desc">По убыванию</option> 
-                    <option value="low-complexity">По сложности (Низкая)</option> 
-                    <option value="middle-complexity">По сложности (Средняя)</option> 
-                    <option value="hard-complexity">По сложности (Высокая)</option> 
-                    <option value="Completed">Завершенные</option> 
-                    <option value="In developer">В разработке</option> 
-                    <option value="Waiting">Ожидают</option> 
-                    <option value="created-old">По дате (старые)</option> 
-                    <option value="created-now">По дате (новые)</option> 
-
-                </select>
-                <button type="submit" value="sort">Фильтровать</button>
-                <a href="{% url 'home' %}">Сбросить</a>
-            </div>
-        </form>
-    </nav>
+    
     <main class="container">
         <div class="left-container">
             <div class="left-content">
@@ -62,8 +61,8 @@
                     <button type="submit" class="button-projects">
                         <p>Название</p>
                         <h3>{{ project.title }}</h3>
-                        <p>Описание</p>
-                        <span>{{ project.description }}</span>
+                        <!-- <p>Описание</p>
+                        <span>{{ project.description }}</span> -->
                         <hr>
                         {% if project.participants.all %}
                             <p>Над проектом работают</p>
@@ -77,14 +76,14 @@
                         {% else %}
                             <p>Исполнители отсутствуют</p>
                         {% endif %}
-                        <p>Проект создан</p>
-                        <span>{{ project.created_at }}</span>
+                        <!-- <p>Проект создан</p>
+                        <span>{{ project.created_at }}</span> -->
                         <p>Статус проекта</p>
                         <span>{{ project.status }}</span>
                         <p>Сложность проекта</p>
                         <span>{{ project.complexity }}</span>
-                        <p>Создатель проекта</p>
-                        <strong>{{ project.owner }}</strong>
+                        <!-- <p>Создатель проекта</p>
+                        <strong>{{ project.owner }}</strong> -->
                     </button>
                 </form>
             {% empty %}

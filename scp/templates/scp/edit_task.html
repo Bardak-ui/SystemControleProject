@@ -18,6 +18,8 @@
                 {{ form.title }}
                 {{ form.description.label_tag }}
                 {{ form.description }}
+                {{ form.code.label_tag }}
+                {{ form.code }}
                 {{ form.status.label_tag }}
                 {{ form.status }}
                 {{ form.priority.label_tag }}
@@ -26,11 +28,17 @@
                 {{ form.assignee }}
             </div>
             <div class="form-actions">
-                <button type="submit">Добавить</button>
-                <a href="{{ delete_task }}" class="delete-link">Удалить задачу</a>
+                <button type="submit">
+                    <img style="height: 20px; width: 20px;" src="{% static 'scp/image/save.png' %}" />
+                </button>
+                <a href="{{ delete_task }}" class="delete-link">
+                    <img style="height: 20px; width: 20px;" src="{% static 'scp/image/delete.png' %}" />    
+                </a>
                 <form method="post" action="{% url 'info_task' project_id task_id %}">
                     {% csrf_token %}
-                    <button type="submit">Назад</button>
+                    <button type="submit">
+                        <img style="height: 20px; width: 20px;" src="{% static 'scp/image/back.png' %}" />
+                    </button>
                 </form>
             </div>
         </form>

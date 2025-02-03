@@ -13,21 +13,21 @@
         <header class="project-header">
             <h1>{{ project.title }}</h1><hr>
             <strong>Описание проекта</strong>
-            <br><span>{{ project.description }}</span>
+            <br><br><span>{{ project.description }}</span>
         </header>
         <section class="actions">
             {% if request.user != project.owner %}
                 {% if is_participant %}
                     <a href="{% url 'unjoin_project' project.id %}">
                         <button type="submit" class="nav-button">
-                            <img src="{% static 'scp/image/exit.png' %}" style="height: 35px; width: 35px;" alt="Иконка выхода" >
+                            <img src="{% static 'scp/image/exit.png' %}" alt="Иконка выхода" >
                             <p>Покинуть проект</p>
                         </button>
                     </a>
                 {% else %}
                     <a href="{% url 'join_project' project.id %}">
                         <button type="submit" class="nav-button">
-                            <img src="{% static 'scp/image/entrance.png' %}" style="height: 35px; width: 35px;" alt="Иконка выхода">
+                            <img src="{% static 'scp/image/entrance.png' %}" alt="Иконка выхода">
                             <p>Вступить в разработку</p>
                         </button>
                     </a>

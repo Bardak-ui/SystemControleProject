@@ -78,10 +78,14 @@ body {
 }
 
 .actions {
-    padding: 20px;
     display: flex;
+    padding: 20px;
     flex-direction: row-reverse;
     align-self: center;
+}
+
+.actions img {
+    height: 35px; width: 35px;
 }
 
 .nav-button {
@@ -101,7 +105,7 @@ body {
 }
 
 .nav-button:hover {
-    background-color: #4aa866; /* Синий при наведении */
+    background: #37474f; /* Синий при наведении */
 }
 
 .nav-button:focus {
@@ -115,7 +119,8 @@ body {
 
 .task-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .task-btn {
@@ -123,7 +128,7 @@ body {
 }
 
 .task-btn button {
-    width: 45%;
+    width: 100%;
     text-align: center;
     background-color: #292929; /* Темный фон для задач */
     padding: 15px;
@@ -145,7 +150,7 @@ body {
 }
 
 .task-btn p strong {
-    color: #986da2; /* Акцент на важной информации */
+    color: #a7c5d0; /* Акцент на важной информации */
 }
 
 .avatar-wrapper {
@@ -216,7 +221,7 @@ body {
     }
 
     .nav-button:hover {
-        background-color: #4aa866; /* Синий при наведении */
+        background-color: #37474f; /* Синий при наведении */
     }
 
     .nav-button:focus {

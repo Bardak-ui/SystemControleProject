@@ -77,7 +77,6 @@ class Project(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название проекта')
     description = models.TextField(verbose_name='Описание проекта')
     # tasks = models.ManyToManyField(Task, related_name='p_tasks')
-    code = models.TextField(verbose_name="Код",blank=True, null=True)
     language = models.CharField(max_length=50, choices=Language.LANGUAGE_CHOICES, verbose_name='Язык программирования',default='Не указан')
     status = models.CharField(max_length=50,choices=Status.STATUS_CHOICES, verbose_name="Статус",default='Ожидает')
     owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name='p_owner')
@@ -87,17 +86,18 @@ class Project(models.Model):
     # updated_at = models.DateField() #Реализовать дату последнего обновления
 
     def __str__(self):
-        return self.title
+        return (f"Проект: {self.title} пользователя: {self.owner}")
 
 class Task(models.Model):
     title = models.CharField(max_length=100, null=False, verbose_name="Название задачи")
     description = models.TextField(verbose_name="Описание задачи")
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='t_creator')
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='t_project')
-    assignee = models.ForeignKey(User, on_delete=models.CASCADE, blank = True,null=True,related_name='t_assignee')
+    assignee = models.ForeignKey(User, on_delete=models.CASCADE, blank = True,null=True,verbose_name="Исполнитель",related_name='t_assignee')
     priority = models.CharField(max_length=50, choices=Status.PRIORITY_CHOICES,verbose_name="Статус",default='Не указан')
     status = models.CharField(max_length=50,choices=Status.STATUS_CHOICES, verbose_name="Cтатус",default='Ожидает')
     created_at = models.DateField(auto_now_add=True)
+    code = models.TextField(verbose_name="Код",blank=True, null=True)
     # updated_at = models.DateField() #Реализовать дату последнего обновления
 
     def __str__(self):

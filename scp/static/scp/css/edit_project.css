@@ -109,7 +109,7 @@ button, .delete-link {
 }
 
 button {
-    background: #37474f; /* Синий фон кнопки */
+    background-color: #333; /* Синий фон кнопки */
     color: white;
     border: none;
 }

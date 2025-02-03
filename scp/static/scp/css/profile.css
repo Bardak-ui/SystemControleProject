@@ -6,7 +6,7 @@ body {
     color: #e0e0e0; /* Светлый текст */
     display: flex;
     flex-direction: column; /* Делаем тело страницы вертикальным */
-    height: 105vh; /* Страница должна растягиваться по высоте */
+    height: 100%; /* Страница должна растягиваться по высоте */
     padding: 0;
     overflow-x: hidden; /* Отключаем горизонтальный скроллинг */
 }
@@ -137,6 +137,7 @@ p {
     gap: 10px; /* Отступ между кнопками */
     justify-content: center; /* Кнопки начинаются с начала строки */
     margin-bottom: 20px;
+    
 }
 
 .button-form button {
@@ -152,11 +153,15 @@ p {
     transition: background 0.3s;
     text-align: center;
     align-items: center;
+    transition: transform 0.3s ease;
+    
 }
 
 .button-form button:hover {
     background: #37474f; /* Темнее при наведении */
+    transform: scale(1.05);
 }
+
 
 /* Горизонтальная линия */
 hr {
@@ -188,6 +193,7 @@ hr {
     color: #e0e0e0; /* Светлый текст */
     cursor: pointer;
     margin-bottom: 10px; /* Отступ снизу */
+    transition: transform 0.3s ease;
 
 }
 
@@ -207,6 +213,7 @@ hr {
 
 .project-btn:hover {
     background: #37474f; /* Темно-серый при наведении */
+    transform: scale(1.05);
 }
 
 .button-control button{

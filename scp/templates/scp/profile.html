@@ -52,7 +52,7 @@
                 <form method="post" action="{% url 'forum' %}">
                     {% csrf_token %}
                     <div class="button-control">
-                        <button type="submit">
+                        <button disabled type="submit">
                             <img src="{% static 'scp/image/forum.png' %}" />
                             <p>На форум</p>
                         </button>
@@ -92,7 +92,7 @@
                     <div class="button-control">
                         <button type="submit">
                             <img src="{% static 'scp/image/settings.png' %}" />
-                            Настройки
+                            <p>Настройки</p>
                         </button>
                     </div>
                 </form>
@@ -101,7 +101,7 @@
                     <div class="button-control">
                         <button type="submit">
                             <img src="{% static 'scp/image/exit.png' %}" />    
-                            Выйти
+                            <p>Выйти</p>
                         </button>
                     </div>
                 </form>
