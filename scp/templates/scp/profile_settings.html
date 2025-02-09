@@ -1,4 +1,3 @@
-<!-- сделать выбор страны прожиавания -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru">
@@ -31,7 +30,12 @@
             <p>Ваша роль: {{ profile.role|default:"не установлена" }}</p>
             <div class="form-group">
                 {{ form.bio }}
+                {{ form.telegram_url.label_tag }}
+                {{ form.telegram_url }}
+                {{ form.github_url.label_tag }}
+                {{ form.github_url }}
             </div>
+            
             <div class="button">
                 <button type="submit"><img src="{% static 'scp/image/save.png' %}" style="height: 20px; width: 20px;" alt="Иконка удаления"></button>
                 <button onclick="history.back()"><img src="{% static 'scp/image/back.png' %}" style="height: 20px; width: 20px;" alt="Иконка удаления"></button>

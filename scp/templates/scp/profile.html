@@ -35,7 +35,8 @@
                     {% endif %}
                     <hr>
                     <p><strong>Контакты</strong></p>
-                    {{ profile.contacts }}
+                    <a href="{{ profile.telegram_url }}"><img src="{% static 'scp/image/telegram.png' %}" /></a>
+                    <a href="{{ profile.github_url }}"><img src="{% static 'scp/image/github.png' %}" /></a> 
                 </div>
         </div>
         <div class="right-container">

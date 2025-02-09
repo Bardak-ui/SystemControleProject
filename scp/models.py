@@ -106,11 +106,14 @@ class Task(models.Model):
 class Profile(models.Model):
     puser = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', unique=True)
     bio = models.TextField(blank=True, null=True)
-    avatar = models.ImageField(upload_to='./profile_avatars/', blank=True, null=True)
+    avatar = models.ImageField(upload_to='./profile_avatars/', blank=True, null=True, default='./default/no_avatar.png')
     role = models.CharField(max_length=50, blank=True, choices=Role.ROLE_CHOICES, default='Исполнитель')
     account = models.BooleanField(default=False)  # Это поле отвечает за статус пользователя
     contacts = models.TextField(default='Контакты не указаны')
     status = models.CharField(max_length=50, choices=Status.BLACKLIST_CHOICES, default='Не заблокирован')
+    telegram_url = models.URLField(max_length=255, blank=True, null=True, verbose_name='Telegram')
+    github_url = models.URLField(max_length=255, blank=True, null=True, verbose_name='GitHub')
+    #other_url = models.URLField(max_length=255, blank=True, null=True)
     def __str__(self):
         return f"{self.puser}'s Profile"
     

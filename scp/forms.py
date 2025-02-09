@@ -141,11 +141,18 @@ class ProjectFilterForm(forms.ModelForm):
 class ProfileSettings(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio', 'avatar']
+        fields = ['bio', 'avatar','telegram_url','github_url']
+        labels = {
+            'telegram_url':'Telegram',
+            'github_url':'Github',
+        }
         widgets = {
             'avatar': forms.ClearableFileInput(attrs={'style': 'display: none; text-decoration: none;' , 'class': 'id_avatar'}),
             'bio': forms.Textarea(attrs={'class': 'bio-profile', 'rows': 5, 'style': 'resize: vertical'}),
+            'telegram_url': forms.URLInput(attrs={'class':'form-control'}),
+            'github_url': forms.URLInput(attrs={'class':'form-control'}),
         }
+
 
 class CreatePost(forms.ModelForm):
     class Meta:

@@ -3,7 +3,6 @@ from .forms import EditTask
 from .forms import AddProject
 from .forms import EditProject
 from .forms import ProfileSettings
-from .forms import ProjectFilterForm
 from .forms import CustomeCreateUserForm
 from .forms import SendComment, CreatePost
 from django.http import HttpResponseForbidden, HttpResponse
