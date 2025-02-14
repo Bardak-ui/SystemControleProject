@@ -113,6 +113,7 @@ def join_task(request, task_id, project_id):
     if request.user != task.creator:
         if request.user != project.participants:
             task.assignee = request.user
+            task.status = 'В разработке'
             task.save()
         else:
             return render(request, 'scp/user_ban.html')
@@ -124,10 +125,19 @@ def unjoin_task(request, task_id, project_id):
     task = get_object_or_404(Task, id = task_id)
     if request.user != task.creator:
         task.assignee = None
+        task.status = 'Ожидает'
         task.save()
         return redirect('info_task', task_id = task_id, project_id = project_id)
     return render(request, 'scp/info_task.html', {'task_id':task_id, 'project_id':project_id})
 
+@login_required
+def done_task(request, task_id, project_id):
+    task = get_object_or_404(Task, id = task_id)
+    if request.user != task.creator:
+        task.status = 'Выполнено'
+        task.save()
+        return redirect('info_task', task_id = task_id, project_id = project_id)
+    return render(request, 'scp/info_task.html', {'task_id':task_id, 'project_id':project_id})
 @login_required
 def join_project(request, project_id):
     project = get_object_or_404(Project, id = project_id)
@@ -253,7 +263,7 @@ def info_project(request, project_id):
 def info_task(request,project_id,task_id):
     project = get_object_or_404(Project, id = project_id)
     task = get_object_or_404(Task, id = task_id)
-    is_assignee = task.assignee is not None
+    is_assignee = task.assignee
     context = {
         'is_assignee':is_assignee,
         'task':task,

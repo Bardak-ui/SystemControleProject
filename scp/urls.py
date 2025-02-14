@@ -35,6 +35,7 @@ urlpatterns = [
     path('info_task/<int:project_id>/<int:task_id>/', views.info_task, name='info_task'), 
     path('info_task/join_task/<int:task_id>/<int:project_id>/', views.join_task, name='join_task'), 
     path('info_task/unjoin_task/<int:task_id>/<int:project_id>/', views.unjoin_task, name='unjoin_task'), 
+    path('info_task/done_task/<int:task_id>/<int:project_id>/', views.done_task, name='done_task'), 
     #path('manage_particip/delete/<int:user_id>/', views.delete_user_particip, name='delete_user_particip')
     #Восстановление пароля
     path('password_reset/', 

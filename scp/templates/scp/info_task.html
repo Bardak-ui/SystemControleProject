@@ -59,17 +59,25 @@
         <!-- Действия с задачей -->
         <section class="actions">
             {% if request.user != task.creator %}
-                {% if request.user != is_assignee %}
-                    {% if is_assignee %}
+                    {% if is_assignee == request.user and task.status != "Выполнено"%}
                         <a href="{% url 'unjoin_task' task_id project_id %}">
                             <button type="submit" class="nav-button">Отказаться от выполнения</button>
                         </a>
-                    {% else %}
+                    {% elif not is_assignee %}
                         <a href="{% url 'join_task' task_id project_id %}">
                             <button type="submit" class="nav-button">Приступить к выполнению</button>
                         </a>
+                    {% elif task.status == "Выполнено" %}
+                        <p>Задача выполнена</p>
+                    {% elif is_assignee != request.user%}
+                        <p>Задача занята</p>
                     {% endif %}
-                {% endif %}
+                    {% if task.status == "В разработке" and request.user == is_assignee %}
+                        <a href="{% url 'done_task' task_id project_id %}">
+                            <button type="submit" class="nav-button">Выполнено</button>
+                        </a>
+                    {% else %}
+                    {% endif %}
             {% endif %}
 
             {% if request.user == task.creator %}

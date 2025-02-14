@@ -35,10 +35,9 @@
                 {{ form.github_url.label_tag }}
                 {{ form.github_url }}
             </div>
-            
             <div class="button">
                 <button type="submit"><img src="{% static 'scp/image/save.png' %}" style="height: 20px; width: 20px;" alt="Иконка удаления"></button>
-                <button onclick="history.back()"><img src="{% static 'scp/image/back.png' %}" style="height: 20px; width: 20px;" alt="Иконка удаления"></button>
+                <button type="button" onclick="history.back()"><img src="{% static 'scp/image/back.png' %}" style="height: 20px; width: 20px;" alt="Иконка удаления"></button>
             </div>
         </form>
     </div>

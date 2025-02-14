@@ -100,31 +100,34 @@
             <hr>
             <h2 style="text-align: center;">Задачи</h2>
             <div class="task-container">
-                {% for task in tasks %}
-                    <div class="task-btn">
-                        <form method="post" action="{% url 'info_task' project.id task.id %}" class="task-form">
-                            {% csrf_token %}
-                            <button type="submit">
-                                <p><strong>Название задачи<br></strong> {{ task.title }}</p>
-                                <p><strong>Приоритет задачи<br></strong> {{ task.priority }}</p>
-                                <p><strong>Статус задачи<br></strong> {{ task.status }}</p>
-                                {% if task.assignee %} 
-                                    {% if task.assignee.profile.avatar %}
-                                        <div class="avatar-container">
-                                            <img class="avatar" src="{{ task.assignee.profile.avatar.url }}" alt="{{ assignee.user }}'s avatar">
-                                        </div>
-                                        <br><strong>{{task.assignee.profile.puser}}</strong>
+                {% if request.user == p_participants.project.participants %}
+                    {% for task in tasks %}
+                        <div class="task-btn">
+                            <form method="post" action="{% url 'info_task' project.id task.id %}" class="task-form">
+                                {% csrf_token %}
+                                <button type="submit">
+                                    <p><strong>Название задачи<br></strong> {{ task.title }}</p>
+                                    <p><strong>Приоритет задачи<br></strong> {{ task.priority }}</p>
+                                    <p><strong>Статус задачи<br></strong> {{ task.status }}</p>
+                                    {% if task.assignee %} 
+                                        {% if task.assignee.profile.avatar %}
+                                            <div class="avatar-container">
+                                                <img class="avatar" src="{{ task.assignee.profile.avatar.url }}" alt="{{ assignee.user }}'s avatar">
+                                            </div>
+                                            <br><strong>{{task.assignee.profile.puser}}</strong>
+                                        {% else %}
+                                            <p>Изображение отсутствует</p>
+                                        {% endif %}
                                     {% else %}
-                                        <p>Изображение отсутствует</p>
+                                        <p>Исполнители отсутствуют</p>
                                     {% endif %}
-                                    
-                                {% else %}
-                                    <p>Исполнители отсутствуют</p>
-                                {% endif %}
-                            </button>
-                        </form>
-                    </div>
-                {% endfor %}
+                                </button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="color: brown;">ДЛЯ НАЧАЛА ВЫПОЛНЕНИЯ ЗАДАЧ ВСТУПИТЕ В ПРОЕКТ</p>
+                {% endif %}
             </div>
         </section>
         

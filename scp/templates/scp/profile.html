@@ -35,8 +35,16 @@
                     {% endif %}
                     <hr>
                     <p><strong>Контакты</strong></p>
-                    <a href="{{ profile.telegram_url }}"><img src="{% static 'scp/image/telegram.png' %}" /></a>
-                    <a href="{{ profile.github_url }}"><img src="{% static 'scp/image/github.png' %}" /></a> 
+                    {% if profile.telegram_url and profile.github_url %}
+                        {% if profile.telegram_url %}
+                            <a href="{{ profile.telegram_url }}"><img src="{% static 'scp/image/telegram.png' %}" /></a>
+                        {% endif %}
+                        {% if profile.github_url %}
+                            <a href="{{ profile.github_url }}"><img src="{% static 'scp/image/github.png' %}" /></a> 
+                        {% endif %}
+                    {% else %}
+                        <p>Контакты не указаны</p>
+                    {% endif %}
                 </div>
         </div>
         <div class="right-container">
