@@ -122,6 +122,12 @@ body {
     flex-direction: row;
     gap: 10px;
 }
+.error-task p{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    color: brown;
+}
 
 .task-btn {
     margin-bottom: 20px;

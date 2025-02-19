@@ -221,13 +221,13 @@ def edit_project(request, project_id):
 @login_required
 def edit_task(request, task_id, project_id):
     task = get_object_or_404(Task, id = task_id)
-    project = get_object_or_404(Project, id = project_id)  # Исправлено: использую project_id для поиска проекта
+    project = get_object_or_404(Project, id = project_id) 
     delete_task = reverse('delete_task', args=[task.id, project.id])
     if request.method == "POST":
         form = EditTask(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('info_task',project_id=project_id,task_id=task_id )  # Исправлено: правильный редирект
+            return redirect('info_task',project_id=project_id,task_id=task_id )
     else:
         form = EditTask(instance=task)
 
@@ -246,7 +246,7 @@ def info_project(request, project_id):
     project = get_object_or_404(Project, id = project_id)
     all_parsip = project.participants.prefetch_related('p_participants')
     profile = Profile.objects.select_related('profile')
-    is_participant = project.participants.filter(id=request.user.id).exists()
+    is_participant = project.participants.filter(id = request.user.id).exists()
     tasks = Task.objects.filter(project = project_id)
 
     context = {
@@ -306,9 +306,9 @@ def add_project(request):
             project = form.save(commit=False)
             project.owner = request.user
             project.save()
-            file_code = form.cleaned_data['code']
-            file = form.cleaned_data['title']
-            create_file(code = file_code, user=project.owner, title_file=file)
+            # file_code = form.cleaned_data['code']
+            # file = form.cleaned_data['title']
+            # create_file(code = file_code, user=project.owner, title_file=file)
             return redirect('profile')
     else:
         form = AddProject()
