@@ -138,6 +138,36 @@ def done_task(request, task_id, project_id):
         task.save()
         return redirect('info_task', task_id = task_id, project_id = project_id)
     return render(request, 'scp/info_task.html', {'task_id':task_id, 'project_id':project_id})
+
+@login_required 
+def undone_task(request, task_id, project_id):
+    task = get_object_or_404(Task, id = task_id)
+    if request.user != task.creator:
+        task.status = 'В разработке'
+        task.save()
+        return redirect('info_task', task_id = task_id, project_id = project_id)
+    return render(request, 'scp/info_task.html', {'task_id':task_id, 'project_id':project_id})
+
+@login_required
+def parsip_edit_task(request, task_id, project_id):
+    task = get_object_or_404(Task, id = task_id)
+    if request.method == "POST":
+        form = EditTask(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+        return redirect('info_task',project_id=project_id,task_id=task_id )
+    else:
+        form = EditTask(instance=task)
+
+    context = {
+        'form': form, 
+        'project_id': project_id, 
+        'task_id': task_id, 
+        'task': task,
+    }
+
+    return render(request, 'scp/parsip_edit_task.html', context)
+
 @login_required
 def join_project(request, project_id):
     project = get_object_or_404(Project, id = project_id)
@@ -204,8 +234,6 @@ def edit_project(request, project_id):
                 return redirect('info_project', project_id=project.id) 
         else:
             form = EditProject(instance=project)
-    else:
-        # Если у пользователя нет доступа, возвращаем 403 Forbidden
         return render(request, 'scp/user_ban.html', {'project_id':project_id})
 
     context = {
@@ -341,3 +369,4 @@ def create_post(request):
     else:
         form = CreatePost()
     return render(request, 'scp/create_post.html', {'form':form})
+

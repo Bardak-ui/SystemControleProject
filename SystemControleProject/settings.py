@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'channels',
     'scp',
-
 ]
 
 ASGI_APPLICATION = "SystemControleProject.asgi.application"

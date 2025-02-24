@@ -76,7 +76,18 @@
                         <a href="{% url 'done_task' task_id project_id %}">
                             <button type="submit" class="nav-button">Выполнено</button>
                         </a>
-                    {% else %}
+                    {% elif request.user == is_assignee %}
+                        <a href="{% url 'undone_task' task_id project_id %}">
+                            <button type="submit" class="nav-button">Отмена выполнения</button>
+                        </a>
+                    {% endif %}
+                    {% if task.status == "В разработке" %}
+                        <form method="get" action="{% url 'parsip_edit_task' project_id task_id %}">
+                            <button type="submit" class="nav-button">
+                                <img src="{% static 'scp/image/edit_project.png' %}" />
+                                <p>Изменить задачу</p>
+                            </button>
+                        </form>
                     {% endif %}
             {% endif %}
 

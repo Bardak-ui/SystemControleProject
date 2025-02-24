@@ -36,20 +36,14 @@ urlpatterns = [
     path('info_task/join_task/<int:task_id>/<int:project_id>/', views.join_task, name='join_task'), 
     path('info_task/unjoin_task/<int:task_id>/<int:project_id>/', views.unjoin_task, name='unjoin_task'), 
     path('info_task/done_task/<int:task_id>/<int:project_id>/', views.done_task, name='done_task'), 
+    path('info_task/undone_task/<int:task_id>/<int:project_id>/', views.undone_task, name='undone_task'), 
+    path('info_task/parsip_edit_task/<int:task_id>/<int:project_id>/', views.parsip_edit_task, name='parsip_edit_task'), 
     #path('manage_particip/delete/<int:user_id>/', views.delete_user_particip, name='delete_user_particip')
     #Восстановление пароля
-    path('password_reset/', 
-        auth_views.PasswordResetView.as_view(), 
-        name='password_reset'),
-    path('password_reset_done/', 
-        auth_views.PasswordResetDoneView.as_view(), 
-        name='password_reset_done'),
-    path('password_reset_confirm/<uidb64>/<token>/', 
-        auth_views.PasswordResetConfirmView.as_view(),
-        name='password_reset_confirm'),
-    path('password_reset_complete/', 
-        auth_views.PasswordResetCompleteView.as_view(), 
-        name='password_reset_complete'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),name='password_reset_confirm'),
+    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     
 
 ]
