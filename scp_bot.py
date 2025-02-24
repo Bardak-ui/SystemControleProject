@@ -14,7 +14,7 @@ django.setup()
 
 from scp.models import Profile
 
-TOKEN = '7724435274:AAG2pzTE01tPR6tAHY8UPEIN89qvaDKyPYE'
+TOKEN = '7724435274:AAG2pzTE01tPR6tAHY8UPEIN89qvaDKyPYE3'
 
 # Состояния для ConversationHandler
 MENU, SETTINGS, PROFILE, USERS = range(4)
@@ -45,7 +45,6 @@ def settings_bk():
 
 def users_bk():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('❌ Удалить уч.запись', callback_data='del_acc')],
         [InlineKeyboardButton('🔙 Назад', callback_data='back')],
     ])
 
@@ -62,18 +61,15 @@ async def menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
 
     if query.data == 'profile':
-        await query.edit_message_text("👤 Профиль",
-            reply_markup=profile_bk())
+        await query.edit_message_text("👤 Профиль", reply_markup=profile_bk())
         return PROFILE
 
     elif query.data == 'users':
-        await query.edit_message_text("👥 Пользователи", 
-            reply_markup=users_bk())
+        await query.edit_message_text("👥 Пользователи", reply_markup=users_bk())
         return USERS
 
     elif query.data == 'settings':
-        await query.edit_message_text("⚙ Настройки", 
-            reply_markup=settings_bk())
+        await query.edit_message_text("⚙ Настройки", reply_markup=settings_bk())
         return SETTINGS
 
     elif query.data == 'exit':
@@ -111,22 +107,30 @@ def get_all_profiles_sync():
 
 # Обработка списка пользователей
 async def get_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    profiles = await get_all_profiles_sync()
-    if profiles:
-        for profile in profiles:
-            avatar = await sync_to_async(lambda: profile.avatar.path if profile.avatar else None)()
-            puser = await sync_to_async(lambda: profile.puser)()
-            role = await sync_to_async(lambda: profile.role)()
-            bio = await sync_to_async(lambda: profile.bio)()
-            message = f"👤 Профиль:\n✘ Имя: {puser}\n✘ Роль: {role}\n✘ Био: {bio}\n"
+    query = update.callback_query
+    await query.answer()
 
-            if avatar and os.path.exists(avatar):
-                with open(avatar, 'rb') as photo:
-                    await update.message.reply_photo(photo=photo, caption=message)  # Используем query.message
-            else:
-                await update.message.reply_text(message)  # Используем query.message
-    else:
-        await update.message.reply_text("Пользователи не найдены.")  # Используем query.message
+    if query.data == 'users':
+        profiles = await get_all_profiles_sync()
+        if profiles:
+            for profile in profiles:
+                avatar = await sync_to_async(lambda: profile.avatar.path if profile.avatar else None)()
+                puser = await sync_to_async(lambda: profile.puser)()
+                role = await sync_to_async(lambda: profile.role)()
+                bio = await sync_to_async(lambda: profile.bio)()
+                message = f"👤 Профиль:\n✘ Имя: {puser}\n✘ Роль: {role}\n✘ Био: {bio}\n"
+
+                if avatar and os.path.exists(avatar):
+                    with open(avatar, 'rb') as photo:
+                        await query.message.reply_photo(photo=photo, caption=message)  # Используем query.message.reply_photo
+                else:
+                    await query.message.reply_text(message)  # Используем query.message.reply_text
+        else:
+            await query.message.reply_text("Пользователи не найдены.")  # Используем query.message.reply_text
+    elif query.data == 'back':
+        await query.edit_message_text("Главное меню", reply_markup=menu_bk())
+        return MENU
+
 # Отмена
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("До встречи!")
